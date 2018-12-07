@@ -1,0 +1,15 @@
+{
+  "name": "tododev",
+  "version": "0.1.0",
+  "description": "ToDo list for development training",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MG",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  }
+}
