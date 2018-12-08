@@ -8,8 +8,8 @@
 //  }
 //}
 
-function App() {
-  document.getElementById('')
+function App(text) {
+  document.getElementById('').textContent = text;
 }
 
 export default App;

@@ -6,4 +6,6 @@
 //ReactDOM.render(<App />, document.getElementById('root'));
 
 import App from './Components/App';
+import 'css/style.css';
 
+App('hello');
