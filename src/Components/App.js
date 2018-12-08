@@ -1,15 +1,11 @@
-//import React, {Component} from 'react';
-//
-//class App extends Component {
-//  render() {
-//    return (
-//      <p>Test Out</p>
-//    )
-//  }
-//}
+import React, {Component} from 'react';
 
-function App(text) {
-  document.getElementById('').textContent = text;
+class App extends Component {
+  render() {
+    return (
+      <p>Test Out</p>
+    )
+  }
 }
 
 export default App;

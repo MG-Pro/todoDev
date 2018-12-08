@@ -1,14 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
+const autoprefixer = require('autoprefixer');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const config = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, "./build"),
-    filename: 'bundle.js',
-    publicPath: '/assets/'
+    filename: 'js/bundle.js',
+    publicPath: ''
   },
   devServer: {
     overlay: true
@@ -21,27 +22,60 @@ const config = {
         //exclude: '/node_modules/'
       },
       {
-        test: /\.css$/,
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]',
+              outputPath: 'img/'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.scss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: '../'
+              publicPath: '/'
             }
           },
-          "css-loader"
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+              url: false,
+
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [
+                autoprefixer({
+                  browsers: ['ie >= 8', 'last 4 version']
+                })
+              ],
+              sourceMap: true
+            }
+          },
+          "sass-loader"
         ]
       }
     ]
   },
   plugins: [
+    new CleanWebpackPlugin('build', {}),
     new HtmlWebpackPlugin({
       template: 'public/index.html'
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
+      filename: "css/[name].css",
       chunkFilename: "[id].css"
     })
+
   ],
   optimization: {
     minimize: true

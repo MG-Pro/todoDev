@@ -1,0 +1,15 @@
+p {
+  color: #ff3d33;
+}
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}
+.flex {
+  display: flex;
+
+}
+.bg {
+  background-image: url(../img/China_Logo.png);
+}
