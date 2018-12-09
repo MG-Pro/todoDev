@@ -3,6 +3,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const autoprefixer = require('autoprefixer');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const argv = require('yargs').argv;
+
+const isDevelopment = argv.mode === 'development';
+const isProduction = !isDevelopment;
 
 const config = {
   entry: './src/index.js',
@@ -22,31 +26,37 @@ const config = {
         //exclude: '/node_modules/'
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(gif|png|jpe?g|svg)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: '[path][name].[ext]',
-              outputPath: 'img/'
+              name: '[name].[ext]',
+              outputPath: 'img/',
+              publicPath: '../img/'
             }
           }
         ]
       },
       {
-        test: /\.scss$/,
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        use: {
+          loader: 'file-loader?name=./assets/fonts/webfonts/[name].[ext]',
+          //options: {
+          //  name: '[name].[ext]',
+          //  outputPath: 'fonts/',
+          //}
+        }
+      },
+      {
+        test: /\.(css|scss)$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '/'
-            }
-          },
+          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
               importLoaders: 2,
-              url: false,
+              url: true
 
             }
           },
@@ -56,14 +66,18 @@ const config = {
               plugins: [
                 autoprefixer({
                   browsers: ['ie >= 8', 'last 4 version']
-                })
+                }),
+                !isProduction ? require('cssnano') : () => {
+                }
               ],
               sourceMap: true
             }
           },
           "sass-loader"
         ]
-      }
+      },
+
+
     ]
   },
   plugins: [
