@@ -39,16 +39,6 @@ const config = {
         ]
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
-        use: {
-          loader: 'file-loader?name=./assets/fonts/webfonts/[name].[ext]',
-          //options: {
-          //  name: '[name].[ext]',
-          //  outputPath: 'fonts/',
-          //}
-        }
-      },
-      {
         test: /\.(css|scss)$/,
         use: [
           isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
@@ -76,7 +66,17 @@ const config = {
           "sass-loader"
         ]
       },
-
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'css/fonts/',
+            publicPath: 'fonts/'
+          }
+        }
+      }
 
     ]
   },
