@@ -4,8 +4,8 @@
   "description": "ToDo list for development training",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open"
+    "build": "webpack --mode production --colors --progress",
+    "start": "webpack-dev-server --mode development --open --hot --colors --progress"
   },
   "author": "MG",
   "license": "ISC",

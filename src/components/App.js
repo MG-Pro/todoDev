@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import '../css/style.scss';
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className='bg'>
         <p>Test Out</p>
         <i className='fa fa-th-list'></i>
       </div>

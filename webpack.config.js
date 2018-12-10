@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const autoprefixer = require('autoprefixer');
@@ -8,7 +9,7 @@ const argv = require('yargs').argv;
 const isDevelopment = argv.mode === 'development';
 const isProduction = !isDevelopment;
 
-const config = {
+module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, "./build"),
@@ -18,12 +19,16 @@ const config = {
   devServer: {
     overlay: true
   },
+  //devtool: isProduction ? false : 'source-map',
+  optimization: {
+    minimize: isProduction
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader'
-        //exclude: '/node_modules/'
+        loader: 'babel-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.(gif|png|jpe?g|svg)$/,
@@ -57,7 +62,7 @@ const config = {
                 autoprefixer({
                   browsers: ['ie >= 8', 'last 4 version']
                 }),
-                !isProduction ? require('cssnano') : () => {
+                isProduction ? require('cssnano') : () => {
                 }
               ],
               sourceMap: true
@@ -73,7 +78,7 @@ const config = {
           options: {
             name: '[name].[ext]',
             outputPath: 'css/fonts/',
-            publicPath: 'fonts/'
+            publicPath: isProduction ? 'fonts/' : 'css/fonts/'
           }
         }
       }
@@ -88,20 +93,10 @@ const config = {
     new MiniCssExtractPlugin({
       filename: "css/[name].css",
       chunkFilename: "[id].css"
-    })
-
-  ],
-  optimization: {
-    minimize: true
-  }
-
-
-};
-
-module.exports = (env, options) => {
-  const prod = options.mode === 'production';
-
-  config.devtool = prod ? false : 'source-map';
-
-  return config;
+    }),
+    new webpack.ProvidePlugin({
+      'React': 'react',
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+  ]
 };
