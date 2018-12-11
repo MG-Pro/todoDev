@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const autoprefixer = require('autoprefixer');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const argv = require('yargs').argv;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isDevelopment = argv.mode === 'development';
 const isProduction = !isDevelopment;
@@ -95,8 +96,15 @@ module.exports = {
       chunkFilename: "[id].css"
     }),
     new webpack.ProvidePlugin({
-      'React': 'react',
+      'React': 'react'
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new CopyWebpackPlugin([
+      {
+        from: 'public/server',
+        to: 'server',
+        toType: 'dir'
+      }
+    ])
   ]
 };
