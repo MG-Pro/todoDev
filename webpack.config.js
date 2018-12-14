@@ -14,11 +14,13 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, "./build"),
-    filename: 'js/bundle.js',
+    filename: 'app/js/bundle.js',
     publicPath: ''
   },
   devServer: {
     overlay: true,
+    index: 'app/app.html',
+    contentBase: path.join(__dirname, 'app/'),
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
@@ -43,7 +45,7 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: 'img/',
+              outputPath: 'app/img/',
               publicPath: '../img/'
             }
           }
@@ -83,7 +85,7 @@ module.exports = {
           loader: 'file-loader',
           options: {
             name: '[name].[ext]',
-            outputPath: 'css/fonts/',
+            outputPath: 'app/css/fonts/',
             publicPath: isProduction ? 'fonts/' : 'css/fonts/'
           }
         }
@@ -94,10 +96,11 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin('build', {}),
     new HtmlWebpackPlugin({
-      template: 'public/index.html'
+      filename: 'app/app.html',
+      template: 'public/app.html'
     }),
     new MiniCssExtractPlugin({
-      filename: "css/[name].css",
+      filename: "app/css/[name].css",
       chunkFilename: "[id].css"
     }),
     new webpack.ProvidePlugin({
@@ -109,6 +112,10 @@ module.exports = {
         from: 'public/server',
         to: 'server',
         toType: 'dir'
+      },
+      {
+        from: 'public/index.html',
+        toType: 'file'
       }
     ])
   ]
