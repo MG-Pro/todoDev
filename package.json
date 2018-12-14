@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "node build/server/server.js",
-    "sevprestart": "nodemon public/server/server.js",
+    "devserver": "nodemon public/server/server.js",
     "build": "webpack --mode production --colors --progress",
     "start": "webpack-dev-server --mode development --open --hot --colors --progress"
   },

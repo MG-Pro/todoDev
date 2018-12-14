@@ -19,11 +19,11 @@ module.exports = {
   },
   devServer: {
     overlay: true,
-    //proxy: {
-    //  '/api': {
-    //    target: 'http://localhost:3000',
-    //  }
-    //}
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+      }
+    }
   },
   //devtool: isProduction ? false : 'source-map',
   optimization: {

@@ -4,10 +4,8 @@ import '../css/style.scss';
 class App extends Component {
 
   componentDidMount() {
-    fetch('http://localhost:3000/api', {
-      credentials: 'same-origin',
-    })
-      .then(res=> res.json())
+    fetch('http://localhost:3000/api')
+      .then(res => res.json())
       .then(json => {
         console.log(json);
       });
