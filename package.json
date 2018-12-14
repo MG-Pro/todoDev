@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "node build/server/server.js",
+    "sevprestart": "nodemon public/server/server.js",
     "build": "webpack --mode production --colors --progress",
     "start": "webpack-dev-server --mode development --open --hot --colors --progress"
   },
@@ -25,6 +26,7 @@
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
+    "nodemon": "^1.18.8",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",

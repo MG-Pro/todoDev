@@ -18,7 +18,12 @@ module.exports = {
     publicPath: ''
   },
   devServer: {
-    overlay: true
+    overlay: true,
+    //proxy: {
+    //  '/api': {
+    //    target: 'http://localhost:3000',
+    //  }
+    //}
   },
   //devtool: isProduction ? false : 'source-map',
   optimization: {
