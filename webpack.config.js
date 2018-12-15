@@ -6,16 +6,19 @@ const autoprefixer = require('autoprefixer');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const argv = require('yargs').argv;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const sass = require('node-sass');
 
 const isDevelopment = argv.mode === 'development';
 const isProduction = !isDevelopment;
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    'app/js/app':'./src/index.js',
+    'res/js/startpage': './public/res/js/startpage.js'
+  },
   output: {
     path: path.resolve(__dirname, "./build"),
-    filename: 'app/js/bundle.js',
-    publicPath: ''
+
   },
   devServer: {
     overlay: true,
@@ -116,7 +119,22 @@ module.exports = {
       {
         from: 'public/index.html',
         toType: 'file'
-      }
+      },
+      {
+        from: 'public/res/css/start_page.scss',
+        to: 'res/css/start_page.css',
+        transform (content, path) {
+          const result = sass.renderSync({
+            file: path
+          });
+          return result.css.toString();
+        },
+      },
+      {
+        from: 'public/res/img',
+        to: 'res/img',
+        toType: 'dir'
+      },
     ])
   ]
 };
