@@ -92,7 +92,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin('build', {}),
+    new CleanWebpackPlugin('build', {exclude: ['server/']}),
     new HtmlWebpackPlugin({
       filename: 'app/app.html',
       template: 'public/app.html',
