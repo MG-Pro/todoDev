@@ -4,7 +4,7 @@
   "description": "ToDo list for development training",
   "main": "index.js",
   "scripts": {
-    "server": "node build/server/server.js",
+    "server": "pm2 start build/server/server.js --watch",
     "devserver": "nodemon public/server/server.js",
     "build": "webpack --mode production --colors --progress",
     "start": "webpack-dev-server --mode development --open --hot --colors --progress"

@@ -30,7 +30,7 @@ module.exports = {
       }
     }
   },
-  //devtool: isProduction ? false : 'source-map',
+  devtool: isProduction ? false : 'cheap-inline-module-source-map',
   optimization: {
     minimize: isProduction
   },
@@ -49,7 +49,7 @@ module.exports = {
             options: {
               name: '[name].[ext]',
               outputPath: 'app/img/',
-              publicPath: '../img/'
+              publicPath: '../app/img/'
             }
           }
         ]
@@ -73,8 +73,7 @@ module.exports = {
                 autoprefixer({
                   browsers: ['ie >= 8', 'last 4 version']
                 }),
-                isProduction ? require('cssnano') : () => {
-                }
+                isProduction ? require('cssnano') : () => {} // todo ?
               ],
               sourceMap: true
             }
@@ -89,7 +88,7 @@ module.exports = {
           options: {
             name: '[name].[ext]',
             outputPath: 'app/css/fonts/',
-            publicPath: isProduction ? 'fonts/' : 'css/fonts/'
+            publicPath: isProduction ? 'app/fonts/' : 'app/css/fonts/'
           }
         }
       }
