@@ -6,7 +6,6 @@ const autoprefixer = require('autoprefixer');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const argv = require('yargs').argv;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const sass = require('node-sass');
 
 const isDevelopment = argv.mode === 'development';
 const isProduction = !isDevelopment;
@@ -14,16 +13,14 @@ const isProduction = !isDevelopment;
 module.exports = {
   entry: {
     'app/js/app':'./src/index.js',
-    'res/js/startpage': './public/res/js/startpage.js'
+    'assets/start_page_js/startpage': './public/res/startpage.js',
   },
   output: {
     path: path.join(__dirname, "./build"),
-
   },
   devServer: {
     overlay: true,
-    index: 'app/app.html',
-    contentBase: path.join(__dirname, 'app/'),
+    index: 'index.html',
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
@@ -48,8 +45,8 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: 'app/img/',
-              publicPath: isProduction ? '../img/' : '../app/img/'
+              outputPath: 'assets/img/',
+              publicPath: isProduction ? '../img/' : '../assets/img/'
             }
           }
         ]
@@ -87,12 +84,11 @@ module.exports = {
           loader: 'file-loader',
           options: {
             name: '[name].[ext]',
-            outputPath: 'app/css/fonts/',
-            publicPath: isProduction ? 'fonts/' : 'app/css/fonts/'
+            outputPath: 'assets/css/fonts/',
+            publicPath: isProduction ? 'fonts/' : '../assets/css/fonts/'
           }
         }
       }
-
     ]
   },
   plugins: [
@@ -102,8 +98,13 @@ module.exports = {
       template: 'public/app.html',
       inject: false
     }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'public/index.html',
+      inject: false
+    }),
     new MiniCssExtractPlugin({
-      filename: "app/css/style.css"
+      filename: "assets/css/style.css",
     }),
     new webpack.ProvidePlugin({
       'React': 'react'
@@ -113,25 +114,6 @@ module.exports = {
       {
         from: 'public/server',
         to: 'server',
-        toType: 'dir'
-      },
-      {
-        from: 'public/index.html',
-        toType: 'file'
-      },
-      {
-        from: 'public/res/css/start_page.scss',
-        to: 'res/css/start_page.css',
-        transform (content, path) {
-          const result = sass.renderSync({
-            file: path
-          });
-          return result.css.toString();
-        },
-      },
-      {
-        from: 'public/res/img',
-        to: 'res/img',
         toType: 'dir'
       },
     ])
