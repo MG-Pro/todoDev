@@ -4,7 +4,7 @@ import '../css/style.scss';
 class App extends Component {
 
   componentDidMount() {
-    fetch('http://localhost:3000/api')
+    fetch('/api')
       .then(res => res.json())
       .then(json => {
         console.log(json);

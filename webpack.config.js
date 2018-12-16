@@ -12,25 +12,17 @@ const isProduction = !isDevelopment;
 
 module.exports = {
   entry: {
-    'app/js/app':'./src/index.js',
-    'assets/start_page_js/startpage': './public/res/startpage.js',
+    'app/js/app': './src/index.js',
+    'assets/start_page_js/startpage': './public/res/startpage.js'
   },
   output: {
-    path: path.join(__dirname, "./build"),
+    path: path.join(__dirname, "./build")
   },
   devServer: {
     overlay: true,
-    index: 'index.html',
-    proxy: [
-      {
-      '/api': {
-        target: 'http://localhost:3000/api',
-      },
-      '/app': {
-        target: 'http://localhost:3000/app',
-      }
-    }
-    ]
+    proxy: {
+      '/app':'http://localhost:3000',
+    },
   },
   devtool: isProduction ? false : 'cheap-inline-module-source-map',
   optimization: {
@@ -75,7 +67,8 @@ module.exports = {
                 autoprefixer({
                   browsers: ['ie >= 8', 'last 4 version']
                 }),
-                isProduction ? require('cssnano') : () => {} // todo ?
+                isProduction ? require('cssnano') : () => {
+                } // todo ?
               ],
               sourceMap: true
             }
@@ -97,7 +90,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin('build', {exclude: ['server/']}),
+    isProduction ? new CleanWebpackPlugin('build', {exclude: ['server/']}) : () => {},
     new HtmlWebpackPlugin({
       filename: 'app/app.html',
       template: 'public/app.html',
@@ -109,7 +102,7 @@ module.exports = {
       inject: false
     }),
     new MiniCssExtractPlugin({
-      filename: "assets/css/style.css",
+      filename: "assets/css/style.css"
     }),
     new webpack.ProvidePlugin({
       'React': 'react'
@@ -120,7 +113,7 @@ module.exports = {
         from: 'public/server',
         to: 'server',
         toType: 'dir'
-      },
+      }
     ])
   ]
 };
