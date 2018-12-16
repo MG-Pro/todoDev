@@ -17,7 +17,7 @@ module.exports = {
     'res/js/startpage': './public/res/js/startpage.js'
   },
   output: {
-    path: path.resolve(__dirname, "./build"),
+    path: path.join(__dirname, "./build"),
 
   },
   devServer: {
@@ -49,7 +49,7 @@ module.exports = {
             options: {
               name: '[name].[ext]',
               outputPath: 'app/img/',
-              publicPath: '../app/img/'
+              publicPath: isProduction ? '../img/' : '../app/img/'
             }
           }
         ]
@@ -88,7 +88,7 @@ module.exports = {
           options: {
             name: '[name].[ext]',
             outputPath: 'app/css/fonts/',
-            publicPath: isProduction ? 'app/fonts/' : 'app/css/fonts/'
+            publicPath: isProduction ? 'fonts/' : 'app/css/fonts/'
           }
         }
       }
@@ -99,11 +99,11 @@ module.exports = {
     new CleanWebpackPlugin('build', {}),
     new HtmlWebpackPlugin({
       filename: 'app/app.html',
-      template: 'public/app.html'
+      template: 'public/app.html',
+      inject: false
     }),
     new MiniCssExtractPlugin({
-      filename: "app/css/[name].css",
-      chunkFilename: "[id].css"
+      filename: "app/css/style.css"
     }),
     new webpack.ProvidePlugin({
       'React': 'react'
