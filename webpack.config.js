@@ -21,11 +21,16 @@ module.exports = {
   devServer: {
     overlay: true,
     index: 'index.html',
-    proxy: {
+    proxy: [
+      {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'http://localhost:3000/api',
+      },
+      '/app': {
+        target: 'http://localhost:3000/app',
       }
     }
+    ]
   },
   devtool: isProduction ? false : 'cheap-inline-module-source-map',
   optimization: {

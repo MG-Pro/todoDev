@@ -10,10 +10,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/api', (req, res) => {
-  res.json(
-    ["Hello","World!"]
-  )
+app.get('/app', (req, res) => {
+  console.log('app');
+  res.send('../app/app.html');
 });
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
