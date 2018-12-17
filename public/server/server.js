@@ -17,4 +17,4 @@ app.get('/app', (req, res) => {
   res.sendFile(p);
 });
 
-app.listen(port, () => console.log(`App listening on port ${port}!`));
+app.listen(port, () => console.log(`Server start on port ${port}!`));

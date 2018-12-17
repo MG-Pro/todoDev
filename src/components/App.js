@@ -4,11 +4,11 @@ import '../css/style.scss';
 class App extends Component {
 
   componentDidMount() {
-    fetch('/api')
-      .then(res => res.json())
-      .then(json => {
-        console.log(json);
-      });
+    //fetch('/api')
+    //  .then(res => res.json())
+    //  .then(json => {
+    //    console.log(json);
+    //  });
   }
 
   render() {

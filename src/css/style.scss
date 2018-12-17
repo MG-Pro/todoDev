@@ -19,6 +19,9 @@ body {
     font-family: 'Roboto', sans-serif;
     line-height: 1;
   }
+  hr {
+    background-color: #c9c9c9;
+  }
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -31,6 +34,7 @@ body {
     max-width: 1280px;
     margin: auto;
     padding: 0 10px;
+    width: 100%;
   }
   .header {
     min-height: 80px;
@@ -55,7 +59,6 @@ body {
     background-repeat: no-repeat;
   }
   .header__brand {
-    
     font-family: 'PT Serif', serif;
     margin-left: 15px;
   }
@@ -102,29 +105,42 @@ body {
   .content__item {
     display: flex;
     justify-content: space-between;
-    
+    margin-bottom: 50px;
   }
   .content__item_sm {
     max-width: 980px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .content__item_top-line {
+    border-top: 2px solid rgba(255, 255, 255, 0.51);;
+    padding-top: 20px;
   }
   .content__head-wrap {
     font-family: 'PT Serif', serif;
     color: #ffffff;
+    flex: 4;
+    margin-right: 15px;
   }
   .content__brand {
     font-size: 54px;
+    margin-bottom: 20px;
+    text-shadow: 3px 2px rgba(0, 0, 0, 0.43);
   }
   .content__head {
     font-weight: 300;
     font-size: 24px;
+    line-height: 1.5;
   }
   .content__example {
+    flex: 5;
     table {
       background-color: #fff;
       border-radius: 10px;
       box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.58);
       border-collapse: collapse;
+      width: 100%;
+      color: #7f7f7f;
     }
     thead {
       color: #733b7a;
@@ -174,13 +190,58 @@ body {
       color: #5588a8;
       font-weight: 700;
     }
+    .date-col {
+      width: 100px;
+    }
+    .date-cell {
+      position: relative;
+      &:after {
+        font-family: FontAwesome;
+        content: "\f040";
+        color: #c37dc4;
+        position: absolute;
+        right: 4px;
+        top: 6px;
+        cursor: pointer;
+      }
+    }
   }
-  
-
-  
-  
-  
-  
+  .features {
+    color: #ffffff;
+    font-family: 'PT Serif', serif;
+    flex-grow: 1;
+    padding: 0 15px;
+  }
+  .features__head {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 3px 2px rgba(0, 0, 0, 0.43);
+  }
+  .features__list {
+    list-style: none;
+  }
+  .features__item {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  .future {
+    color: #ffffff;
+    font-family: 'PT Serif', serif;
+    flex-grow: 1;
+    padding: 0 15px;
+  }
+  .future__head {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 3px 2px rgba(0, 0, 0, 0.43);
+  }
+  .future__list {
+    list-style: none;
+  }
+  .future__item {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
   
   .footer {
     flex: 0 0 auto;
@@ -196,6 +257,9 @@ body {
   .fotter__contacts-link {
     color: #ffffff;
     text-decoration: none;
+  }
+  .footer__contacts-copy {
+    font-size: 16px;
   }
   .footer__contacts-date {
     font-size: 16px;

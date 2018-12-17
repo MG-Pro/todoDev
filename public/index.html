@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ToDo Dev Start Page</title>
+  <title>ToDo: Dev Start Page</title>
   <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css %>">
   <script src="<%= htmlWebpackPlugin.files.js[1] %>"></script>
 </head>
@@ -16,14 +16,14 @@
           <div class="header__logo"></div>
           <div class="header__brand">
             <a href="" class="header__brand-link">
-              <p class="header__brand-title">TODO</p>
+              <p class="header__brand-title">TODO:</p>
               <p class="header__brand-subtitle">App for development training</p>
             </a>
           </div>
           <nav class="header__nav">
             <ul class="header__list">
               <li class="header__item">
-                <a href="/app" class="header__item-link">О приложении</a>
+                <a href="/about" class="header__item-link">О приложении</a>
               </li>
               <li class="header__item">
                 <a href="/app" class="header__item-link">Регистрация</a>
@@ -40,16 +40,16 @@
       <div class="container">
         <section class="content__item content__item_sm">
           <div class="content__head-wrap">
-            <h2 class="content__brand">TODO</h2>
+            <h2 class="content__brand">TODO:</h2>
             <h1 class="content__head">Веб приложение для планирования и самоконтроля за процессом обучения программированию и не только...</h1>
           </div>
           <div class="content__example">
             <table>
               <thead>
               <tr>
-                <th>Технология</th>
+                <th >Технология</th>
                 <th>Описание задачи</th>
-                <th>Срок результата</th>
+                <th class="date-col">Срок результата</th>
                 <th>Результат</th>
                 <th>Ссылки</th>
               </tr>
@@ -58,26 +58,46 @@
               <tr>
                 <td class="tech tech_green">Node JS</td>
                 <td>Написать REST API</td>
-                <td>20.01.2018</td>
+                <td class="date-cell">20.01.2018 </td>
                 <td>Разработать проект</td>
                 <td class="link">nodejs.org</td>
               </tr>
               <tr>
-                <td class="tech tech_blue">Переход на Webpack 4</td>
+                <td class="tech tech_blue">Webpack 4</td>
                 <td>Написать новый конфиг</td>
-                <td>30.01.2018</td>
+                <td class="date-cell">30.01.2018 </td>
                 <td>Применять в новых проектах</td>
                 <td class="link">webpack.js.org</td>
               </tr>
               <tr>
                 <td class="tech tech_violet">Redux</td>
                 <td>Разобраться в приминении</td>
-                <td>25.02.2018</td>
+                <td class="date-cell">25.02.2018 </td>
                 <td>Применять в новых проектах</td>
                 <td class="link">redux.js.org</td>
               </tr>
               </tbody>
             </table>
+          </div>
+        </section>
+
+        <section class="content__item content__item_top-line">
+          <div class="features">
+            <h2 class="features__head">Возможности:</h2>
+            <ul class="features__list">
+              <li class="features__item">Добавление технологии</li>
+              <li class="features__item">Указание конкретных шагов по изучению</li>
+              <li class="features__item">Установка сроков для изучения</li>
+              <li class="features__item">Хранение ссылок на учебные материалы</li>
+              <li class="features__item">Установка приоритета</li>
+            </ul>
+          </div>
+          <div class="future">
+            <h2 class="future__head">В разработке:</h2>
+            <ul class="future__list">
+              <li class="future__item">Возможность создания подзадач</li>
+              <li class="future__item">Drag&Drop</li>
+            </ul>
           </div>
         </section>
       </div>
@@ -90,7 +110,7 @@
           <i class="fa fa-github"></i> MG-Pro
         </a>
         <br>
-        <span class="fotter__contacts-copy">&copy;</span>
+        <span class="footer__contacts-copy"><i class="fa fa-copyright"></i></span>
         <span id="footer_year" class="footer__contacts-date"></span>
       </div>
     </div>
