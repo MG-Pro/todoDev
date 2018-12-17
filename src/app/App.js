@@ -1,6 +1,7 @@
-import {Component} from 'react';
 import '../css/style.scss';
-
+import {Component} from 'react';
+import AddTask from './components/addTask';
+import TaskList from './components/taskList';
 class App extends Component {
 
   componentDidMount() {
@@ -13,9 +14,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className='bg'>
-        <p>Test O</p>
-        <i className='fa fa-th-list'></i>
+      <div>
+        <AddTask/>
+        <TaskList/>
       </div>
 
     )
