@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="start-page">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -7,7 +7,94 @@
   <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css %>">
   <script src="<%= htmlWebpackPlugin.files.js[1] %>"></script>
 </head>
-<body class="bg">
-<a href="/app">app</a>
+<body>
+<div class="wrapper">
+  <main class="main">
+    <header class="header">
+      <div class="container">
+        <div class="header__cont">
+          <div class="header__logo"></div>
+          <div class="header__brand">
+            <a href="" class="header__brand-link">
+              <p class="header__brand-title">TODO</p>
+              <p class="header__brand-subtitle">App for development training</p>
+            </a>
+          </div>
+          <nav class="header__nav">
+            <ul class="header__list">
+              <li class="header__item">
+                <a href="/app" class="header__item-link">О приложении</a>
+              </li>
+              <li class="header__item">
+                <a href="/app" class="header__item-link">Регистрация</a>
+              </li>
+              <li class="header__item">
+                <a href="/app" class="header__item-link">Вход</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <div class="content">
+      <div class="container">
+        <section class="content__item content__item_sm">
+          <div class="content__head-wrap">
+            <h2 class="content__brand">TODO</h2>
+            <h1 class="content__head">Веб приложение для планирования и самоконтроля за процессом обучения программированию и не только...</h1>
+          </div>
+          <div class="content__example">
+            <table>
+              <thead>
+              <tr>
+                <th>Технология</th>
+                <th>Описание задачи</th>
+                <th>Срок результата</th>
+                <th>Результат</th>
+                <th>Ссылки</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td class="tech tech_green">Node JS</td>
+                <td>Написать REST API</td>
+                <td>20.01.2018</td>
+                <td>Разработать проект</td>
+                <td class="link">nodejs.org</td>
+              </tr>
+              <tr>
+                <td class="tech tech_blue">Переход на Webpack 4</td>
+                <td>Написать новый конфиг</td>
+                <td>30.01.2018</td>
+                <td>Применять в новых проектах</td>
+                <td class="link">webpack.js.org</td>
+              </tr>
+              <tr>
+                <td class="tech tech_violet">Redux</td>
+                <td>Разобраться в приминении</td>
+                <td>25.02.2018</td>
+                <td>Применять в новых проектах</td>
+                <td class="link">redux.js.org</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="fotter__contacts">
+        <a href="https://github.com/MG-Pro" class="fotter__contacts-link">
+          <i class="fa fa-github"></i> MG-Pro
+        </a>
+        <br>
+        <span class="fotter__contacts-copy">&copy;</span>
+        <span id="footer_year" class="footer__contacts-date"></span>
+      </div>
+    </div>
+  </footer>
+</div>
 </body>
 </html>

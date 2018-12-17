@@ -1,3 +1,8 @@
 import '../../src/css/style.scss';
 
-console.log('start');
+document.addEventListener('DOMContentLoaded', () => {
+  const yearElem = document.getElementById('footer_year');
+  yearElem.textContent = (new Date()).getFullYear();
+
+
+});
