@@ -1,7 +1,8 @@
 import '../css/style.scss';
 import {Component} from 'react';
-import AddTask from './components/addTask';
-import TaskList from './components/taskList';
+import Header from './components/Header';
+import Footer from './components/Footer';
+
 class App extends Component {
 
   componentDidMount() {
@@ -14,9 +15,11 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <AddTask/>
-        <TaskList/>
+      <div className="wrapper">
+        <main className="main">
+          <Header/>
+        </main>
+        <Footer/>
       </div>
     )
   }
