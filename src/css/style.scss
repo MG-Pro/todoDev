@@ -116,6 +116,14 @@ body {
     border-top: 2px solid rgba(255, 255, 255, 0.51);;
     padding-top: 20px;
   }
+  .content__logo {
+    width: 150px;
+    background-image: url(../img/logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-right: 30px;
+    background-position: center center;
+  }
   .content__head-wrap {
     font-family: 'PT Serif', serif;
     color: #ffffff;
