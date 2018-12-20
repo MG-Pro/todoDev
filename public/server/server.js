@@ -1,7 +1,10 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 3000;
 const path = require('path');
+
+const dbUrl = 'mongodb+srv://droneadmin:8APndnqKYshne9A0@cluster0-dmatc.gcp.mongodb.net/todo_app?retryWrites=false';
 
 app.use(express.static(__dirname + '/../'));
 
@@ -17,4 +20,9 @@ app.get('/app', (req, res) => {
   res.sendFile(p);
 });
 
-app.listen(port, () => console.log(`Server start on port ${port}!`));
+app.listen(port, () => {
+  console.log(`Server start on port ${port}!`);
+  mongoose.connect(dbUrl, { useNewUrlParser: true })
+    .then(() => {console.log('Database is connected')})
+    .catch(err => { console.log('Can not connect to the database'+ err)});
+});
