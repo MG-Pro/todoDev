@@ -11,7 +11,7 @@ class Login extends Component {
       <div className="user-form">
         <div className="container container_user-form">
           <form onSubmit={this.submit} className="user-form__form">
-            <h1 className="user-form__head">Форма авторизации</h1>
+            <h1 className="user-form__head">Вход</h1>
             <div className="user-form__input-wrap">
               <span className="user-form__icon"><i className="fa fa-envelope"></i></span>
               <input className="user-form__input" name="email" type="text" placeholder="Email"/>

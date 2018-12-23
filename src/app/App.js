@@ -22,7 +22,7 @@ class App extends Component {
         <div className="wrapper">
           <main className="main">
             <Header/>
-            <Route exact path='/app' component={Login}/>
+            <Route exact path='/app' component={Register}/>
             <Route path='/login' component={Login}/>
           </main>
           <Footer/>
