@@ -2,23 +2,29 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 3000;
-const path = require('path');
+const appStatic = require('./routes/staic');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const users = require('./routes/user');
+const jwtStrategy = require('./validation/jwtStrategy');
 
 const dbUrl = 'mongodb+srv://droneadmin:8APndnqKYshne9A0@cluster0-dmatc.gcp.mongodb.net/todo_app?retryWrites=false';
 
-app.use(express.static(__dirname + '/../'));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.get('/app', (req, res) => {
-  const p = path.join(__dirname + '/../../build/app/app.html');
-  console.log(p);
-  res.sendFile(p);
-});
+app.use(passport.initialize());
+jwtStrategy(passport);
+
+app.use('/api/users', users);
+app.use('/', appStatic);
+app.use(express.static(__dirname + '/../'));
 
 app.listen(port, () => {
   console.log(`Server start on port ${port}!`);
