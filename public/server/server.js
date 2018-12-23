@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 3000;
-const appStatic = require('./routes/staic');
+const appStatic = require('./routes/static');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const users = require('./routes/user');
@@ -22,9 +22,8 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 jwtStrategy(passport);
 
-app.use('/api/users', users);
 app.use('/', appStatic);
-app.use(express.static(__dirname + '/../'));
+app.use('/api/users', users);
 
 app.listen(port, () => {
   console.log(`Server start on port ${port}!`);
