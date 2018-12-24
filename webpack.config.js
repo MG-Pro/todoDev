@@ -21,12 +21,14 @@ module.exports = {
   },
   devServer: {
     overlay: true,
+    open: false,
     //contentBase: [path.join(__dirname, 'build')],
     historyApiFallback: true,
-    index: './app.html',
+    //index: './app/app.html',
     publicPath: '/',
     proxy: {
       '/api':'http://localhost:3000',
+
     },
   },
   devtool: isProduction ? false : 'cheap-inline-module-source-map',
@@ -48,7 +50,7 @@ module.exports = {
             options: {
               name: '[name].[ext]',
               outputPath: 'assets/img/',
-              publicPath: isProduction ? '../img/' : '../assets/img/'
+              publicPath: isProduction ? '../img/' : '../img/'
             }
           }
         ]

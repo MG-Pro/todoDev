@@ -10,10 +10,10 @@ const Header = (props) => {
               <img className="header__logo-img" src={logo} alt="logo"/>
             </div>
             <div className="header__brand">
-              <a href="" className="header__brand-link">
+              <Link to={'/app'} className="header__brand-link">
                 <p className="header__brand-title">TODO:</p>
                 <p className="header__brand-subtitle">App for development training</p>
-              </a>
+              </Link>
             </div>
             <ul className="header__menu">
               <li className="header__menu-item">
