@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   res.sendFile(p);
 });
 
-router.get('/app', (req, res) => {
+router.get(/app.*/, (req, res) => {
   const p = path.join(__dirname + '/../../../build/app/app.html');
   console.log(p);
   res.sendFile(p);

@@ -21,7 +21,7 @@ module.exports = {
   devServer: {
     overlay: true,
     proxy: {
-      '/app':'http://localhost:3000',
+      '/api':'http://localhost:3000',
     },
   },
   devtool: isProduction ? false : 'cheap-inline-module-source-map',
@@ -43,7 +43,7 @@ module.exports = {
             options: {
               name: '[name].[ext]',
               outputPath: 'assets/img/',
-              publicPath: isProduction ? '../img/' : '../assets/img/'
+              publicPath: isProduction ? '../img/' : '../img/'
             }
           }
         ]
@@ -51,13 +51,13 @@ module.exports = {
       {
         test: /\.(css|scss)$/,
         use: [
-          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+          //isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
               importLoaders: 2,
               url: true
-
             }
           },
           {
@@ -83,7 +83,7 @@ module.exports = {
           options: {
             name: '[name].[ext]',
             outputPath: 'assets/css/fonts/',
-            publicPath: isProduction ? 'fonts/' : '../assets/css/fonts/'
+            publicPath: isProduction ? 'fonts/' : '../css/fonts/'
           }
         }
       }

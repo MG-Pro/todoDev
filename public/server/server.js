@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const users = require('./routes/user');
 const jwtStrategy = require('./validation/jwtStrategy');
+const path = require('path');
 
 const dbUrl = 'mongodb+srv://droneadmin:8APndnqKYshne9A0@cluster0-dmatc.gcp.mongodb.net/todo_app?retryWrites=false';
 
@@ -18,6 +19,7 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname + '../../../build/')));
 
 app.use(passport.initialize());
 jwtStrategy(passport);
