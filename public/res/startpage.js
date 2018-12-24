@@ -1,4 +1,4 @@
-import '../../src/css/style.scss';
+//import '../../src/css/style.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
   const yearElem = document.getElementById('footer_year');

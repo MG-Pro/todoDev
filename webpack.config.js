@@ -16,10 +16,15 @@ module.exports = {
     'assets/start_page_js/startpage': './public/res/startpage.js'
   },
   output: {
-    path: path.join(__dirname, "./build")
+    path: path.join(__dirname, "./build"),
+
   },
   devServer: {
     overlay: true,
+    //contentBase: [path.join(__dirname, 'build')],
+    historyApiFallback: true,
+    index: './app.html',
+    publicPath: '/',
     proxy: {
       '/api':'http://localhost:3000',
     },
@@ -43,7 +48,7 @@ module.exports = {
             options: {
               name: '[name].[ext]',
               outputPath: 'assets/img/',
-              publicPath: isProduction ? '../img/' : '../img/'
+              publicPath: isProduction ? '../img/' : '../assets/img/'
             }
           }
         ]

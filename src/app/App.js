@@ -17,12 +17,13 @@ class App extends Component {
   }
 
   render() {
+
     return (
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router>
         <div className="wrapper">
           <main className="main">
             <Header/>
-            <Route exact path='/app' component={Register}/>
+            <Route exact path='/app/register' component={Register}/>
             <Route path='/app/login' component={Login}/>
           </main>
           <Footer/>

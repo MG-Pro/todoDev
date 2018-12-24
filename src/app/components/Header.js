@@ -15,6 +15,20 @@ const Header = (props) => {
                 <p className="header__brand-subtitle">App for development training</p>
               </a>
             </div>
+            <ul className="header__menu">
+              <li className="header__menu-item">
+                <Link
+                  to={'/app/register'}
+                  className="header__menu-link
+                  ">Регистрация</Link>
+              </li>
+              <li className="header__menu-item">
+                <Link
+                  to={'/app/login'}
+                  className="header__menu-link"
+                >Вход</Link>
+              </li>
+            </ul>
             <div className="header__user">
               <a className="header__user-name" href="">UserName </a>
               <a className="header__user-sign-out" href="">(Выйти)</a>
