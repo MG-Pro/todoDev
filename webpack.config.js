@@ -9,26 +9,39 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isDevelopment = argv.mode === 'development';
 const isProduction = !isDevelopment;
+var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
 
 module.exports = {
   entry: {
-    'app/js/app': './src/index.js',
-    'assets/start_page_js/startpage': './public/res/startpage.js'
+    app: [
+      './src/index.js',
+    ],
+    startpage: [
+      './public/res/startpage.js',
+
+    ]
   },
   output: {
     path: path.join(__dirname, "./build"),
+    filename: 'assets/js/[name].js',
 
   },
   devServer: {
     overlay: true,
     open: false,
-    //contentBase: [path.join(__dirname, 'build')],
-    historyApiFallback: true,
-    //index: './app/app.html',
+    contentBase: path.join(__dirname, 'build'),
     publicPath: '/',
+    //historyApiFallback: true,
     proxy: {
-      '/api':'http://localhost:3000',
-
+      '/api': 'http://localhost:3000',
+      '/app': {
+        target: 'http://localhost:8080',
+        bypass: function(req, res, proxyOptions) {
+          if (req.headers.accept.indexOf('html') !== -1) {
+            return 'http://localhost:8080/app/app.html';
+          }
+        }
+      }
     },
   },
   devtool: isProduction ? false : 'cheap-inline-module-source-map',
@@ -50,7 +63,7 @@ module.exports = {
             options: {
               name: '[name].[ext]',
               outputPath: 'assets/img/',
-              publicPath: isProduction ? '../img/' : '../img/'
+              publicPath: '../img'
             }
           }
         ]
@@ -99,7 +112,7 @@ module.exports = {
   plugins: [
     isProduction ? new CleanWebpackPlugin('build', {exclude: ['server/']}) : () => {},
     new HtmlWebpackPlugin({
-      filename: 'app/app.html',
+      filename: 'app.html',
       template: 'public/app.html',
       inject: false
     }),
