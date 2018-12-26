@@ -1,4 +1,7 @@
 import {Component} from 'react';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import {registerUser} from '../redux/actions/authentication';
 
 class Register extends Component {
   constructor(props) {
@@ -21,7 +24,7 @@ class Register extends Component {
       password: this.state.pass,
       password_confirm: this.state.pass2
     };
-    console.log(user);
+    this.props.registerUser(user, this.props.history);
   };
 
   inputChange(e) {
@@ -30,6 +33,13 @@ class Register extends Component {
     })
   };
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  }
 
   render() {
     return (
@@ -75,4 +85,8 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const mapStateToProps = state => ({
+  errors: state.errors
+});
+
+export default connect(mapStateToProps, {registerUser})(withRouter(Register))
