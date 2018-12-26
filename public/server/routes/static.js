@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 });
 
 router.get(/app.*/, (req, res) => {
-  const p = path.join(__dirname + '/../../../build/app/app.html');
+  const p = path.join(__dirname + '/../../../build/app.html');
   console.log(p);
   res.sendFile(p);
 });
