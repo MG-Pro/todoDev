@@ -6,43 +6,31 @@ const autoprefixer = require('autoprefixer');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const argv = require('yargs').argv;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-
-const isDevelopment = argv.mode === 'development';
-const isProduction = !isDevelopment;
-var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
+const isProduction = argv.mode === 'production';
 
 module.exports = {
   entry: {
-    app: [
-      './src/index.js',
-    ],
-    startpage: [
-      './public/res/startpage.js',
-
-    ]
+    app: './src/index.js',
+    startpage: './public/res/startpage.js',
   },
   output: {
     path: path.join(__dirname, "./build"),
     filename: 'assets/js/[name].js',
-
+    publicPath: '/'
   },
   devServer: {
     overlay: true,
     open: false,
-    contentBase: path.join(__dirname, 'build'),
-    publicPath: '/',
     //historyApiFallback: true,
     proxy: {
       '/api': 'http://localhost:3000',
       '/app': {
         target: 'http://localhost:8080',
-        bypass: function(req, res, proxyOptions) {
-          if (req.headers.accept.indexOf('html') !== -1) {
-            return 'http://localhost:8080/app/app.html';
-          }
+        bypass: function () {
+          return 'http://localhost:8080/app.html';
         }
       }
-    },
+    }
   },
   devtool: isProduction ? false : 'cheap-inline-module-source-map',
   optimization: {
@@ -56,14 +44,13 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/,
+        test: /\.(gif|png|jpe?g)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: 'assets/img/',
-              publicPath: '../img'
+              outputPath: 'assets/img/'
             }
           }
         ]
@@ -71,11 +58,11 @@ module.exports = {
       {
         test: /\.(css|scss)$/,
         use: [
-          //isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
+              sourceMap: true,
               importLoaders: 2,
               url: true
             }
@@ -87,13 +74,17 @@ module.exports = {
                 autoprefixer({
                   browsers: ['ie >= 8', 'last 4 version']
                 }),
-                isProduction ? require('cssnano') : () => {
-                } // todo ?
+                isProduction ? require('cssnano') : () => {} // todo ?
               ],
               sourceMap: true
             }
           },
-          "sass-loader"
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true
+            }
+          }
         ]
       },
       {
@@ -110,7 +101,7 @@ module.exports = {
     ]
   },
   plugins: [
-    isProduction ? new CleanWebpackPlugin('build', {exclude: ['server/']}) : () => {},
+    isProduction ? new CleanWebpackPlugin('build') : () => {},
     new HtmlWebpackPlugin({
       filename: 'app.html',
       template: 'public/app.html',
