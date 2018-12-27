@@ -1,12 +1,13 @@
 import {GET_ERRORS} from './types';
 
 export const registerUser = (user, history) => dispatch => {
+
   fetch('/api/users/register', {
     method: 'post'
   })
     .then(res => res.json())
-    .then(json => {
-      console.log(json);
+    .then(data => {
+      console.log(data);
       history.push('/login');
     })
     .catch(err => {

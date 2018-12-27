@@ -7,13 +7,16 @@ import rootReducer from './app/redux/reducers'
 
 const inititalState = {};
 
+const args = [
+  applyMiddleware(thunk),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+]
+  .filter((item => item));
+
 const store = createStore(
   rootReducer,
   inititalState,
-  compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__&& window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  compose(...args)
 );
 
 ReactDOM.render(
