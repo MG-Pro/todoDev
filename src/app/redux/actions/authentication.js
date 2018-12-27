@@ -21,17 +21,19 @@ export const registerUser = (user, history) => dispatch => {
 };
 
 export const loginUser = (user) => dispatch => {
-  fetch('/api/users/login', {
+  fetchData('/api/users/login', {
     method: 'post'
   })
-    .then(res => res.json())
-    .then(json => {
-      console.log(json.data);
+    .then(res => {
+      console.log(res.data);
     })
     .catch(err => {
+      if (!err) {
+        return;
+      }
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err
       });
     });
 };
