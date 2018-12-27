@@ -1,24 +1,24 @@
 
 const fetchData = (url, params) => {
+  let status = null;
   return new Promise((resolve, reject) =>{
     fetch(url, params).then(res => {
-        if(res.status < 200 || res.status >= 400) {
-          throw res.json()
-        } else {
-          return res.json();
-        }
+        status = res.status;
+        return res.json();
       })
       .then(data => {
-        resolve(data)
+        if(status < 200 || status >= 400) {
+          throw data;
+        } else {
+          resolve(data);
+        }
       })
       .catch(err => {
-        if (typeof err === 'object' && typeof err.then === 'function') {
-          err.then(e => {
-            reject(e)
-          })
-        } else {
-          reject(err);
-        }
+          if(err instanceof Error) {
+            reject(null);
+          } else {
+            reject(err);
+          }
       });
   })
 };

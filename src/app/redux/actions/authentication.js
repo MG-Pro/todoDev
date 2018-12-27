@@ -2,7 +2,6 @@ import {GET_ERRORS} from './types';
 import fetchData from '../../helpers/fetchData'
 
 export const registerUser = (user, history) => dispatch => {
-
   fetchData('/api/users/register', {
     method: 'post'
   })
@@ -11,7 +10,9 @@ export const registerUser = (user, history) => dispatch => {
       history.push('/login');
     })
     .catch(err => {
-      console.log(err);
+      if (!err) {
+        return;
+      }
       dispatch({
         type: GET_ERRORS,
         payload: err
