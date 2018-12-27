@@ -20,7 +20,7 @@ module.exports = {
   },
   devServer: {
     overlay: true,
-    open: false,
+    open: true,
     //historyApiFallback: true,
     proxy: {
       '/api': 'http://localhost:3000',

@@ -72,7 +72,7 @@ class Register extends Component {
                   onChange={this.inputChange}
                 />
               </div>
-              {/*{errors.password && (<span className="user-form__msg">{errors.password}</span>)}*/}
+              {errors.password && (<span className="user-form__msg">{errors.password}</span>)}
             </div>
             <div className="user-form__group">
               <div className="user-form__input-wrap">
@@ -85,7 +85,7 @@ class Register extends Component {
                   onChange={this.inputChange}
                 />
               </div>
-              {/*{errors.password_confirm && (<span className="user-form__msg">{errors.password_confirm}</span>)}*/}
+              {errors.password_confirm && (<span className="user-form__msg">{errors.password_confirm}</span>)}
             </div>
             <button className="user-form__btn">Отправить</button>
           </form>

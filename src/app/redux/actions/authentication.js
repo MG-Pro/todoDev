@@ -1,19 +1,20 @@
 import {GET_ERRORS} from './types';
+import fetchData from '../../helpers/fetchData'
 
 export const registerUser = (user, history) => dispatch => {
 
-  fetch('/api/users/register', {
+  fetchData('/api/users/register', {
     method: 'post'
   })
-    .then(res => res.json())
     .then(data => {
       console.log(data);
       history.push('/login');
     })
     .catch(err => {
+      console.log(err);
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err
       });
     });
 };
