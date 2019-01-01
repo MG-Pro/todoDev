@@ -1,8 +1,20 @@
+import {Component} from 'react';
 import logo from '../../img/logo.png';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {logoutUser} from '../redux/actions';
 
-const Header = (props) => {
-  return (
+class Header extends Component {
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    console.log(nextContext);
+  }
+
+  render() {
+    const path = this.props.location.pathname;
+    console.log(path);
+    return (
       <header className="header">
         <div className="container">
           <div className="header__cont">
@@ -16,18 +28,21 @@ const Header = (props) => {
               </Link>
             </div>
             <ul className="header__menu">
-              <li className="header__menu-item">
-                <Link
-                  to={'/app/register'}
-                  className="header__menu-link
+              {path === '/app/login' ?
+                <li className="header__menu-item">
+                  <Link
+                    to={'/app/register'}
+                    className="header__menu-link
                   ">Регистрация</Link>
-              </li>
-              <li className="header__menu-item">
-                <Link
-                  to={'/app/login'}
-                  className="header__menu-link"
-                >Вход</Link>
-              </li>
+                </li>
+                :
+                <li className="header__menu-item">
+                  <Link
+                    to={'/app/login'}
+                    className="header__menu-link"
+                  >Вход</Link>
+                </li>
+              }
             </ul>
             <div className="header__user">
               <a className="header__user-name" href="">UserName </a>
@@ -37,6 +52,11 @@ const Header = (props) => {
         </div>
       </header>
     )
-};
+  }
+}
 
-export default Header;
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, {logoutUser})(withRouter(Header));
