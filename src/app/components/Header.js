@@ -7,13 +7,25 @@ import {logoutUser, forms} from '../redux/actions';
 
 class Header extends Component {
 
-  componentWillReceiveProps(nextProps, nextContext) {
-    console.log(nextContext);
+  constructor(props) {
+    super(props);
+
+    this.toLogin = this.toLogin.bind(this);
+    this.toRegister = this.toRegister.bind(this);
   }
 
+  toLogin() {
+    this.props.forms('login');
+  }
+
+  toRegister() {
+    this.props.forms('register');
+  }
+
+
   render() {
-    const path = this.props.location.pathname;
-    console.log(path);
+    debugger
+    console.log(this.props.formType);
     return (
       <header className="header">
         <div className="container">
@@ -28,18 +40,20 @@ class Header extends Component {
               </Link>
             </div>
             <ul className="header__menu">
-              {path === '/app/login' ?
+              {this.props.formType === 'login' ?
                 <li className="header__menu-item">
                   <Link
                     to={'/app/register'}
-                    className="header__menu-link
-                  ">Регистрация</Link>
+                    className="header__menu-link"
+                    onClick={this.toLogin}
+                  >Регистрация</Link>
                 </li>
                 :
                 <li className="header__menu-item">
                   <Link
                     to={'/app/login'}
                     className="header__menu-link"
+                    onClick={this.toRegister}
                   >Вход</Link>
                 </li>
               }
@@ -57,12 +71,12 @@ class Header extends Component {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  form: state.form
+  formType: state.formType
 });
 
 const mapDispatchToProps = {
-  form: forms,
-  logoutUser
+  logoutUser,
+  forms
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));
