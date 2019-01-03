@@ -3,7 +3,7 @@ import logo from '../../img/logo.png';
 import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {logoutUser} from '../redux/actions';
+import {logoutUser, forms} from '../redux/actions';
 
 class Header extends Component {
 
@@ -56,7 +56,13 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.auth
+  auth: state.auth,
+  form: state.form
 });
 
-export default connect(mapStateToProps, {logoutUser})(withRouter(Header));
+const mapDispatchToProps = {
+  form: forms,
+  logoutUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));
