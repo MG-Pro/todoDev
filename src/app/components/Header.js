@@ -11,6 +11,7 @@ class Header extends Component {
     super(props);
 
     this.formToggle = this.formToggle.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   formToggle() {
@@ -21,8 +22,14 @@ class Header extends Component {
     }
   }
 
+  logOut(e) {
+    e.preventDefault();
+    this.props.logoutUser(this.props.history);
+  }
+
   render() {
     console.log(this.props.formType);
+    const {isAuthenticated, user} = this.props.auth
     return (
       <header className="header">
         <div className="container">
@@ -55,10 +62,11 @@ class Header extends Component {
                 </li>
               }
             </ul>
-            {this.props.auth.isAuthenticated &&
+            {isAuthenticated &&
             <div className="header__user">
-              <Link className="header__user-name" to={'/app/account'}>UserName </Link>
-              <a className="header__user-sign-out" href="">(Выйти)</a>
+              <img src={user.avatar} alt="Avatar"/>
+              <Link className="header__user-name" to={'/app/account'}>{user.email} </Link>
+              <a className="header__user-sign-out" href="" onClick={this.logOut}>(Выйти)</a>
             </div>
             }
 
