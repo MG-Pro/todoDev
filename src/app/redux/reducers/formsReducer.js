@@ -1,6 +1,4 @@
-const initialState = {
-  formType: 'login',
-};
+const initialState = 'login';
 
 export default function (state = initialState, action) {
   switch (action.type) {

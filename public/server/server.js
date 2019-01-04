@@ -31,5 +31,5 @@ app.listen(port, () => {
   console.log(`Server start on port ${port}!`);
   mongoose.connect(dbUrl, { useNewUrlParser: true })
     .then(() => {console.log('Database is connected')})
-    .catch(err => { console.log('Can not connect to the database'+ err)});
+    .catch(err => { console.log('Can not connect to the database '+ err)});
 });

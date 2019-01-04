@@ -391,7 +391,7 @@ body {
     flex-grow: 1;
     display: flex;
     list-style: none;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     padding: 0 30px;
   }
   .header__menu-item {

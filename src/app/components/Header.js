@@ -10,21 +10,18 @@ class Header extends Component {
   constructor(props) {
     super(props);
 
-    this.toLogin = this.toLogin.bind(this);
-    this.toRegister = this.toRegister.bind(this);
+    this.formToggle = this.formToggle.bind(this);
   }
 
-  toLogin() {
-    this.props.forms('login');
+  formToggle() {
+    if(this.props.formType === 'login') {
+      this.props.forms('register');
+    } else {
+      this.props.forms('login');
+    }
   }
-
-  toRegister() {
-    this.props.forms('register');
-  }
-
 
   render() {
-    debugger
     console.log(this.props.formType);
     return (
       <header className="header">
@@ -45,7 +42,7 @@ class Header extends Component {
                   <Link
                     to={'/app/register'}
                     className="header__menu-link"
-                    onClick={this.toLogin}
+                    onClick={this.formToggle}
                   >Регистрация</Link>
                 </li>
                 :
@@ -53,15 +50,18 @@ class Header extends Component {
                   <Link
                     to={'/app/login'}
                     className="header__menu-link"
-                    onClick={this.toRegister}
+                    onClick={this.formToggle}
                   >Вход</Link>
                 </li>
               }
             </ul>
+            {this.props.auth.isAuthenticated &&
             <div className="header__user">
-              <a className="header__user-name" href="">UserName </a>
+              <Link className="header__user-name" to={'/app/account'}>UserName </Link>
               <a className="header__user-sign-out" href="">(Выйти)</a>
             </div>
+            }
+
           </div>
         </div>
       </header>
