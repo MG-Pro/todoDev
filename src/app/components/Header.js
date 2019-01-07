@@ -15,7 +15,7 @@ class Header extends Component {
   }
 
   formToggle() {
-    if(this.props.formType === 'login') {
+    if (this.props.formType === 'login') {
       this.props.forms('register');
     } else {
       this.props.forms('login');
@@ -29,6 +29,28 @@ class Header extends Component {
 
   render() {
     const {isAuthenticated, user} = this.props.auth;
+    let formsButtons;
+    if (!isAuthenticated) {
+      formsButtons = this.props.formType === 'login' ?
+        <li className="header__menu-item">
+          <Link
+            to={'/app/register'}
+            className="header__menu-link"
+            onClick={this.formToggle}
+          >Регистрация</Link>
+        </li>
+        :
+        <li className="header__menu-item">
+          <Link
+            to={'/app/login'}
+            className="header__menu-link"
+            onClick={this.formToggle}
+          >Вход</Link>
+        </li>
+    } else {
+      formsButtons = null;
+    }
+
     return (
       <header className="header">
         <div className="container">
@@ -43,32 +65,15 @@ class Header extends Component {
               </Link>
             </div>
             <ul className="header__menu">
-              {this.props.formType === 'login' ?
-                <li className="header__menu-item">
-                  <Link
-                    to={'/app/register'}
-                    className="header__menu-link"
-                    onClick={this.formToggle}
-                  >Регистрация</Link>
-                </li>
-                :
-                <li className="header__menu-item">
-                  <Link
-                    to={'/app/login'}
-                    className="header__menu-link"
-                    onClick={this.formToggle}
-                  >Вход</Link>
-                </li>
-              }
+              {formsButtons}
             </ul>
             {isAuthenticated &&
             <div className="header__user">
-              <img src={user.avatar} alt="Avatar"/>
-              <Link className="header__user-name" to={'/app/account'}>{user.email} </Link>
-              <a className="header__user-sign-out" href="" onClick={this.logOut}>(Выйти)</a>
+              <img className="header__user-avatar" src={user.avatar} alt="Avatar"/>
+              <Link className="header__user-name" to={'/app/account'}>{user.name}</Link>
+              <a className="header__user-sign-out" href="/app/logout" onClick={this.logOut}>(Выйти)</a>
             </div>
             }
-
           </div>
         </div>
       </header>

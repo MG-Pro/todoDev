@@ -382,6 +382,14 @@ body {
     color: #ffffff;
     text-decoration: none;
     font-weight: 700;
+    margin-right: 10px;
+  }
+  .header__user-avatar {
+    max-width: 65px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
   }
   .header__user-sign-out {
     color: #ffffff;

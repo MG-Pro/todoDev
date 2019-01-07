@@ -31,7 +31,6 @@ router.post('/register', function(req, res) {
         d: 'mm'
       });
       const newUser = new User({
-        name: req.body.name,
         email: req.body.email,
         password: req.body.password,
         avatar
@@ -48,7 +47,8 @@ router.post('/register', function(req, res) {
                 .save()
                 .then(user => {
                   res.json(user)
-                });
+                })
+                .catch(e => console.log(e));
             }
           });
         }
@@ -79,12 +79,11 @@ router.post('/login', (req, res) => {
           if(isMatch) {
             const payload = {
               id: user.id,
-              name: user.name,
+              email: user.email,
+              name: user.email.replace(/@(.*)/, ''),
               avatar: user.avatar
             };
-            jwt.sign(payload, 'secret', {
-              expiresIn: 3600
-            }, (err, token) => {
+            jwt.sign(payload, 'secret', {expiresIn: 3600}, (err, token) => {
               if(err) console.error('There is some error in token', err);
               else {
                 res.json({
