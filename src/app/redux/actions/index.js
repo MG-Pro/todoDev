@@ -1,5 +1,5 @@
 import addTask from './addTask';
-import {registerUser, loginUser, logoutUser} from './authentication';
+import {registerUser, loginUser, logoutUser, setCurrentUser} from './authentication';
 import {forms} from './forms';
 
 export {
@@ -7,6 +7,7 @@ export {
   registerUser,
   loginUser,
   logoutUser,
+  setCurrentUser,
   forms,
 
 };

@@ -28,8 +28,7 @@ class Header extends Component {
   }
 
   render() {
-    console.log(this.props.formType);
-    const {isAuthenticated, user} = this.props.auth
+    const {isAuthenticated, user} = this.props.auth;
     return (
       <header className="header">
         <div className="container">

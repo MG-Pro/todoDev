@@ -9,14 +9,6 @@ import Login from './components/Login';
 
 class App extends Component {
 
-  componentDidMount() {
-    //fetch('/api')
-    //  .then(res => res.json())
-    //  .then(json => {
-    //    console.log(json);
-    //  });
-  }
-
   render() {
 
     return (
