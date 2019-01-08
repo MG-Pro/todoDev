@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {registerUser} from '../../redux/actions';
+import {user} from '../../redux/actions';
 
 
 class NewPassword extends Component {
@@ -19,13 +19,12 @@ class NewPassword extends Component {
 
   submit(e) {
     e.preventDefault();
-    const user = {
+    const pass = {
       old_password: this.state.old_password,
       new_password: this.state.new_password,
       password_confirm: this.state.password_confirm
     };
-    //this.props.registerUser(user, this.props.history);
-    console.log(user);
+    this.props.user(pass, this.props.user.id);
   };
 
   inputChange(e) {
@@ -102,8 +101,9 @@ class NewPassword extends Component {
 
 const mapStateToProps = state => ({
   errors: state.errors,
-  auth: state.auth,
+  user: state.auth.user,
+  isSetNewPassword: state.user.isSetNewPassword,
 });
 
 export default connect(
-  mapStateToProps, {registerUser})(NewPassword);
+  mapStateToProps, {user})(NewPassword);
