@@ -551,6 +551,85 @@ body {
     font-size: 14px;
   }
   
+  // Accaunt
+  
+  .layout {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
+    
+  }
+  .account__header {
+    color: #63617d;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  .account-wrap {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .account__user {
+    width: 50%;
+    padding-right: 5px;
+  }
+  .account__stat {
+    width: 50%;
+    padding-left: 5px;
+  }
+  .account__user-item {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    color: #63617d;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .account__user-item-l {
+    width: 50%;
+  }
+  .account__user-item-r {
+    width: 50%;
+    font-weight: 700;
+  }
+  .account__user-item-link {
+    text-decoration: none;
+    color: #208e10;
+    font-weight: 700;
+    font-size: 22px;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .account__stat-head {
+    font-weight: 700;
+    color: #63617d;
+    margin-bottom: 20px;
+  }
+  .account__stat-subhead {
+    font-style: italic;
+  }
+  .account__user-item_form {
+    justify-content: center;
+  }
+  .account__user-form {
+    width: 80%;
+  }
+  .user-form__btn-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -572,6 +651,7 @@ body {
     font-size: 16px;
   }
   
+
   
   
   
