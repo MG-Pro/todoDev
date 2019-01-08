@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logoutUser, forms} from '../redux/actions';
+import HeaderDropMenu from './HeaderDropMenu';
 
 class Header extends Component {
 
@@ -12,6 +13,10 @@ class Header extends Component {
 
     this.formToggle = this.formToggle.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.showMenu = this.showMenu.bind(this);
+    this.state = {
+      showMenu: false
+    }
   }
 
   formToggle() {
@@ -25,6 +30,12 @@ class Header extends Component {
   logOut(e) {
     e.preventDefault();
     this.props.logoutUser(this.props.history);
+  }
+
+  showMenu() {
+    this.setState({
+      showMenu: !this.state.showMenu
+    })
   }
 
   render() {
@@ -70,8 +81,15 @@ class Header extends Component {
             {isAuthenticated &&
             <div className="header__user">
               <img className="header__user-avatar" src={user.avatar} alt="Avatar"/>
-              <Link className="header__user-name" to={'/app/account'}>{user.name}</Link>
-              <a className="header__user-sign-out" href="/app/logout" onClick={this.logOut}>(Выйти)</a>
+              <div className="header__user-name" onClick={this.showMenu}>{user.name}
+                <span className="header__user-name-angle">
+                  {!this.state.showMenu
+                    ? <i className="fa fa-angle-down" aria-hidden="true"></i>
+                    : <i className="fa fa-angle-right" aria-hidden="true"></i>
+                  }
+              </span>
+              </div>
+              {this.state.showMenu && <HeaderDropMenu user={user} logOut={this.logOut}/>}
             </div>
             }
           </div>
