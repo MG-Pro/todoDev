@@ -5,7 +5,7 @@ const HeaderDropMenu = (props) => {
         <div className='header__drop-menu'>
             <ul className='header__drop-menu-list'>
               <li className='header__drop-menu-item'>
-                <Link className='header__drop-menu-link' to={'/app/account'}>Личный кабинет</Link>
+                <Link className='header__drop-menu-link' to={'/app/account'} onClick={props.menuToggle}>Личный кабинет</Link>
               </li>
               <li className='header__drop-menu-item'>
                 <a className='header__drop-menu-link' href="/app/logout" onClick={props.logOut}>Выход</a>

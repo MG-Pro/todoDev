@@ -13,7 +13,7 @@ class Header extends Component {
 
     this.formToggle = this.formToggle.bind(this);
     this.logOut = this.logOut.bind(this);
-    this.showMenu = this.showMenu.bind(this);
+    this.menuToggle = this.menuToggle.bind(this);
     this.state = {
       showMenu: false
     }
@@ -32,7 +32,7 @@ class Header extends Component {
     this.props.logoutUser(this.props.history);
   }
 
-  showMenu() {
+  menuToggle() {
     this.setState({
       showMenu: !this.state.showMenu
     })
@@ -81,7 +81,7 @@ class Header extends Component {
             {isAuthenticated &&
             <div className="header__user">
               <img className="header__user-avatar" src={user.avatar} alt="Avatar"/>
-              <div className="header__user-name" onClick={this.showMenu}>{user.name}
+              <div className="header__user-name" onClick={this.menuToggle}>{user.name}
                 <span className="header__user-name-angle">
                   {!this.state.showMenu
                     ? <i className="fa fa-angle-down" aria-hidden="true"></i>
@@ -89,7 +89,7 @@ class Header extends Component {
                   }
               </span>
               </div>
-              {this.state.showMenu && <HeaderDropMenu user={user} logOut={this.logOut}/>}
+              {this.state.showMenu && <HeaderDropMenu user={user} logOut={this.logOut} menuToggle={this.menuToggle}/>}
             </div>
             }
           </div>
