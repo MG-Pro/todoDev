@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {addTask} from '../redux/actions'
+import {addTask} from '../../redux/actions'
 
 const AddTask = ({dispatch}) => {
   let input;

@@ -1,9 +1,9 @@
 import {Component} from 'react';
-import logo from '../../img/logo.png';
+import logo from '../../../img/logo.png';
 import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {logoutUser, forms} from '../redux/actions';
+import {logoutUser, forms} from '../../redux/actions';
 import HeaderDropMenu from './HeaderDropMenu';
 
 class Header extends Component {

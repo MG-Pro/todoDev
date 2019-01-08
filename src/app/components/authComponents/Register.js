@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {registerUser} from '../redux/actions';
+import {registerUser} from '../../redux/actions';
 
 class Register extends Component {
   constructor(props) {
