@@ -83,7 +83,7 @@ router.post('/login', (req, res) => {
               name: user.email.replace(/@(.*)/, ''),
               avatar: user.avatar
             };
-            jwt.sign(payload, 'secret', {expiresIn: 3600}, (err, token) => {
+            jwt.sign(payload, 'secret', {expiresIn: '7d'}, (err, token) => {
               if(err) console.error('There is some error in token', err);
               else {
                 res.json({
