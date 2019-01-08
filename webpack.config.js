@@ -118,7 +118,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       'React': 'react'
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new CopyWebpackPlugin([
       {
         from: 'public/server',
