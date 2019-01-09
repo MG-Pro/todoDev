@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {user} from '../../redux/actions';
+import {userAction} from '../../redux/actions';
 
 
 class NewPassword extends Component {
@@ -24,7 +24,7 @@ class NewPassword extends Component {
       new_password: this.state.new_password,
       password_confirm: this.state.password_confirm
     };
-    this.props.user(pass, this.props.user.id);
+    this.props.userAction(pass, this.props.userData.id);
   };
 
   inputChange(e) {
@@ -101,9 +101,9 @@ class NewPassword extends Component {
 
 const mapStateToProps = state => ({
   errors: state.errors,
-  user: state.auth.user,
+  userData: state.auth.user,
   isSetNewPassword: state.user.isSetNewPassword,
 });
 
 export default connect(
-  mapStateToProps, {user})(NewPassword);
+  mapStateToProps, {userAction})(NewPassword);

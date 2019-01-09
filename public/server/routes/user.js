@@ -110,4 +110,25 @@ router.get('/me',
   });
 });
 
+router.put('/:id',
+  passport.authenticate('jwt', { session: false }),
+  function(req, res) {
+    const id = req.params.id;
+    console.log(id);
+  //const { errors, isValid } = validateRegisterInput(req.body);
+
+  //if(!isValid) {
+  //  return res.status(400).json(errors);
+  //}
+  User.findById()
+    .then(user => {
+    if(user) {
+      return res.status(400).json({
+        email: 'Email already exists'
+      });
+    }
+
+  });
+});
+
 module.exports = router;
