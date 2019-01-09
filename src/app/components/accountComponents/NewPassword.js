@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {userAction} from '../../redux/actions';
+import {user as userAction} from '../../redux/actions';
 
 
 class NewPassword extends Component {
@@ -59,7 +59,7 @@ class NewPassword extends Component {
                   onChange={this.inputChange}
                 />
               </div>
-              {errors.password_confirm && (<span className="user-form__msg">{errors.password_confirm}</span>)}
+              {errors.old_password && (<span className="user-form__msg">{errors.old_password}</span>)}
             </div>
             <div className="user-form__group">
               <div className="user-form__input-wrap">
@@ -72,7 +72,7 @@ class NewPassword extends Component {
                   onChange={this.inputChange}
                 />
               </div>
-              {errors.password_confirm && (<span className="user-form__msg">{errors.password_confirm}</span>)}
+              {errors.new_password && (<span className="user-form__msg">{errors.new_password}</span>)}
             </div>
             <div className="user-form__group">
               <div className="user-form__input-wrap">

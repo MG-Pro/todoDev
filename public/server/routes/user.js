@@ -6,25 +6,24 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
-
+const validateNewPasswordInput = require('../validation/newPassword');
 const User = require('../models/User');
 
-router.post('/register', function(req, res) {
+router.post('/register', function (req, res) {
 
-  const { errors, isValid } = validateRegisterInput(req.body);
+  const {errors, isValid} = validateRegisterInput(req.body);
 
-  if(!isValid) {
+  if (!isValid) {
     return res.status(400).json(errors);
   }
   User.findOne({
     email: req.body.email
   }).then(user => {
-    if(user) {
+    if (user) {
       return res.status(400).json({
         email: 'Email already exists'
       });
-    }
-    else {
+    } else {
       const avatar = gravatar.url(req.body.email, {
         s: '200',
         r: 'pg',
@@ -37,10 +36,10 @@ router.post('/register', function(req, res) {
       });
 
       bcrypt.genSalt(10, (err, salt) => {
-        if(err) console.error('There was an error', err);
+        if (err) console.error('There was an error', err);
         else {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if(err) console.error('There was an error', err);
+            if (err) console.error('There was an error', err);
             else {
               newUser.password = hash;
               newUser
@@ -59,9 +58,9 @@ router.post('/register', function(req, res) {
 
 router.post('/login', (req, res) => {
 
-  const { errors, isValid } = validateLoginInput(req.body);
+  const {errors, isValid} = validateLoginInput(req.body);
 
-  if(!isValid) {
+  if (!isValid) {
     return res.status(400).json(errors);
   }
 
@@ -70,13 +69,13 @@ router.post('/login', (req, res) => {
 
   User.findOne({email})
     .then(user => {
-      if(!user) {
+      if (!user) {
         errors.email = 'User not found';
         return res.status(404).json(errors);
       }
       bcrypt.compare(password, user.password)
         .then(isMatch => {
-          if(isMatch) {
+          if (isMatch) {
             const payload = {
               id: user.id,
               email: user.email,
@@ -84,7 +83,7 @@ router.post('/login', (req, res) => {
               avatar: user.avatar
             };
             jwt.sign(payload, 'secret', {expiresIn: '7d'}, (err, token) => {
-              if(err) console.error('There is some error in token', err);
+              if (err) console.error('There is some error in token', err);
               else {
                 res.json({
                   success: true,
@@ -92,8 +91,7 @@ router.post('/login', (req, res) => {
                 });
               }
             });
-          }
-          else {
+          } else {
             errors.password = 'Incorrect Password';
             return res.status(400).json(errors);
           }
@@ -102,33 +100,66 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/me',
-  passport.authenticate('jwt', { session: false }), (req, res) => {
-  return res.json({
-    id: req.user.id,
-    name: req.user.name,
-    email: req.user.email
+  passport.authenticate('jwt', {session: false}), (req, res) => {
+    return res.json({
+      id: req.user.id,
+      name: req.user.name,
+      email: req.user.email
+    });
   });
-});
 
 router.put('/:id',
-  passport.authenticate('jwt', { session: false }),
-  function(req, res) {
+  passport.authenticate('jwt', {session: false}),
+  function (req, res) {
     const id = req.params.id;
-    console.log(id);
-  //const { errors, isValid } = validateRegisterInput(req.body);
 
-  //if(!isValid) {
-  //  return res.status(400).json(errors);
-  //}
-  User.findById()
-    .then(user => {
-    if(user) {
-      return res.status(400).json({
-        email: 'Email already exists'
-      });
+    const {errors, isValid} = validateNewPasswordInput(req.body);
+
+    if(!isValid) {
+      //return res.status(400).json(errors);
     }
 
+    User.findById(id)
+      .then(user => {
+        if (!user) {
+          return res.status(400).json({
+            email: 'User not found'
+          });
+        } else {
+          bcrypt.genSalt(10, (err, salt) => {
+            if (err) console.error('There was an error', err);
+            else {
+              bcrypt.hash(req.body.new_password, salt, (err, hash) => {
+                if (err) console.error('There was an error', err);
+                else {
+                  user.password = hash;
+                  user
+                    .save()
+                    .then(user => {
+                      const payload = {
+                        id: user.id,
+                        email: user.email,
+                        name: user.email.replace(/@(.*)/, ''),
+                        avatar: user.avatar
+                      };
+                      jwt.sign(payload, 'secret', {expiresIn: '7d'}, (err, token) => {
+                        if (err) console.error('There is some error in token', err);
+                        else {
+                          res.json({
+                            success: true,
+                            token: `Bearer ${token}`
+                          });
+                        }
+                      });
+                    })
+                    .catch(e => console.log(e));
+                }
+              });
+            }
+          });
+        }
+
+      });
   });
-});
 
 module.exports = router;
