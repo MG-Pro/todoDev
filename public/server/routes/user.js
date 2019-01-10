@@ -115,51 +115,64 @@ router.put('/:id',
 
     const {errors, isValid} = validateNewPasswordInput(req.body);
 
-    if(!isValid) {
-      //return res.status(400).json(errors);
+    if (!isValid) {
+      return res.status(400).json(errors);
     }
 
     User.findById(id)
       .then(user => {
         if (!user) {
           return res.status(400).json({
-            email: 'User not found'
+            msg: 'User not found'
           });
         } else {
-          bcrypt.genSalt(10, (err, salt) => {
-            if (err) console.error('There was an error', err);
-            else {
-              bcrypt.hash(req.body.new_password, salt, (err, hash) => {
-                if (err) console.error('There was an error', err);
-                else {
-                  user.password = hash;
-                  user
-                    .save()
-                    .then(user => {
-                      const payload = {
-                        id: user.id,
-                        email: user.email,
-                        name: user.email.replace(/@(.*)/, ''),
-                        avatar: user.avatar
-                      };
-                      jwt.sign(payload, 'secret', {expiresIn: '7d'}, (err, token) => {
-                        if (err) console.error('There is some error in token', err);
-                        else {
-                          res.json({
-                            success: true,
-                            token: `Bearer ${token}`
-                          });
-                        }
-                      });
-                    })
-                    .catch(e => console.log(e));
-                }
-              });
-            }
-          });
+
+          bcrypt.compare(req.body.old_password, user.password)
+            .then(isMatch => {
+              if (isMatch) {
+                bcrypt.genSalt(10, (err, salt) => {
+                  if (err) console.error(err);
+                  else {
+                    bcrypt.hash(req.body.new_password, salt, (err, hash) => {
+                      if (err) console.error(err);
+                      else {
+                        user.password = hash;
+                        user
+                          .save()
+                          .then(user => {
+                            const payload = {
+                              id: user.id,
+                              email: user.email,
+                              name: user.email.replace(/@(.*)/, ''),
+                              avatar: user.avatar
+                            };
+                            jwt.sign(payload, 'secret', {expiresIn: '7d'}, (err, token) => {
+                              if (err) console.error('There is some error in token', err);
+                              else {
+                                res.json({
+                                  success: true,
+                                  token: `Bearer ${token}`
+                                });
+                              }
+                            });
+                          })
+                          .catch(e => console.log(e));
+                      }
+                    });
+                  }
+                });
+              } else {
+                return res.status(400).json({
+                  old_password: 'Incorrect old password'
+                });
+              }
+            });
+
+
         }
 
       });
+
   });
 
 module.exports = router;

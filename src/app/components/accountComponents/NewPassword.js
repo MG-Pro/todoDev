@@ -45,6 +45,7 @@ class NewPassword extends Component {
     const { errors } = this.state;
     return (
         <div className="account__user-item account__user-item_form">
+          {errors.msg && (<span className="user-form__msg">{errors.msg}</span>)}
           <form className="account__user-form" onSubmit={this.submit}>
             <div className="user-form__group">
               <div className="user-form__input-wrap">
