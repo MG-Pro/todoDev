@@ -9,7 +9,7 @@ class MainSidebar extends Component {
   render() {
     return (
         <div>
-
+          <h2>Sidebar</h2>
         </div>
       )
   }
