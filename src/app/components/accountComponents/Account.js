@@ -27,8 +27,17 @@ class Account extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.isSetNewPassword) {
+      this.setState({
+        showForm: false
+      });
+    }
+  }
+
   render() {
   const {user} = this.props;
+  const isSetNewPassword = this.props.isSetNewPassword;
   return (
         <div className='container'>
           <div className="layout">
@@ -45,6 +54,10 @@ class Account extends Component {
                 </div>
                 <div className="account__user-item">
                   <a href='' onClick={this.showForm} className='account__user-item-link'>Изменить пароль</a>
+                  {isSetNewPassword &&
+                  <span className='account__user-item-msg'><i
+                    className="fa fa-check-circle-o" aria-hidden="true"></i> Пароль успешно изменен</span>
+                  }
                 </div>
                 {this.state.showForm && <NewPassword close={this.closeForm}/>}
               </div>
@@ -61,6 +74,7 @@ class Account extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.auth.user,
+  isSetNewPassword: state.user.isSetNewPassword,
 });
 
 export default connect(mapStateToProps)(Account);

@@ -45,8 +45,8 @@ class NewPassword extends Component {
     const { errors } = this.state;
     return (
         <div className="account__user-item account__user-item_form">
-          {errors.msg && (<span className="user-form__msg">{errors.msg}</span>)}
           <form className="account__user-form" onSubmit={this.submit}>
+            {errors.msg && <p className="account__err-msg">{errors.msg}</p>}
             <div className="user-form__group">
               <div className="user-form__input-wrap">
                 <span className="user-form__icon">
@@ -103,7 +103,6 @@ class NewPassword extends Component {
 const mapStateToProps = state => ({
   errors: state.errors,
   userData: state.auth.user,
-  isSetNewPassword: state.user.isSetNewPassword,
 });
 
 export default connect(

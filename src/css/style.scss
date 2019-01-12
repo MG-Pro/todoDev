@@ -595,12 +595,22 @@ body {
   }
   .account__user-item-link {
     text-decoration: none;
-    color: #208e10;
+    color: #7095eb;
     font-weight: 700;
-    font-size: 22px;
-    display: block;
-    width: 100%;
-    text-align: center;
+    font-size: 20px;
+    &:hover {
+      color: #5873b3;
+    }
+  }
+  .account__user-item-msg {
+    color: #1d7d50;
+    padding-left: 15px;
+  }
+  .account__err-msg {
+    color: #ff0000;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 14px;
   }
   .account__stat-head {
     font-weight: 700;
