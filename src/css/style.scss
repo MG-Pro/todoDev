@@ -631,6 +631,52 @@ body {
     flex-wrap: wrap;
     justify-content: space-between;
   }
+  .tool-bar {
+    margin-bottom: 20px;
+  }
+  .tool-bar__list {
+    display: flex;
+    flex-wrap: nowrap;
+    list-style: none;
+  }
+  .tool-bar__item {
+    margin-right: 20px;
+  }
+  .tool-bar__link {
+    color: #bd98d7;
+    text-decoration: none;
+    padding: 10px 10px;
+    font-size: 22px;
+    position: relative;
+    transition: 0.5s;
+    &:before {
+      content: '';
+      display: block;
+      height: 75%;
+      width: 1px;
+      background-color: #e3e3e3;
+      position: absolute;
+      left: -10px;
+      top: 15%;
+    }
+    &:hover {
+      color: #7b7596;
+    }
+  }
+  .tool-bar__link_new-task {
+    padding-left: 0;
+    font-weight: 700;
+    color: #1d7d50;
+    &:before {
+      display: none;
+    }
+    &:hover {
+      color: #155132;
+    }
+  }
+  
+  
+  
   
   
   

@@ -14,11 +14,11 @@ const AddTask = ({dispatch}) => {
   }
 
   return (
-    <div>
-      <form onSubmit={submit}>
-        <input ref={node => input = node}/>
-        <button type="submit">Add Task</button>
-      </form>
+    <div className='add-task'>
+        <form onSubmit={submit}>
+          <input ref={node => input = node}/>
+          <button type="submit">Add Task</button>
+        </form>
     </div>
   )
 };

@@ -9,6 +9,7 @@ import Login from './components/authComponents/Login';
 import PrivateRoute from './components/PrivateRoute';
 import Account from './components/accountComponents/Account';
 
+
 class App extends Component {
   render() {
     return (
@@ -20,6 +21,7 @@ class App extends Component {
             <Route exact path='/app/login' component={Login}/>
             <Switch>
               <PrivateRoute path='/app/account' component={Account}/>
+
               <PrivateRoute path='/app' component={Main}/>
             </Switch>
           </main>
