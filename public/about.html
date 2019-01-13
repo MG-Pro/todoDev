@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" class="start-page">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="shortcut icon" href="/assets/img/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/assets/img/favicon.png" type="image/x-icon">
+  <title>ToDo: Dev - About App</title>
+  <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css %>">
+  <script src="<%= htmlWebpackPlugin.files.js[1] %>"></script>
+</head>
+<body class="about-page">
+<div class="wrapper">
+  <main class="main">
+    <header class="header">
+      <div class="container">
+        <div class="header__cont">
+          <div class="header__logo"></div>
+          <div class="header__brand">
+            <a href="" class="header__brand-link">
+              <p class="header__brand-title">TODO:</p>
+              <p class="header__brand-subtitle">App for development training</p>
+            </a>
+          </div>
+          <nav class="header__nav">
+            <ul class="header__list">
+              <li class="header__item">
+                <a href="/about" class="header__item-link">О приложении</a>
+              </li>
+              <li class="header__item">
+                <a href="/app/login" class="header__item-link">Вход</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <div class="content">
+      <div class="container">
+        <section class="content__item ">
+          <div class="article">
+            <h1>О приложении</h1>
+            <p>Статья в разработке</p>
+          </div>
+          
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__contacts">
+        <a href="https://github.com/MG-Pro" class="footer__contacts-link">
+          <i class="fa fa-github"></i> MG-Pro
+        </a>
+        <br>
+        <span class="footer__contacts-copy"><i class="fa fa-copyright"></i></span>
+        <span id="footer_year" class="footer__contacts-date"></span>
+      </div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

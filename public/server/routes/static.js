@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
+router.get('/about', (req, res) => {
+  const p = path.join(__dirname + '/../../../build/about.html');
+  console.log(p);
+  res.sendFile(p);
+});
+
 router.get('/', (req, res) => {
   const p = path.join(__dirname + '/../../../build/index.html');
   console.log(p);

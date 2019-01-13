@@ -29,7 +29,13 @@ module.exports = {
         bypass: function () {
           return 'http://localhost:8080/app.html';
         }
-      }
+      },
+      '/about': {
+        target: 'http://localhost:8080',
+        bypass: function () {
+          return 'http://localhost:8080/about.html';
+        }
+      },
     }
   },
   devtool: isProduction ? false : 'cheap-inline-module-source-map',
@@ -110,6 +116,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'public/index.html',
+      inject: false
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'about.html',
+      template: 'public/about.html',
       inject: false
     }),
     new MiniCssExtractPlugin({

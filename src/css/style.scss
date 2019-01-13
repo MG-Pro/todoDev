@@ -14,9 +14,11 @@ body,
 #root {
   height: 100%;
 }
+
 body {
   line-height: 1;
 }
+
 .container {
   max-width: 1280px;
   margin: auto;
@@ -49,6 +51,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 .footer {
   flex: 0 0 auto;
   background-color: #63617d;
@@ -103,13 +106,13 @@ body {
     list-style: none;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     font-size: 24px;
     height: 100%;
   }
   
   .header__item {
-  
+    margin-left: 50px;
   }
   
   .header__item-link {
@@ -344,6 +347,13 @@ body {
   .footer__contacts-date {
     font-size: 16px;
   }
+  
+  // about page
+  body.about-page {
+    background-color: #f0faff;
+    
+  }
+  
 }
 
 .app {
@@ -359,26 +369,32 @@ body {
   .header__logo-img {
     width: 50px;
   }
+  
   .header__brand {
     font-family: 'PT Serif', serif;
     text-align: center;
   }
+  
   .header__brand-link {
     color: #ffffff;
     text-decoration: none;
   }
+  
   .header__brand-title {
     font-size: 49px;
     font-weight: 700;
   }
+  
   .header__brand-subtitle {
     font-size: 14px;
   }
+  
   .header__user {
     text-align: right;
     font-size: 20px;
     position: relative;
   }
+  
   .header__user-name {
     color: #ffffff;
     text-decoration: none;
@@ -391,11 +407,13 @@ body {
     -khtml-user-select: none;
     -webkit-user-select: none;
   }
+  
   .header__user-name-angle {
     min-width: 20px;
     text-align: center;
     display: inline-block;
   }
+  
   .header__user-avatar {
     max-width: 65px;
     border-radius: 50%;
@@ -403,10 +421,12 @@ body {
     vertical-align: middle;
     margin-right: 10px;
   }
+  
   .header__user-sign-out {
     color: #ffffff;
     text-decoration: none;
   }
+  
   .header__menu {
     flex-grow: 1;
     display: flex;
@@ -414,23 +434,28 @@ body {
     justify-content: flex-end;
     padding: 0 30px;
   }
+  
   .header__menu-item {
     font-size: 20px;
   }
+  
   .header__menu-link {
     color: #ffffff;
     text-decoration: none;
     font-weight: 700;
+    
     &:hover {
       text-decoration: underline;
     }
   }
+  
   .header__drop-menu {
     position: absolute;
     width: 150px;
     right: 0;
     top: 60px;
   }
+  
   .header__drop-menu-list {
     background-color: #ffffff;
     border: 2px solid #979797;
@@ -439,6 +464,7 @@ body {
     padding: 10px 10px;
     text-align: left;
     position: relative;
+    
     &:before {
       content: '';
       position: absolute;
@@ -452,17 +478,21 @@ body {
       right: 12px;
     }
   }
+  
   .header__drop-menu-item {
     margin-bottom: 10px;
     border-bottom: 1px solid #d6d6d6;
+    
     &:last-child {
       border: none;
       margin-bottom: 0;
+      
       a {
         margin-bottom: 0;
       }
     }
   }
+  
   .header__drop-menu-link {
     color: #4c4c4c;
     font-size: 16px;
@@ -470,35 +500,42 @@ body {
     margin-bottom: 15px;
     display: inline-block;
   }
+  
   .container_user-form {
     max-width: 480px;
     flex-grow: 1;
   }
+  
   .user-form {
     flex-grow: 1;
     display: flex;
     padding: 40px 0;
   }
+  
   .user-form__head {
     text-align: center;
     color: #63617d;
     font-size: 28px;
     margin-bottom: 26px;
   }
+  
   .user-form__form {
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
   }
+  
   .user-form__group {
     margin-bottom: 25px;
     position: relative;
   }
+  
   .user-form__input-wrap {
     display: flex;
     flex-wrap: wrap;
   }
+  
   .user-form__icon {
     border: 0.5px solid #cecece;
     border-right: none;
@@ -507,6 +544,7 @@ body {
     padding: 5px;
     color: #8a2be2;
   }
+  
   .user-form__input {
     flex-grow: 1;
     border: 0.5px solid #cecece;
@@ -516,6 +554,7 @@ body {
     padding: 5px;
     color: #63617d;
   }
+  
   .user-form__btn {
     padding: 8px 10px;
     border-radius: 10px;
@@ -532,15 +571,18 @@ body {
     box-shadow: 0px 0 5px 2px rgba(0, 0, 0, 0.3);
     transition: 0.5s;
     outline: none !important;
+    
     &:hover {
       background-color: #561990;
     }
+    
     &:active {
       background-color: #3b1163;
       box-shadow: inset 0px 0 2px 2px rgba(0, 0, 0, 0.5);
       color: #b1b1b1;
     }
   }
+  
   .user-form__msg {
     color: #ff0000;
     font-weight: 700;
@@ -560,88 +602,109 @@ body {
     box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
     margin: 35px 0;
   }
+  
   .account__header {
     color: #63617d;
     font-size: 26px;
     margin-bottom: 20px;
   }
+  
   .account-wrap {
     display: flex;
     flex-wrap: wrap;
   }
+  
   .account__user {
     width: 50%;
     padding-right: 5px;
   }
+  
   .account__stat {
     width: 50%;
     padding-left: 5px;
   }
+  
   .account__user-item {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 20px;
     color: #63617d;
+    
     &:last-child {
       margin-bottom: 0;
     }
   }
+  
   .account__user-item-l {
     width: 50%;
   }
+  
   .account__user-item-r {
     width: 50%;
     font-weight: 700;
   }
+  
   .account__user-item-link {
     text-decoration: none;
     color: #7095eb;
     font-weight: 700;
     font-size: 20px;
+    
     &:hover {
       color: #5873b3;
     }
   }
+  
   .account__user-item-msg {
     color: #1d7d50;
     padding-left: 15px;
   }
+  
   .account__err-msg {
     color: #ff0000;
     font-weight: 700;
     margin-bottom: 10px;
     font-size: 14px;
   }
+  
   .account__stat-head {
     font-weight: 700;
     color: #63617d;
     margin-bottom: 20px;
   }
+  
   .account__stat-subhead {
     font-style: italic;
   }
+  
   .account__user-item_form {
     justify-content: center;
   }
+  
   .account__user-form {
     width: 80%;
   }
+  
   .user-form__btn-wrap {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
+  
   .tool-bar {
     margin-bottom: 20px;
   }
+  
   .tool-bar__list {
     display: flex;
     flex-wrap: nowrap;
     list-style: none;
   }
+  
   .tool-bar__item {
     margin-right: 20px;
   }
+  
   .tool-bar__link {
     color: #bd98d7;
     text-decoration: none;
@@ -649,6 +712,7 @@ body {
     font-size: 22px;
     position: relative;
     transition: 0.5s;
+    
     &:before {
       content: '';
       display: block;
@@ -659,34 +723,25 @@ body {
       left: -10px;
       top: 15%;
     }
+    
     &:hover {
       color: #7b7596;
     }
   }
+  
   .tool-bar__link_new-task {
     padding-left: 0;
     font-weight: 700;
     color: #1d7d50;
+    
     &:before {
       display: none;
     }
+    
     &:hover {
       color: #155132;
     }
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   .footer__contacts {
@@ -706,10 +761,6 @@ body {
   .footer__contacts-date {
     font-size: 16px;
   }
-  
-
-  
-  
   
   
 }
