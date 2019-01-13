@@ -21,22 +21,19 @@ module.exports = {
   devServer: {
     overlay: true,
     open: true,
-    //historyApiFallback: true,
     proxy: {
       '/api': 'http://localhost:3000',
       '/app': {
         target: 'http://localhost:8080',
-        bypass: function () {
+        bypass: function (req, res, proxyOptions) {
+          if (req.url === '/about') {
+            return 'http://localhost:8080/about.html';
+          }
           return 'http://localhost:8080/app.html';
         }
       },
-      '/about': {
-        target: 'http://localhost:8080',
-        bypass: function () {
-          return 'http://localhost:8080/about.html';
-        }
-      },
-    }
+    },
+    //historyApiFallback: true,
   },
   devtool: isProduction ? false : 'cheap-inline-module-source-map',
   optimization: {
