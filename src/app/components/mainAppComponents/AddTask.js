@@ -2,6 +2,7 @@ import {Component} from 'react';
 import {connect} from 'react-redux'
 import {addTask} from '../../redux/actions'
 import {withRouter} from 'react-router-dom';
+import EditTask from './EditTask';
 
 class AddTask extends Component {
   constructor(props) {
@@ -21,10 +22,7 @@ class AddTask extends Component {
   render() {
     return (
       <div className='add-task'>
-        <form onSubmit={this.submit}>
-          <input ref={node => this.input = node}/>
-          <button type="submit">Add Task</button>
-        </form>
+        <EditTask submit={this.submit}/>
       </div>
     )
   }

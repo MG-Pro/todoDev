@@ -2,6 +2,7 @@ $fa-font-path: "fonts";
 @import 'FontAwesome/font-awesome';
 @import url('https://fonts.googleapis.com/css?family=PT+Serif:400,700|Roboto:300,400,700');
 @import 'variables';
+@import "datePicker";
 
 * {
   &, &:after, &:before {
@@ -535,7 +536,7 @@ body {
 
   .user-form__input-wrap {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .user-form__icon {
@@ -545,6 +546,8 @@ body {
     border-bottom-left-radius: 5px;
     padding: 5px;
     color: #8a2be2;
+    display: flex;
+    align-items: center;
   }
 
   .user-form__input {
@@ -556,7 +559,10 @@ body {
     padding: 5px;
     color: $head-color;
   }
-
+  .user-form__input_ta {
+    min-height: 31px;
+    max-height: 200px;
+  }
   .user-form__btn {
     padding: 8px 10px;
     border-radius: 10px;
@@ -763,7 +769,6 @@ body {
   }
 
 
-
   .task-list {
     flex-grow: 10;
     margin-left: 15px;
@@ -778,12 +783,34 @@ body {
     margin-bottom: 20px;
   }
 
+  // edit task
 
+  .task-form {
+    max-width: 800px;
 
+  }
+  .task-form__group {
+    margin-bottom: 15px;
+    position: relative;
+  }
+  .task-form__name-wrap {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .task-form__name {
+    color: $head-color;
+    font-weight: 700;
+    font-size: 16px;
 
-
-
-
+  }
+  .task-form__msg {
+    color: #ff0000;
+    font-weight: 700;
+    font-size: 14px;
+    margin-left: 20px;
+  }
 
 
   .footer__contacts {

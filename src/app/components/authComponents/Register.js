@@ -34,10 +34,10 @@ class Register extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.auth.isAuthenticated) {
+    if (nextProps.auth.isAuthenticated) {
       this.props.history.push('/app');
     }
-    if(nextProps.errors) {
+    if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
       });
@@ -46,13 +46,13 @@ class Register extends Component {
   }
 
   componentDidMount() {
-    if(this.props.auth.isAuthenticated) {
+    if (this.props.auth.isAuthenticated) {
       this.props.history.push('/app');
     }
   }
 
   render() {
-    const { errors } = this.state;
+    const {errors} = this.state;
     return (
       <div className="user-form">
         <div className="container container_user-form">
@@ -107,7 +107,7 @@ class Register extends Component {
 
 const mapStateToProps = state => ({
   errors: state.errors,
-  auth: state.auth,
+  auth: state.auth
 });
 
 export default connect(
