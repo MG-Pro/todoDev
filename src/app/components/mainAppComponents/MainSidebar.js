@@ -8,8 +8,8 @@ class MainSidebar extends Component {
 
   render() {
     return (
-        <div>
-          <h2>Sidebar</h2>
+        <div className='sidebar'>
+          <h3 className='sidebar__head'>Технологии</h3>
         </div>
       )
   }

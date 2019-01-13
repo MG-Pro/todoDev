@@ -1,26 +1,41 @@
+import {Component} from 'react';
 import {connect} from 'react-redux'
 import {addTask} from '../../redux/actions'
+import {withRouter} from 'react-router-dom';
 
-const AddTask = ({dispatch}) => {
-  let input;
-
-  function submit(e) {
-    e.preventDefault();
-    if (!input.value.trim()) {
-      return
-    }
-    dispatch(addTask(input.value));
-    input.value = ''
+class AddTask extends Component {
+  constructor(props) {
+    super(props);
   }
 
-  return (
-    <div className='add-task'>
-        <form onSubmit={submit}>
-          <input ref={node => input = node}/>
+
+  submit(e) {
+    e.preventDefault();
+    if (!this.input.value.trim()) {
+      return
+    }
+    this.props.addTask(this.input.value);
+    this.input.value = ''
+  }
+
+  render() {
+    return (
+      <div className='add-task'>
+        <form onSubmit={this.submit}>
+          <input ref={node => this.input = node}/>
           <button type="submit">Add Task</button>
         </form>
-    </div>
-  )
-};
+      </div>
+    )
+  }
 
-export default connect()(AddTask)
+
+}
+
+const mapStateToProps = state => ({
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, {addTask})(withRouter(AddTask)
+);
+

@@ -4,7 +4,8 @@ const TaskList = ({tasks}) => {
   console.log(tasks);
   return (
     <div className='task-list'>
-      <h2>Task List</h2>
+      <h3 className='task-list__head'>Задачи</h3>
+      {!tasks.length && <p className='task-list__msg'>У вас пока нет задач</p>}
       <ul>
         {tasks.map(task =>
           <li key={task.id}>

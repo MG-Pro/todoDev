@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import MainSidebar from './MainSidebar';
 import TaskList from './TaskList';
 
-export default class name extends Component {
+class Content extends Component {
   render() {
     return (
       <div className="main-wrap">
@@ -12,3 +12,5 @@ export default class name extends Component {
       )
   }
 }
+
+export default Content;
