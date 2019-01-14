@@ -7,10 +7,24 @@ class EditTask extends Component {
     this.state = {
       tech: this.props.tech || '',
       target: this.props.target || '',
-      targetDate: this.props.targetDate || Date.now(),
+      targetDate: this.props.targetDate || new Date(),
       showPicker: false,
     }
 
+  }
+
+  static stringDate(date) {
+    let d = date.getDate() + '';
+    let m = date.getMonth() + 1 + '';
+    let y = date.getFullYear() + '';
+
+    if(d.length < 2) {
+      d = '0' + d;
+    }
+    if(m.length < 2) {
+      m = '0' + m;
+    }
+    return `${d}.${m}.${y}`;
   }
 
   togglePicker = (e) => {
@@ -22,6 +36,14 @@ class EditTask extends Component {
 
   getDate = (date) => {
     console.log(date);
+    this.setState({
+      targetDate: date,
+      showPicker: false,
+    })
+  };
+
+  inputChange = (e) => {
+    console.log(e);
   };
 
   render() {
@@ -73,7 +95,7 @@ class EditTask extends Component {
           </div>
           <div className="task-form__group">
             <div className='task-form__name-wrap'>
-              <span className="task-form__name">Срок результата</span>
+              <span className="task-form__name">Дата завершения</span>
               {errors.email && (<span className="task-form__msg">{errors.email}</span>)}
             </div>
             <div className="user-form__input-wrap">
@@ -84,7 +106,7 @@ class EditTask extends Component {
                 className="user-form__input"
                 name="date"
                 type="text"
-                value={state.targetDate}
+                value={EditTask.stringDate(state.targetDate)}
                 onChange={this.inputChange}
                 onFocus={this.togglePicker}
                 //onBlur={this.togglePicker}
@@ -93,7 +115,6 @@ class EditTask extends Component {
               <div className="date-picker-wrap">
                 <DatePicker
                   onDayClick={this.getDate}
-
                 />
               </div>
               }

@@ -62,7 +62,9 @@ body {
   padding: 15px 0;
   box-shadow: 0px -4px 2px 0px rgba(0, 0, 0, 0.38);
 }
-
+.hide {
+  display: none;
+}
 .start-page {
   body {
     background-color: #ff3ad3;
@@ -363,7 +365,6 @@ body {
   body {
     font-family: 'Roboto', sans-serif;
     background-color: #f0faff;
-    overflow: hidden;
   }
 
   .header__logo {
@@ -560,6 +561,10 @@ body {
     outline: none !important;
     padding: 5px;
     color: $head-color;
+    height: 31px;
+    &:focus {
+      background-color: #efeff4;
+    }
   }
   .user-form__input_ta {
     min-height: 31px;
@@ -818,8 +823,20 @@ body {
     box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
     border-radius: 10px;
-    left: 15%;
-    top: 45px;
+    left: 18%;
+    top: -130px;
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 12.5px 15px 12.5px 0;
+      border-color: transparent #ffffff transparent transparent;
+      left: -15px;
+      bottom: 25px;
+    }
   }
 
 
