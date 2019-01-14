@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import DatePicker from '../helperComponents/DatePicker';
 
 class EditTask extends Component {
   constructor(props) {
@@ -74,6 +75,7 @@ class EditTask extends Component {
                 value={state.targetDate}
                 onChange={this.inputChange}
               />
+              <DatePicker/>
             </div>
           </div>
 

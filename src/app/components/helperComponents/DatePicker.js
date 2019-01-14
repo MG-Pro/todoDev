@@ -55,7 +55,7 @@ const DAYS_SHORT = {
   en: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 };
 
-export default class DayPicker extends Component {
+export default class DatePicker extends Component {
   constructor(props) {
     super(props);
 
@@ -158,7 +158,7 @@ export default class DayPicker extends Component {
     const {active} = this.props;
 
     const isToday = day && day.valueOf() === today.valueOf();
-    const isActive = active && day && DayPicker.isSameDay(active, day);
+    const isActive = active && day && DatePicker.isSameDay(active, day);
 
     return (
       <td
