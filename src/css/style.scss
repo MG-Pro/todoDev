@@ -363,6 +363,7 @@ body {
   body {
     font-family: 'Roboto', sans-serif;
     background-color: #f0faff;
+    overflow: hidden;
   }
 
   .header__logo {
@@ -537,6 +538,7 @@ body {
   .user-form__input-wrap {
     display: flex;
     flex-wrap: nowrap;
+    position: relative;
   }
 
   .user-form__icon {
@@ -811,6 +813,26 @@ body {
     font-size: 14px;
     margin-left: 20px;
   }
+  .date-picker-wrap {
+    position: absolute;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    border-radius: 10px;
+    left: 15%;
+    top: 45px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   .footer__contacts {

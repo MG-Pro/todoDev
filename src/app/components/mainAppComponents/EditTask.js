@@ -8,9 +8,21 @@ class EditTask extends Component {
       tech: this.props.tech || '',
       target: this.props.target || '',
       targetDate: this.props.targetDate || Date.now(),
+      showPicker: false,
     }
 
   }
+
+  togglePicker = (e) => {
+    e.preventDefault();
+    this.setState({
+      showPicker: !this.state.showPicker,
+    })
+  };
+
+  getDate = (date) => {
+    console.log(date);
+  };
 
   render() {
     const {state} = this;
@@ -71,11 +83,20 @@ class EditTask extends Component {
               <input
                 className="user-form__input"
                 name="date"
-                type="date"
+                type="text"
                 value={state.targetDate}
                 onChange={this.inputChange}
+                onFocus={this.togglePicker}
+                //onBlur={this.togglePicker}
               />
-              <DatePicker/>
+              {this.state.showPicker &&
+              <div className="date-picker-wrap">
+                <DatePicker
+                  onDayClick={this.getDate}
+
+                />
+              </div>
+              }
             </div>
           </div>
 

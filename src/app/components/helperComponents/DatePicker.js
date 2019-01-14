@@ -180,7 +180,6 @@ export default class DatePicker extends Component {
 
   renderWeek = (days, index) => {
     const {month, year} = this.state;
-
     return (
       <tr key={`${year}.${month}.week.${index}`}>{days.map(this.renderDay)}</tr>
     );
@@ -222,6 +221,7 @@ export default class DatePicker extends Component {
             {this.renderDayHeader(4)}
             {this.renderDayHeader(5)}
             {this.renderDayHeader(6)}
+
           </tr>
           </thead>
           <tbody>{this.weeks.map(this.renderWeek)}</tbody>
