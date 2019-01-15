@@ -27,11 +27,19 @@ class EditTask extends Component {
     return `${d}.${m}.${y}`;
   }
 
-  togglePicker = (e) => {
-    e.preventDefault();
+  showPicker = () => {
     this.setState({
-      showPicker: !this.state.showPicker,
+      showPicker: true,
     })
+  };
+
+  closePicker = () => {
+    setTimeout(() => {
+      this.setState({
+        showPicker: false,
+      })
+    }, )
+
   };
 
   getDate = (date) => {
@@ -45,6 +53,11 @@ class EditTask extends Component {
   inputChange = (e) => {
     console.log(e);
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(this.state.showPicker);
+    return true
+  }
 
   render() {
     const {state} = this;
@@ -108,8 +121,8 @@ class EditTask extends Component {
                 type="text"
                 value={EditTask.stringDate(state.targetDate)}
                 onChange={this.inputChange}
-                onFocus={this.togglePicker}
-                //onBlur={this.togglePicker}
+                onFocus={this.showPicker}
+                onBlur={this.closePicker}
               />
               {this.state.showPicker &&
               <div className="date-picker-wrap">
