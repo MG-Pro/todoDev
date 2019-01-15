@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import DatePicker from '../helperComponents/DatePicker';
+import LinksList from './LinksList';
 
 class EditTask extends Component {
   constructor(props) {
@@ -10,12 +11,12 @@ class EditTask extends Component {
       targetDate: this.props.targetDate || new Date(),
       links: this.props.links || [
         {
-          link: 'hhhhhhhhhhhhhhhlsl.com',
-          content: 'ddddddddddkscemjep'
+          link: 'https://nodejs.org/en/docs/',
+          title: 'Node.js Doc'
         },
         {
           link: 'hhhhhhhhhhhhhhhlsl.com',
-          content: 'ddddddddddkscemjep'
+          title: 'ddddddddddkscemjep'
         }
       ],
       showPicker: false
@@ -152,29 +153,7 @@ class EditTask extends Component {
               </div>
             </div>
             <div className="edit-task__links">
-              <div className="task-form__group">
-                <div className='task-form__name-wrap'>
-                  <span className="task-form__name">Учебные материалы</span>
-                </div>
-                <div className="user-form__input-wrap">
-                  <span className="user-form__icon">
-                    <i className="fa fa-external-link"></i>
-                  </span>
-                  <ul className="edit-task__links-list">
-                    {this.state.links &&
-                    <li className='edit-task__links-empty'>Вы пока не добавили учебные материалы</li>
-                    }
-                    {this.state.links.map((link, i) => {
-                      return (
-                      <li className='edit-task__links-item' key={i}>
-                        <a href={link.link} target='_blank' className='edit-task__links-link'>
-                          {link.content}
-                        </a>
-                      </li>
-                      )})}
-                  </ul>
-                </div>
-              </div>
+              <LinksList links={this.state.links}/>
             </div>
           </div>
           <div className="user-form__btn-wrap">

@@ -671,7 +671,7 @@ body {
   }
 
   .account__user-item-msg {
-    color: #1d7d50;
+    color: $success-color;
     padding-left: 15px;
   }
 
@@ -744,7 +744,7 @@ body {
   .tool-bar__link_new-task {
     padding-left: 0;
     font-weight: 700;
-    color: #1d7d50;
+    color: $success-color;
 
     &:before {
       display: none;
@@ -784,7 +784,7 @@ body {
   }
   .task-list__msg {
     font-style: italic;
-    color: #979797;
+    color: $lite-font-color;
   }
   .task-list__head {
     font-size: 26px;
@@ -864,13 +864,19 @@ body {
     list-style: none;
   }
   .edit-task__links-empty {
-
+    font-size: 16px;
+    font-style: italic;
+    color: $lite-font-color;
   }
   .edit-task__links-item {
-
+    border-bottom: 1px solid $border-color;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
   }
   .edit-task__links-link {
-
+    font-size: 16px;
+    text-decoration: none;
+    color: $success-color;
   }
 
 
