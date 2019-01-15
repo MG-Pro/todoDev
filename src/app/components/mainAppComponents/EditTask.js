@@ -8,7 +8,17 @@ class EditTask extends Component {
       tech: this.props.tech || '',
       target: this.props.target || '',
       targetDate: this.props.targetDate || new Date(),
-      showPicker: false,
+      links: this.props.links || [
+        {
+          link: 'hhhhhhhhhhhhhhhlsl.com',
+          content: 'ddddddddddkscemjep'
+        },
+        {
+          link: 'hhhhhhhhhhhhhhhlsl.com',
+          content: 'ddddddddddkscemjep'
+        }
+      ],
+      showPicker: false
     }
 
   }
@@ -18,10 +28,10 @@ class EditTask extends Component {
     let m = date.getMonth() + 1 + '';
     let y = date.getFullYear() + '';
 
-    if(d.length < 2) {
+    if (d.length < 2) {
       d = '0' + d;
     }
-    if(m.length < 2) {
+    if (m.length < 2) {
       m = '0' + m;
     }
     return `${d}.${m}.${y}`;
@@ -29,112 +39,148 @@ class EditTask extends Component {
 
   showPicker = () => {
     this.setState({
-      showPicker: true,
+      showPicker: true
     })
   };
 
   closePicker = () => {
     setTimeout(() => {
       this.setState({
-        showPicker: false,
+        showPicker: false
       })
-    }, )
+    }, 200)
 
   };
 
   getDate = (date) => {
     console.log(date);
     this.setState({
-      targetDate: date,
-      showPicker: false,
+      targetDate: date
     })
   };
 
   inputChange = (e) => {
-    console.log(e);
+    this.setState({
+      [e.currentTarget.name]: e.currentTarget.value
+    })
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log(this.state.showPicker);
-    return true
-  }
+  cleanForm = (e) => {
+    e.preventDefault();
+    this.setState({
+      tech: '',
+      target: '',
+      targetDate: new Date()
+    });
+  };
 
   render() {
     const {state} = this;
     const errors = {
-      email: 'dddddddddddddddd'
+      email: 'Error'
     };
     return (
       <div className='edit-task'>
         <form onSubmit={this.props.submit} className='task-form'>
-          <div className="task-form__group">
-            <div className='task-form__name-wrap'>
-              <span className="task-form__name">Технология</span>
-              {errors.email && (<span className="task-form__msg">{errors.email}</span>)}
-            </div>
-            <div className="user-form__input-wrap">
+          <div className="edit-task-wrap">
+            <div className="edit-task__main">
+              <div className="task-form__group">
+                <div className='task-form__name-wrap'>
+                  <span className="task-form__name">Технология</span>
+                  {errors.email && (<span className="task-form__msg">{errors.email}</span>)}
+                </div>
+                <div className="user-form__input-wrap">
               <span className="user-form__icon">
                 <i className="fa fa-cog"></i>
               </span>
-              <input
-                className="user-form__input"
-                name="tech"
-                type="text"
-                value={state.tech}
-                placeholder="Начните ввод"
-                onChange={this.inputChange}
-              />
-            </div>
-          </div>
-          <div className="task-form__group">
-            <div className='task-form__name-wrap'>
-              <span className="task-form__name">Цель</span>
-              {errors.email && (<span className="task-form__msg">{errors.email}</span>)}
-            </div>
-            <div className="user-form__input-wrap">
+                  <input
+                    className="user-form__input"
+                    name="tech"
+                    type="text"
+                    value={state.tech}
+                    placeholder="Начните ввод"
+                    onChange={this.inputChange}
+                  />
+                </div>
+              </div>
+              <div className="task-form__group">
+                <div className='task-form__name-wrap'>
+                  <span className="task-form__name">Цель</span>
+                  {errors.email && (<span className="task-form__msg">{errors.email}</span>)}
+                </div>
+                <div className="user-form__input-wrap">
               <span className="user-form__icon">
                 <i className="fa fa-dot-circle-o"></i>
               </span>
-              <textarea
-                name="target"
-                rows="1"
-                value={state.target}
-                className="user-form__input user-form__input_ta"
-                onChange={this.inputChange}
-              >
+                  <textarea
+                    name="target"
+                    rows="1"
+                    value={state.target}
+                    className="user-form__input user-form__input_ta"
+                    onChange={this.inputChange}
+                  >
 
               </textarea>
-            </div>
-          </div>
-          <div className="task-form__group">
-            <div className='task-form__name-wrap'>
-              <span className="task-form__name">Дата завершения</span>
-              {errors.email && (<span className="task-form__msg">{errors.email}</span>)}
-            </div>
-            <div className="user-form__input-wrap">
+                </div>
+              </div>
+              <div className="task-form__group">
+                <div className='task-form__name-wrap'>
+                  <span className="task-form__name">Дата завершения</span>
+                  {errors.email && (<span className="task-form__msg">{errors.email}</span>)}
+                </div>
+                <div className="user-form__input-wrap">
               <span className="user-form__icon">
                 <i className="fa fa-calendar"></i>
               </span>
-              <input
-                className="user-form__input"
-                name="date"
-                type="text"
-                value={EditTask.stringDate(state.targetDate)}
-                onChange={this.inputChange}
-                onFocus={this.showPicker}
-                onBlur={this.closePicker}
-              />
-              {this.state.showPicker &&
-              <div className="date-picker-wrap">
-                <DatePicker
-                  onDayClick={this.getDate}
-                />
+                  <input
+                    className="user-form__input"
+                    name="date"
+                    type="text"
+                    value={EditTask.stringDate(state.targetDate)}
+                    onChange={this.inputChange}
+                    onFocus={this.showPicker}
+                    onBlur={this.closePicker}
+                  />
+                  {this.state.showPicker &&
+                  <div className="date-picker-wrap">
+                    <DatePicker
+                      onDayClick={this.getDate}
+                    />
+                  </div>
+                  }
+                </div>
               </div>
-              }
+            </div>
+            <div className="edit-task__links">
+              <div className="task-form__group">
+                <div className='task-form__name-wrap'>
+                  <span className="task-form__name">Учебные материалы</span>
+                </div>
+                <div className="user-form__input-wrap">
+                  <span className="user-form__icon">
+                    <i className="fa fa-external-link"></i>
+                  </span>
+                  <ul className="edit-task__links-list">
+                    {this.state.links &&
+                    <li className='edit-task__links-empty'>Вы пока не добавили учебные материалы</li>
+                    }
+                    {this.state.links.map((link, i) => {
+                      return (
+                      <li className='edit-task__links-item' key={i}>
+                        <a href={link.link} target='_blank' className='edit-task__links-link'>
+                          {link.content}
+                        </a>
+                      </li>
+                      )})}
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
-
-          <button>Add Task</button>
+          <div className="user-form__btn-wrap">
+            <button className='user-form__btn'>Добавить</button>
+            <button className='user-form__btn' onClick={this.cleanForm}>Очистить</button>
+          </div>
         </form>
       </div>
     )
