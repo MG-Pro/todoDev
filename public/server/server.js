@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 3000;
 const appStatic = require('./routes/static');
+const helpers = require('./routes/helpers');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const users = require('./routes/user');
@@ -26,6 +27,7 @@ jwtStrategy(passport);
 
 app.use('/', appStatic);
 app.use('/api/users', users);
+app.use('/api/helpers', helpers);
 
 app.listen(port, () => {
   console.log(`Server start on port ${port}!`);
