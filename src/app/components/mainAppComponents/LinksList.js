@@ -1,41 +1,94 @@
 import {Component} from 'react';
+import {connect} from 'react-redux';
+import {links} from '../../redux/actions';
+
 
 class LinksList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      links: props.links
+      linksList: [],
+      error: false
     }
   }
 
+  linkSubmit = (e) => {
+    e.preventDefault();
+    const value = e.currentTarget[0].value;
+    if(value.length < 5) {
+      this.setState({
+        error: 'Поле не должно быть пустым'
+      });
+      return;
+    }
+    this.props.links(value);
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.linkData.title) {
+      this.state.linksList.push(nextProps.linkData);
+      this.setState({
+        linksList: this.state.linksList,
+      })
+    }
+
+  }
+
   render() {
-    const {links} = this.state;
+    const {linksList} = this.state;
+    const {error} = this.state;
     return (
-      <div className="task-form__group">
-        <div className='task-form__name-wrap'>
-          <span className="task-form__name">Учебные материалы</span>
-        </div>
-        <div className="user-form__input-wrap">
+      <div className="edit-task__links">
+        <div className="task-form__group task-form__group_links">
+          <div className='task-form__name-wrap'>
+            <span className="task-form__name">Учебные материалы</span>
+            {error && <span className="task-form__msg">{error}</span>}
+          </div>
+          <div className="user-form__input-wrap user-form__input-wrap_links">
                   <span className="user-form__icon">
                     <i className="fa fa-external-link"></i>
                   </span>
-          <ul className="edit-task__links-list">
-            {!links.length &&
-            <li className='edit-task__links-empty'>Вы пока не добавили учебные материалы</li>
-            }
-            {links.map((link, i) => {
-              return (
-                <li className='edit-task__links-item' key={i}>
-                  <a href={link.link} target='_blank' className='edit-task__links-link'>
-                    {link.title}
-                  </a>
-                </li>
-              )})}
-          </ul>
+            <ul className="edit-task__links-list">
+              {!linksList.length &&
+              <li className='edit-task__links-empty'>Вы пока не добавили учебные материалы</li>
+              }
+              {linksList.map((link, i) => {
+                return (
+                  <li className='edit-task__links-item' key={i}>
+                    <a href={link.link} target='_blank' className='edit-task__links-link'>
+                      {link.title}
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
         </div>
+        <form className="edit-task__links-form" onSubmit={this.linkSubmit}>
+          <div className="user-form__input-wrap">
+              <span className="user-form__icon">
+                <i className="fa fa-link"></i>
+              </span>
+            <input
+              className="user-form__input user-form__input_links"
+              name="link"
+              type="text"
+              placeholder="Вставьте сюда ссылку"
+            />
+            <button className="user-form__btn user-form__btn_links">Сохранить</button>
+          </div>
+        </form>
       </div>
-      )
+    )
   }
 }
 
-export default LinksList;
+const mapStateToProps = state => ({
+  linkData: state.links
+});
+
+export default connect(
+  mapStateToProps,
+  {links})((LinksList)
+);
+

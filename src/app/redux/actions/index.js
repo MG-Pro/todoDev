@@ -2,6 +2,7 @@ import addTask from './addTask';
 import {registerUser, loginUser, logoutUser, setCurrentUser} from './authentication';
 import {forms} from './forms';
 import {user} from './user';
+import {links} from './links';
 
 export {
   addTask,
@@ -10,5 +11,7 @@ export {
   logoutUser,
   setCurrentUser,
   forms,
-  user
+  user,
+  links,
+
 };

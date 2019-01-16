@@ -583,8 +583,7 @@ body {
     border: none;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0px 0 5px 2px rgba(0, 0, 0, 0.3);
-    transition: 0.5s;
+    transition: 0.25s;
     outline: none !important;
 
     &:hover {
@@ -779,7 +778,7 @@ body {
 
 
   .task-list {
-    flex-grow: 10;
+    flex-grow: 16;
     margin-left: 15px;
   }
   .task-list__msg {
@@ -801,12 +800,15 @@ body {
     display: flex;
   }
   .edit-task__main {
-    flex-grow: 1;
+    width: 50%;
     padding-right: 10px;
   }
   .edit-task__links {
-    flex-grow: 1;
+    width: 50%;
     padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   .task-form__group {
     margin-bottom: 15px;
@@ -874,10 +876,50 @@ body {
     margin-bottom: 5px;
   }
   .edit-task__links-link {
-    font-size: 16px;
+    font-size: 14px;
     text-decoration: none;
     color: $success-color;
+    word-break: break-all;
+    display: inline-block;
   }
+  .user-form__input-wrap_links {
+    max-height: 190px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      left: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $header-bg;
+      border-radius: 10px;
+    }
+  }
+  .task-form__group_links {
+
+  }
+  .user-form__input_links {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 35px;
+  }
+  .user-form__btn_links {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    box-shadow: none;
+    margin: 0;
+  }
+
+
+
+
+
+
+
 
 
 

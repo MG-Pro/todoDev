@@ -82,9 +82,9 @@ class EditTask extends Component {
     };
     return (
       <div className='edit-task'>
-        <form onSubmit={this.props.submit} className='task-form'>
-          <div className="edit-task-wrap">
-            <div className="edit-task__main">
+        <div className="edit-task-wrap">
+          <div className="edit-task__main">
+            <form onSubmit={this.props.submit} className='task-form'>
               <div className="task-form__group">
                 <div className='task-form__name-wrap'>
                   <span className="task-form__name">Технология</span>
@@ -151,16 +151,14 @@ class EditTask extends Component {
                   }
                 </div>
               </div>
-            </div>
-            <div className="edit-task__links">
-              <LinksList links={this.state.links}/>
-            </div>
+              <div className="user-form__btn-wrap">
+                <button className='user-form__btn'>Добавить</button>
+                <button className='user-form__btn' onClick={this.cleanForm}>Очистить</button>
+              </div>
+            </form>
           </div>
-          <div className="user-form__btn-wrap">
-            <button className='user-form__btn'>Добавить</button>
-            <button className='user-form__btn' onClick={this.cleanForm}>Очистить</button>
-          </div>
-        </form>
+          <LinksList linksList={this.state.links}/>
+        </div>
       </div>
     )
   }
