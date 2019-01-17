@@ -26,14 +26,19 @@ class LinksList extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.linkData.title) {
+    if(nextProps.linkData) {
       this.state.linksList.push(nextProps.linkData);
       this.setState({
         linksList: this.state.linksList,
-        value: ''
+        value: '',
+        error: false
       })
     }
-
+    if(nextProps.linkError) {
+      this.setState({
+        error: nextProps.linkError,
+      })
+    }
   }
 
   inputChange = (e) => {
