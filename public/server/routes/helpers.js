@@ -20,9 +20,10 @@ router.get('/link-info',
           console.log(error);
         }
         const data = extractor.lazy(body);
+        const fav = data.favicon();
         const siteData = {
           title: data.title(),
-          fav: data.favicon().replace(/^\/\//, ''),
+          fav: fav ? fav.replace(/^\/\//, '') : null,
           url: req.query.url
         };
         res.json(siteData);
