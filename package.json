@@ -53,6 +53,9 @@
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "request": "^2.88.0",
+    "unfluff": "^3.2.0",
+    "url-parse-lax": "^3.0.0",
     "validator": "^10.10.0"
   }
 }

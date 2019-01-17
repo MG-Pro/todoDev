@@ -1,24 +1,35 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const http = require('https');
+const request = require('request');
+const extractor = require('unfluff');
+const urlParseLax = require('url-parse-lax');
 
 router.get('/link-info',
   //passport.authenticate('jwt', {session: false}),
   (req, res) => {
 
-    var re = /(<\s*title[^>]*>(.+?)<\s*\/\s*title)>/gi;
-    http.get(req.query.url, function (response) {
-      response.on('data', function (chunk) {
-        var str = chunk.toString();
-        var match = re.exec(str);
-        if (match && match[2]) {
-          return res.json({
-            link: req.query.url,
-            title: match[2],
-          });
+    const urlData = urlParseLax(req.query.url);
+    if(!urlData.host) {
+      return res.json({error: 'Invalid URL'})
+    }
+
+    const url = `${urlData.protocol}//${urlData.host}${urlData.path ? urlData.path : ''}`;
+    request.get(url, function (error, response, body) {
+        if(error) {
+          console.log(error);
         }
-      });
+        const data = extractor.lazy(body);
+        const siteData = {
+          title: data.title(),
+          fav: data.favicon(),
+          url: req.query.url
+        };
+
+        console.log(siteData);
+        res.json(siteData);
+
+
     });
   });
 
