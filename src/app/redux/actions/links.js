@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ADD_LINK} from './types';
+import {ADD_LINK, LINK_ERROR} from './types';
 
 export const links = (url) => dispatch => {
   axios.get('/api/helpers/link-info?url=' + url)
@@ -12,7 +12,7 @@ export const links = (url) => dispatch => {
     })
     .catch(err => {
       dispatch({
-        type: ADD_LINK,
+        type: LINK_ERROR,
         payload: err.response.data
       });
     });

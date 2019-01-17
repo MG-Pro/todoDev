@@ -4,16 +4,16 @@ const passport = require('passport');
 const request = require('request');
 const extractor = require('unfluff');
 const urlParseLax = require('url-parse-lax');
+const validator = require('validator');
 
 router.get('/link-info',
   //passport.authenticate('jwt', {session: false}),
   (req, res) => {
 
-    const urlData = urlParseLax(req.query.url);
-    if(!urlData.host) {
-      return res.json({error: 'Invalid URL'})
+    if(!validator.isURL(req.query.url)) {
+      return res.status(400).json({error: 'Invalid URL'})
     }
-
+    const urlData = urlParseLax(req.query.url);
     const url = `${urlData.protocol}//${urlData.host}${urlData.path ? urlData.path : ''}`;
     request.get(url, function (error, response, body) {
         if(error) {
@@ -22,14 +22,10 @@ router.get('/link-info',
         const data = extractor.lazy(body);
         const siteData = {
           title: data.title(),
-          fav: data.favicon(),
+          fav: data.favicon().replace(/^\/\//, ''),
           url: req.query.url
         };
-
-        console.log(siteData);
         res.json(siteData);
-
-
     });
   });
 

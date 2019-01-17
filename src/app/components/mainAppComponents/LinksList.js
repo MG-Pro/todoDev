@@ -8,7 +8,8 @@ class LinksList extends Component {
     super(props);
     this.state = {
       linksList: [],
-      error: false
+      error: false,
+      value: '',
     }
   }
 
@@ -29,10 +30,17 @@ class LinksList extends Component {
       this.state.linksList.push(nextProps.linkData);
       this.setState({
         linksList: this.state.linksList,
+        value: ''
       })
     }
 
   }
+
+  inputChange = (e) => {
+    this.setState({
+      value: e.currentTarget.value
+    })
+  };
 
   render() {
     const {linksList} = this.state;
@@ -74,6 +82,8 @@ class LinksList extends Component {
               name="link"
               type="text"
               placeholder="Вставьте сюда ссылку"
+              value={this.state.value}
+              onChange={this.inputChange}
             />
             <button className="user-form__btn user-form__btn_links">Сохранить</button>
           </div>
@@ -84,7 +94,8 @@ class LinksList extends Component {
 }
 
 const mapStateToProps = state => ({
-  linkData: state.links
+  linkData: state.links,
+  linkError: state.linkError
 });
 
 export default connect(
