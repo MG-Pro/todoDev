@@ -7,6 +7,7 @@ const helpers = require('./routes/helpers');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const users = require('./routes/user');
+const tasks = require('./routes/tasks');
 const jwtStrategy = require('./validation/jwtStrategy');
 const path = require('path');
 
@@ -27,6 +28,7 @@ jwtStrategy(passport);
 
 app.use('/', appStatic);
 app.use('/api/users', users);
+app.use('/api/tasks', users);
 app.use('/api/helpers', helpers);
 
 app.listen(port, () => {
