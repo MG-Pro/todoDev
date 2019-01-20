@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {links} from '../../redux/actions';
+import {links as addLink} from '../../redux/actions';
 
 
 class LinksList extends Component {
@@ -14,6 +14,12 @@ class LinksList extends Component {
 
   linkSubmit = (e) => {
     e.preventDefault();
+    if(!this.props.isTask) {
+      this.setState({
+        error: 'Сохраните задачу перед добавлением ссылок',
+      });
+      return;
+    }
     const value = e.currentTarget[0].value;
     if(value.length < 5) {
       this.setState({
@@ -21,14 +27,14 @@ class LinksList extends Component {
       });
       return;
     }
-    this.props.links(value);
+    this.props.addLink(value);
   };
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.linkData) {
-      this.state.linksList.push(nextProps.linkData);
+      this.props.links.push(nextProps.linkData);
+      this.props.changeLinks(this.props.links);
       this.setState({
-        linksList: this.state.linksList,
         value: '',
         error: false
       })
@@ -47,8 +53,8 @@ class LinksList extends Component {
   };
 
   render() {
-    const {linksList} = this.state;
     const {error} = this.state;
+    const {links} = this.props;
     return (
       <div className="edit-task__links">
         <div className="task-form__group task-form__group_links">
@@ -61,10 +67,10 @@ class LinksList extends Component {
                     <i className="fa fa-external-link"></i>
                   </span>
             <ul className="edit-task__links-list">
-              {!linksList.length &&
+              {!links.length &&
               <li className='edit-task__links-empty'>Вы пока не добавили учебные материалы</li>
               }
-              {linksList.map((link, i) => {
+              {links.map((link, i) => {
                 return (
                   <li className='edit-task__links-item' key={i}>
                     {link.fav && <img src={link.fav} className='edit-task__links-fav'/>}
@@ -99,11 +105,12 @@ class LinksList extends Component {
 }
 
 const mapStateToProps = state => ({
-  linkError: state.linkError
+  linkError: state.linkError,
+  linkData: state.links,
 });
 
 export default connect(
   mapStateToProps,
-  {links})((LinksList)
+  {addLink})((LinksList)
 );
 

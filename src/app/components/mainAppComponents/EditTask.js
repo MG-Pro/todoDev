@@ -8,13 +8,15 @@ import {withRouter} from 'react-router-dom';
 class EditTask extends Component {
   constructor(props) {
     super(props);
+    const {task} = props;
     this.state = {
-      tech: this.props.tech || '',
-      target: this.props.target || '',
-      targetDate: this.props.targetDate || new Date(),
-      links: this.props.links || [],
+      id: task.id,
+      tech: task.tech || '',
+      target: task.target || '',
+      targetDate: task.targetDate || new Date(),
+      links: task.links || [],
       showPicker: false,
-      linkData: props.linkData,
+      errors: {}
     }
 
   }
@@ -44,7 +46,7 @@ class EditTask extends Component {
       this.setState({
         showPicker: false
       })
-    }, 200)
+    }, 300)
 
   };
 
@@ -61,13 +63,38 @@ class EditTask extends Component {
     })
   };
 
-  submit(e) {
+  submit = (e) => {
     e.preventDefault();
-    if (!this.input.value.trim()) {
-      return
+    const {state} = this;
+    const errors = {};
+    if (state.tech.length < 2) {
+      errors.tech = 'Название технологии не должно быть короче 2 символов';
     }
-    this.props.addTask(this.input.value);
-    this.input.value = ''
+    if (state.target.length < 5) {
+      errors.target = 'Описание цели не должно быть короче 5 символов';
+    }
+    const dateNow = Date.now();
+    const targetDate = state.targetDate.getTime();
+    if (targetDate < dateNow) {
+      errors.targetDate = 'Дата завершения должна быть позже сегодняшней';
+    }
+
+    if (!Object.keys(errors).length) {
+      const task = {
+        tech: state.tech,
+        target: state.target,
+        targetDate: state.targetDate,
+        links: state.links
+      };
+      console.log(task);
+      //this.props.addTask();
+    } else {
+      this.setState({
+        errors: errors,
+      });
+    }
+
+
   }
 
   cleanForm = (e) => {
@@ -79,15 +106,15 @@ class EditTask extends Component {
     });
   };
 
-  componentWillReceiveProps(nextProps, nextContext) {
-
-  }
+  changeLinks = (links) => {
+    this.setState({
+      links: links
+    })
+  };
 
   render() {
     const {state} = this;
-    const errors = {
-      email: 'Error'
-    };
+    const errors = state.errors;
     return (
       <div className='edit-task'>
         <div className="edit-task-wrap">
@@ -96,7 +123,7 @@ class EditTask extends Component {
               <div className="task-form__group">
                 <div className='task-form__name-wrap'>
                   <span className="task-form__name">Технология</span>
-                  {errors.email && (<span className="task-form__msg">{errors.email}</span>)}
+                  {errors.tech && (<span className="task-form__msg">{errors.tech}</span>)}
                 </div>
                 <div className="user-form__input-wrap">
               <span className="user-form__icon">
@@ -115,7 +142,7 @@ class EditTask extends Component {
               <div className="task-form__group">
                 <div className='task-form__name-wrap'>
                   <span className="task-form__name">Цель</span>
-                  {errors.email && (<span className="task-form__msg">{errors.email}</span>)}
+                  {errors.target && (<span className="task-form__msg">{errors.target}</span>)}
                 </div>
                 <div className="user-form__input-wrap">
               <span className="user-form__icon">
@@ -129,13 +156,13 @@ class EditTask extends Component {
                     onChange={this.inputChange}
                   >
 
-              </textarea>
+                  </textarea>
                 </div>
               </div>
               <div className="task-form__group">
                 <div className='task-form__name-wrap'>
                   <span className="task-form__name">Дата завершения</span>
-                  {errors.email && (<span className="task-form__msg">{errors.email}</span>)}
+                  {errors.targetDate && (<span className="task-form__msg">{errors.targetDate}</span>)}
                 </div>
                 <div className="user-form__input-wrap">
               <span className="user-form__icon">
@@ -165,7 +192,7 @@ class EditTask extends Component {
               </div>
             </form>
           </div>
-          <LinksList linkData={this.state.linkData}/>
+          <LinksList links={this.state.links} changeLinks={this.changeLinks} isTask={this.state.id}/>
         </div>
       </div>
     )
@@ -173,8 +200,8 @@ class EditTask extends Component {
 }
 
 const mapStateToProps = state => ({
-  errors: state.errors,
-  linkData: state.links,
+  errors: state.errors
+
 });
 
 export default connect(mapStateToProps, {addTask})(withRouter(EditTask));
