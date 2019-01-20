@@ -28,7 +28,7 @@ jwtStrategy(passport);
 
 app.use('/', appStatic);
 app.use('/api/users', users);
-app.use('/api/tasks', users);
+app.use('/api/tasks', tasks);
 app.use('/api/helpers', helpers);
 
 app.listen(port, () => {

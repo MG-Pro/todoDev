@@ -13,15 +13,17 @@ class EditTask extends Component {
       id: task.id,
       tech: task.tech || '',
       target: task.target || '',
-      targetDate: task.targetDate || new Date(),
+      targetDate: task.targetDate || new Date,
       links: task.links || [],
       showPicker: false,
-      errors: {}
+      errors: {},
+      success: ''
     }
 
   }
 
   static stringDate(date) {
+
     let d = date.getDate() + '';
     let m = date.getMonth() + 1 + '';
     let y = date.getFullYear() + '';
@@ -51,7 +53,6 @@ class EditTask extends Component {
   };
 
   getDate = (date) => {
-    console.log(date);
     this.setState({
       targetDate: date
     })
@@ -73,21 +74,18 @@ class EditTask extends Component {
     if (state.target.length < 5) {
       errors.target = 'Описание цели не должно быть короче 5 символов';
     }
-    const dateNow = Date.now();
-    const targetDate = state.targetDate.getTime();
-    if (targetDate < dateNow) {
+    if (state.targetDate.getTime() < Date.now()) {
       errors.targetDate = 'Дата завершения должна быть позже сегодняшней';
     }
 
     if (!Object.keys(errors).length) {
       const task = {
-        userId: this.props.user._id,
+        userId: this.props.user.id,
         tech: state.tech,
         target: state.target,
         targetDate: state.targetDate,
         links: state.links
       };
-      console.log(task);
       this.props.addTask(task);
     } else {
       this.setState({
@@ -111,9 +109,18 @@ class EditTask extends Component {
     })
   };
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.tasks.length > this.props.tasks.length) {
+      this.setState({
+        success: 'Задача обновлена',
+        errors: {},
+      });
+    }
+  }
+
   render() {
     const {state} = this;
-    const errors = state.errors;
+    const {errors, success} = state;
     return (
       <div className='edit-task'>
         <div className="edit-task-wrap">
@@ -123,6 +130,7 @@ class EditTask extends Component {
                 <div className='task-form__name-wrap'>
                   <span className="task-form__name">Технология</span>
                   {errors.tech && (<span className="task-form__msg">{errors.tech}</span>)}
+                  {success && (<span className="task-form__msg">{success}</span>)}
                 </div>
                 <div className="user-form__input-wrap">
               <span className="user-form__icon">
@@ -200,7 +208,8 @@ class EditTask extends Component {
 
 const mapStateToProps = state => ({
   errors: state.errors,
-  user: state.auth.user
+  user: state.auth.user,
+  tasks: state.tasks
 });
 
 export default connect(mapStateToProps, {addTask})(withRouter(EditTask));
