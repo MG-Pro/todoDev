@@ -1,4 +1,4 @@
-import addTask from './addTask';
+import {addTask} from './task';
 import {registerUser, loginUser, logoutUser, setCurrentUser} from './authentication';
 import {forms} from './forms';
 import {user} from './user';

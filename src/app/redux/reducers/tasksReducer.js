@@ -5,11 +5,7 @@ export default (state = [], action) => {
     case ADD_TASK:
       return [
         ...state,
-        {
-          id: action.id,
-          text: action.text,
-          completed: false
-        }
+        action.payload
       ];
     case 'TOGGLE_TASK':
       return state.map(task =>

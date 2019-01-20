@@ -81,21 +81,20 @@ class EditTask extends Component {
 
     if (!Object.keys(errors).length) {
       const task = {
+        userId: this.props.user._id,
         tech: state.tech,
         target: state.target,
         targetDate: state.targetDate,
         links: state.links
       };
       console.log(task);
-      //this.props.addTask();
+      this.props.addTask(task);
     } else {
       this.setState({
         errors: errors,
       });
     }
-
-
-  }
+  };
 
   cleanForm = (e) => {
     e.preventDefault();
@@ -200,8 +199,8 @@ class EditTask extends Component {
 }
 
 const mapStateToProps = state => ({
-  errors: state.errors
-
+  errors: state.errors,
+  user: state.auth.user
 });
 
 export default connect(mapStateToProps, {addTask})(withRouter(EditTask));
