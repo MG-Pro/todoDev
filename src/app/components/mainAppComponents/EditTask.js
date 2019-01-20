@@ -2,7 +2,7 @@ import {Component} from 'react';
 import DatePicker from '../helperComponents/DatePicker';
 import LinksList from './LinksList';
 import {connect} from 'react-redux';
-import {addTask} from '../../redux/actions';
+import {addTask, updateTask} from '../../redux/actions';
 import {withRouter} from 'react-router-dom';
 
 class EditTask extends Component {
@@ -80,6 +80,7 @@ class EditTask extends Component {
 
     if (!Object.keys(errors).length) {
       const task = {
+        id: state.id,
         userId: this.props.user.id,
         tech: state.tech,
         target: state.target,
@@ -110,10 +111,17 @@ class EditTask extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.tasks.length > this.props.tasks.length) {
+    const len = nextProps.tasks.length;
+    if(len > this.props.tasks.length) {
+      const task = nextProps.tasks[len - 1];
       this.setState({
         success: 'Задача обновлена',
         errors: {},
+        id: task._id,
+        tech: task.tech,
+        target: task.target,
+        targetDate: new Date(task.targetDate),
+        links: task.links,
       });
     }
   }
@@ -129,7 +137,7 @@ class EditTask extends Component {
               <div className="task-form__group">
                 <div className='task-form__name-wrap'>
                   <span className="task-form__name">Технология</span>
-                  {errors.tech && (<span className="task-form__msg">{errors.tech}</span>)}
+                  {errors.tech && (<span className="task-form__msg task-form__msg_scs">{errors.tech}</span>)}
                   {success && (<span className="task-form__msg">{success}</span>)}
                 </div>
                 <div className="user-form__input-wrap">
@@ -212,4 +220,4 @@ const mapStateToProps = state => ({
   tasks: state.tasks
 });
 
-export default connect(mapStateToProps, {addTask})(withRouter(EditTask));
+export default connect(mapStateToProps, {addTask, updateTask})(withRouter(EditTask));

@@ -17,6 +17,10 @@ const TaskSchema = new Schema({
   links: {
     type: Array
   },
+  status: {
+    type: Boolean,
+    default: true
+  },
   date: {
     type: Date,
     default: Date.now()

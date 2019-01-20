@@ -31,7 +31,7 @@ class LinksList extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.linkData) {
+    if(nextProps.linkData.length) {
       this.props.links.push(nextProps.linkData);
       this.props.changeLinks(this.props.links);
       this.setState({
