@@ -18,12 +18,14 @@ router.get('/link-info',
     request.get(url, function (error, response, body) {
         if(error) {
           console.log(error);
+          res.status(500).json({error: 'Server Error'})
         }
         const data = extractor.lazy(body);
         const fav = data.favicon();
+
         const siteData = {
           title: data.title(),
-          fav: fav ? fav.replace(/^\/\//, '') : null,
+          fav: fav ? fav.replace(/^\/\//, 'https://') : null,
           url: req.query.url
         };
         res.json(siteData);

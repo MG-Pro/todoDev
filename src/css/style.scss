@@ -882,6 +882,12 @@ body {
     word-break: break-all;
     display: inline-block;
   }
+  .edit-task__links-fav {
+    width: 15px;
+    max-height: 15px;
+    display: inline-block;
+    margin-right: 5px;
+  }
   .user-form__input-wrap_links {
     max-height: 190px;
     overflow-y: auto;

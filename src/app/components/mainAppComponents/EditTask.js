@@ -1,6 +1,9 @@
 import {Component} from 'react';
 import DatePicker from '../helperComponents/DatePicker';
 import LinksList from './LinksList';
+import {connect} from 'react-redux';
+import {addTask} from '../../redux/actions';
+import {withRouter} from 'react-router-dom';
 
 class EditTask extends Component {
   constructor(props) {
@@ -9,17 +12,9 @@ class EditTask extends Component {
       tech: this.props.tech || '',
       target: this.props.target || '',
       targetDate: this.props.targetDate || new Date(),
-      links: this.props.links || [
-        {
-          link: 'https://nodejs.org/en/docs/',
-          title: 'Node.js Doc'
-        },
-        {
-          link: 'hhhhhhhhhhhhhhhlsl.com',
-          title: 'ddddddddddkscemjep'
-        }
-      ],
-      showPicker: false
+      links: this.props.links || [],
+      showPicker: false,
+      linkData: props.linkData,
     }
 
   }
@@ -66,6 +61,15 @@ class EditTask extends Component {
     })
   };
 
+  submit(e) {
+    e.preventDefault();
+    if (!this.input.value.trim()) {
+      return
+    }
+    this.props.addTask(this.input.value);
+    this.input.value = ''
+  }
+
   cleanForm = (e) => {
     e.preventDefault();
     this.setState({
@@ -74,6 +78,10 @@ class EditTask extends Component {
       targetDate: new Date()
     });
   };
+
+  componentWillReceiveProps(nextProps, nextContext) {
+
+  }
 
   render() {
     const {state} = this;
@@ -84,7 +92,7 @@ class EditTask extends Component {
       <div className='edit-task'>
         <div className="edit-task-wrap">
           <div className="edit-task__main">
-            <form onSubmit={this.props.submit} className='task-form'>
+            <form onSubmit={this.submit} className='task-form'>
               <div className="task-form__group">
                 <div className='task-form__name-wrap'>
                   <span className="task-form__name">Технология</span>
@@ -152,16 +160,21 @@ class EditTask extends Component {
                 </div>
               </div>
               <div className="user-form__btn-wrap">
-                <button className='user-form__btn'>Добавить</button>
+                <button className='user-form__btn'>Сохранить</button>
                 <button className='user-form__btn' onClick={this.cleanForm}>Очистить</button>
               </div>
             </form>
           </div>
-          <LinksList linksList={this.state.links}/>
+          <LinksList linkData={this.state.linkData}/>
         </div>
       </div>
     )
   }
 }
 
-export default EditTask;
+const mapStateToProps = state => ({
+  errors: state.errors,
+  linkData: state.links,
+});
+
+export default connect(mapStateToProps, {addTask})(withRouter(EditTask));

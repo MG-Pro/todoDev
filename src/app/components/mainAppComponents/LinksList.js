@@ -7,7 +7,6 @@ class LinksList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      linksList: [],
       error: false,
       value: '',
     }
@@ -68,7 +67,8 @@ class LinksList extends Component {
               {linksList.map((link, i) => {
                 return (
                   <li className='edit-task__links-item' key={i}>
-                    <a href={link.link} target='_blank' className='edit-task__links-link'>
+                    {link.fav && <img src={link.fav} className='edit-task__links-fav'/>}
+                    <a href={link.url} target='_blank' className='edit-task__links-link'>
                       {link.title}
                     </a>
                   </li>
@@ -90,7 +90,7 @@ class LinksList extends Component {
               value={this.state.value}
               onChange={this.inputChange}
             />
-            <button className="user-form__btn user-form__btn_links">Сохранить</button>
+            <button className="user-form__btn user-form__btn_links">Добавить</button>
           </div>
         </form>
       </div>
@@ -99,7 +99,6 @@ class LinksList extends Component {
 }
 
 const mapStateToProps = state => ({
-  linkData: state.links,
   linkError: state.linkError
 });
 
