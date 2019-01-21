@@ -920,7 +920,9 @@ body {
     box-shadow: none;
     margin: 0;
   }
-
+  .task-form__msg_success {
+    color: $success-color;
+  }
 
 
 

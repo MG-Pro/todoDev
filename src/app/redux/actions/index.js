@@ -2,7 +2,7 @@ import {addTask, updateTask} from './task';
 import {registerUser, loginUser, logoutUser, setCurrentUser} from './authentication';
 import {forms} from './forms';
 import {user} from './user';
-import {links} from './links';
+import {links, clearLinkState} from './links';
 
 export {
   addTask,
@@ -14,5 +14,6 @@ export {
   user,
   links,
   updateTask,
+  clearLinkState,
 
 };

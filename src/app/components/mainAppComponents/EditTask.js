@@ -137,8 +137,8 @@ class EditTask extends Component {
               <div className="task-form__group">
                 <div className='task-form__name-wrap'>
                   <span className="task-form__name">Технология</span>
-                  {errors.tech && (<span className="task-form__msg task-form__msg_scs">{errors.tech}</span>)}
-                  {success && (<span className="task-form__msg">{success}</span>)}
+                  {errors.tech && (<span className="task-form__msg ">{errors.tech}</span>)}
+                  {success && (<span className="task-form__msg task-form__msg_success">{success}</span>)}
                 </div>
                 <div className="user-form__input-wrap">
               <span className="user-form__icon">

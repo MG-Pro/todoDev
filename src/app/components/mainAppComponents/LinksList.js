@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {links as addLink} from '../../redux/actions';
+import {links as addLink, clearLinkState} from '../../redux/actions';
 
 
 class LinksList extends Component {
@@ -31,12 +31,14 @@ class LinksList extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.linkData.length) {
+    if(nextProps.linkData) {
       this.props.links.push(nextProps.linkData);
       this.props.changeLinks(this.props.links);
       this.setState({
         value: '',
         error: false
+      }, () => {
+        this.props.clearLinkState();
       })
     }
     if(nextProps.linkError) {
@@ -111,6 +113,6 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {addLink})((LinksList)
+  {addLink, clearLinkState})((LinksList)
 );
 
