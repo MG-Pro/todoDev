@@ -13,7 +13,7 @@ class EditTask extends Component {
       id: task.id,
       tech: task.tech || '',
       target: task.target || '',
-      targetDate: task.targetDate || new Date,
+      targetDate: task.targetDate || new Date(),
       links: task.links || [],
       showPicker: false,
       errors: {},
@@ -78,21 +78,26 @@ class EditTask extends Component {
       errors.targetDate = 'Дата завершения должна быть позже сегодняшней';
     }
 
-    if (!Object.keys(errors).length) {
-      const task = {
-        id: state.id,
-        userId: this.props.user.id,
-        tech: state.tech,
-        target: state.target,
-        targetDate: state.targetDate,
-        links: state.links
-      };
-      this.props.addTask(task);
-    } else {
+    if (Object.keys(errors).length) {
       this.setState({
-        errors: errors,
+        errors: errors
       });
+      return;
     }
+
+    const task = {
+      id: state.id,
+      userId: this.props.user.id,
+      tech: state.tech,
+      target: state.target,
+      targetDate: state.targetDate,
+      links: state.links
+    };
+    if (state.id) {
+      this.props.updateTask(task);
+      return;
+    }
+    this.props.addTask(task);
   };
 
   cleanForm = (e) => {
@@ -112,18 +117,21 @@ class EditTask extends Component {
 
   componentWillReceiveProps(nextProps) {
     const len = nextProps.tasks.length;
-    if(len > this.props.tasks.length) {
-      const task = nextProps.tasks[len - 1];
-      this.setState({
-        success: 'Задача обновлена',
-        errors: {},
-        id: task._id,
-        tech: task.tech,
-        target: task.target,
-        targetDate: new Date(task.targetDate),
-        links: task.links,
-      });
+    let task;
+    if (!this.state.id && len > this.props.tasks.length) {
+      task = nextProps.tasks[len - 1];
+    } else if (this.state.id) {
+      task = nextProps.tasks.filter(item => item._id === this.state.id);
     }
+    this.setState({
+      success: 'Задача обновлена',
+      errors: {},
+      id: task._id,
+      tech: task.tech,
+      target: task.target,
+      targetDate: task.targetDate,
+      links: task.links
+    });
   }
 
   render() {

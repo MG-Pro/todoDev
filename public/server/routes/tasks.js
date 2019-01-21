@@ -10,13 +10,11 @@ router.post(
   (req, res) => {
 
   const {errors, isValid} = validateTaskInput(req.body);
-
   if (!isValid) {
     return res.status(400).json(errors);
   }
 
   const {userId, tech, target, targetDate, links} = req.body;
-
   const newTask = new Task({
     user: userId,
     tech,
@@ -26,18 +24,34 @@ router.post(
   });
 
   newTask
-    .save()
-    .then(task => {
+    .save().then(task => {
       Task.find({user: userId})
         .sort({date: 1})
         .then(tasks => {
         res.json(tasks)
       })
-
-
     })
     .catch(e => console.log(e));
-
 });
+
+router.put(
+  '/',
+  passport.authenticate('jwt', {session: false}),
+  (req, res) => {
+
+    const {errors, isValid} = validateTaskInput(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    const {userId, tech, target, targetDate, links} = req.body;
+
+      Task.findById()
+        .sort({date: 1})
+        .then(tasks => {
+          res.json(tasks)
+        })
+
+  });
 
 module.exports = router;
