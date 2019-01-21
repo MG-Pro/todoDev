@@ -44,13 +44,24 @@ router.put(
       return res.status(400).json(errors);
     }
 
-    const {userId, tech, target, targetDate, links} = req.body;
+    const {userId, id, tech, target, targetDate, links} = req.body;
 
-      Task.findById()
-        .sort({date: 1})
-        .then(tasks => {
-          res.json(tasks)
-        })
+      Task.findById(id)
+        .then(task => {
+          task.updateOne({
+            tech,
+            target,
+            targetDate,
+            links,
+            updateDate: Date.now()
+          }).then(result => {
+            Task.find({user: userId})
+              .sort({updateDate: -1})
+              .then(tasks => {
+                res.json(tasks)
+              })
+          })
+        }).catch(e => console.log(e));
 
   });
 

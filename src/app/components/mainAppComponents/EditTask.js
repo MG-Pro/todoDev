@@ -121,7 +121,7 @@ class EditTask extends Component {
     if (!this.state.id && len > this.props.tasks.length) {
       task = nextProps.tasks[len - 1];
     } else if (this.state.id) {
-      task = nextProps.tasks.filter(item => item._id === this.state.id);
+      task = nextProps.tasks.find(item => item._id === this.state.id);
     }
     this.setState({
       success: 'Задача обновлена',
@@ -129,7 +129,7 @@ class EditTask extends Component {
       id: task._id,
       tech: task.tech,
       target: task.target,
-      targetDate: task.targetDate,
+      targetDate: new Date(task.targetDate),
       links: task.links
     });
   }
