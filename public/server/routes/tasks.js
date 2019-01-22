@@ -4,6 +4,19 @@ const passport = require('passport');
 const validateTaskInput = require('../validation/task');
 const Task = require('../models/Task');
 
+router.get(
+  '/',
+  passport.authenticate('jwt', {session: false}),
+  (req, res) => {
+    console.log(req.user.id);
+    Task.find({user: req.user.id}, {user: 0, __v: 0})
+      .sort({date: 1})
+      .then(tasks => {
+        res.json(tasks)
+      })
+      .catch(e => console.log(e));
+  });
+
 router.post(
   '/',
   passport.authenticate('jwt', {session: false}),
@@ -25,7 +38,7 @@ router.post(
 
   newTask
     .save().then(task => {
-      Task.find({user: userId})
+      Task.find({user: userId}, {user: 0, __v: 0})
         .sort({date: 1})
         .then(tasks => {
         res.json(tasks)
@@ -55,7 +68,7 @@ router.put(
             links,
             updateDate: Date.now()
           }).then(result => {
-            Task.find({user: userId})
+            Task.find({user: userId}, {user: 0, __v: 0})
               .sort({updateDate: -1})
               .then(tasks => {
                 res.json(tasks)

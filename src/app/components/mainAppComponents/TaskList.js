@@ -1,24 +1,35 @@
 import {connect} from 'react-redux';
+import {Component} from 'react';
+import {getTask} from '../../redux/actions';
+import TaskItem from './TaskItem';
 
-const TaskList = ({tasks}) => {
-  console.log(tasks);
-  return (
-    <div className='task-list'>
-      <h3 className='task-list__head'>Задачи</h3>
-      {!tasks.length && <p className='task-list__msg'>У вас пока нет задач</p>}
-      <ul>
-        {tasks.map(task =>
-          <li key={task.id}>
-            {task.text}
-          </li>
-        )}
-      </ul>
-    </div>
-  )
+class TaskList extends Component {
+
+
+  componentDidMount() {
+    this.props.getTask();
+  }
+
+  render() {
+    const {tasks} = this.props;
+    return (
+      <div className='task-list'>
+        <h3 className='task-list__head'>Задачи</h3>
+        {!tasks.length && <p className='task-list__msg'>У вас пока нет задач</p>}
+        <ul>
+          {tasks.map(task =>
+            <TaskItem key={task._id} task={task}/>
+          )}
+        </ul>
+      </div>
+    )
+  }
+
+
 };
 
 const mapStateToProps = state => ({
   tasks: state.tasks
 });
 
-export default connect(mapStateToProps, dispatch => {})(TaskList);
+export default connect(mapStateToProps, {getTask})(TaskList);
