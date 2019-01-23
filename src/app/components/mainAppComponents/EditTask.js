@@ -4,6 +4,7 @@ import LinksList from './LinksList';
 import {connect} from 'react-redux';
 import {addTask, updateTask} from '../../redux/actions';
 import {withRouter} from 'react-router-dom';
+import dateToString from '../../helpers/dateToString';
 
 class EditTask extends Component {
   constructor(props) {
@@ -20,21 +21,6 @@ class EditTask extends Component {
       success: ''
     }
 
-  }
-
-  static stringDate(date) {
-
-    let d = date.getDate() + '';
-    let m = date.getMonth() + 1 + '';
-    let y = date.getFullYear() + '';
-
-    if (d.length < 2) {
-      d = '0' + d;
-    }
-    if (m.length < 2) {
-      m = '0' + m;
-    }
-    return `${d}.${m}.${y}`;
   }
 
   showPicker = () => {
@@ -195,7 +181,7 @@ class EditTask extends Component {
                     className="user-form__input"
                     name="date"
                     type="text"
-                    value={EditTask.stringDate(state.targetDate)}
+                    value={dateToString(state.targetDate)}
                     onChange={this.inputChange}
                     onFocus={this.showPicker}
                     onBlur={this.closePicker}

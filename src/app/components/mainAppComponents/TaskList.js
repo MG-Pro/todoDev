@@ -26,7 +26,7 @@ class TaskList extends Component {
   }
 
 
-};
+}
 
 const mapStateToProps = state => ({
   tasks: state.tasks
