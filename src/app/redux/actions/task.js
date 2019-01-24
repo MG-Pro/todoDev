@@ -28,12 +28,13 @@ export const addTask = task => dispatch => {
     .catch(err => {
       dispatch({
         type: TASK_ERROR,
-        payload: err.response.data.error
+        payload: err.response.data
       });
     });
 };
 
 export const updateTask = task => dispatch => {
+  //task.updateDate && delete task.updateDate;
   axios.put('/api/tasks/', task)
     .then(res => {
       dispatch({
@@ -44,7 +45,7 @@ export const updateTask = task => dispatch => {
     .catch(err => {
       dispatch({
         type: TASK_ERROR,
-        payload: err.response.data.error
+        payload: err.response.data
       });
     });
 };

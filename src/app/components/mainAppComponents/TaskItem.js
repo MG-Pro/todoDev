@@ -1,26 +1,44 @@
 import React, {Component} from 'react';
 import dateToString from '../../helpers/dateToString';
+import CheckBox from '../helperComponents/CheckBox';
+import {updateTask} from '../../redux/actions';
+import {connect} from 'react-redux';
 
 class TaskItem extends Component {
+  constructor(props) {
+    super(props);
+  }
 
+  changeStatus = (e) => {
+    this.props.task.status = !this.props.task.status;
+    console.log(this.props.task);
+    this.props.updateTask(this.props.task);
+  };
 
   render() {
-    const {task} = this.props;
+    const {task, error} = this.props;
     const targetDate = new Date(task.targetDate);
     const t = new Date();
     const today = new Date(t.getFullYear(), t.getMonth(), t.getDate());
     const alertClass = targetDate < today ? 'date-alert' : '';
-
+    let errStr = '';
+    for (let key in error) {
+      errStr += error[key];
+    }
     return (
       <li className='task-item'>
         <div className="task-item__content">
           <p className="task-item__content-tech">{task.tech}</p>
           <p className="task-item__content-target">{task.target}</p>
-          <p className={`task-item__content-target-date ${alertClass}`}>{dateToString(task.targetDate)}</p>
+          <div className="task-item__content-footer">
+            <p className={`task-item__content-target-date ${alertClass}`}>{dateToString(task.targetDate)}</p>
+            {error && <span className='task-form__msg'>{errStr}</span>}
+          </div>
+
         </div>
         <div className="task-item__actions">
           <div className="task-item__actions-status">
-            <input type="checkbox" checked={task.status}/>
+            <CheckBox checked={task.status} change={this.changeStatus}/>
           </div>
           {!task.links.length ?
             <p className="task-item__actions-links">{`Вы не прикрепили ссылки к задаче`}</p> :
@@ -37,5 +55,9 @@ class TaskItem extends Component {
     )
   }
 }
+const mapStateToProps = state => ({
+  tasks: state.tasks,
+  error: state.taskError
+});
 
-export default TaskItem;
+export default connect(mapStateToProps, {updateTask})(TaskItem);

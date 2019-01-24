@@ -6,7 +6,7 @@ import formsReducer from './formsReducer';
 import userReducer from './userReducer';
 import linksReducer from './linksReducer';
 import linkErrorReducer from './linkErrorReducer';
-
+import taskErrorReducer from './taskErrorReducer';
 
 export default combineReducers({
   errors: errorReducer,
@@ -15,5 +15,6 @@ export default combineReducers({
   formType: formsReducer,
   user: userReducer,
   links: linksReducer,
-  linkError: linkErrorReducer
+  linkError: linkErrorReducer,
+  taskError: taskErrorReducer
 })

@@ -994,7 +994,9 @@ body {
   .date-alert {
     color: $alert-color;
   }
-
+  .task-item__content-footer {
+    display: flex;
+  }
 
 
 
