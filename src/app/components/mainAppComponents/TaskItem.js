@@ -9,10 +9,11 @@ class TaskItem extends Component {
     super(props);
   }
 
-  changeStatus = (e) => {
-    this.props.task.status = !this.props.task.status;
-    console.log(this.props.task);
-    this.props.updateTask(this.props.task);
+  changeStatus = () => {
+    const task = Object.assign({}, this.props.task);
+    task.status = !this.props.task.status;
+    console.log(task);
+    this.props.updateTask(task);
   };
 
   render() {
@@ -23,7 +24,7 @@ class TaskItem extends Component {
     const alertClass = targetDate < today ? 'date-alert' : '';
     let errStr = '';
     for (let key in error) {
-      errStr += error[key];
+      errStr += error[key] + ' ';
     }
     return (
       <li className='task-item'>
@@ -38,6 +39,7 @@ class TaskItem extends Component {
         </div>
         <div className="task-item__actions">
           <div className="task-item__actions-status">
+            <span className='task-item__actions-status-name'>Статус</span>
             <CheckBox checked={task.status} change={this.changeStatus}/>
           </div>
           {!task.links.length ?
@@ -51,7 +53,6 @@ class TaskItem extends Component {
           </div>
         </div>
       </li>
-
     )
   }
 }

@@ -14,7 +14,6 @@ class TaskList extends Component {
     const {tasks} = this.props;
     return (
       <div className='task-list'>
-        <h3 className='task-list__head'>Задачи</h3>
         {!tasks.length && <p className='task-list__msg'>У вас пока нет задач</p>}
         <ul>
           {tasks.map(task =>

@@ -957,6 +957,20 @@ body {
   }
   .task-item__actions-status {
     margin-bottom: 5px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .task-item__actions-status-name {
+    color: $lite-font-color;
+    font-size: 14px;
+    margin-right: 10px;
+    display: inline-block;
+  }
+  .checkbox {
+    font-size: 35px;
+    color: #3b6e9b;
+    cursor: pointer;
   }
   .task-item__actions-links {
     color: $lite-font-color;
@@ -984,6 +998,8 @@ body {
     cursor: pointer;
     opacity: 0.7;
     transition: 0.3s;
+    min-width: 35px;
+    min-height: 35px;
     &:hover {
       opacity: 1;
     }

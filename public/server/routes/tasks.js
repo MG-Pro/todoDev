@@ -8,7 +8,6 @@ router.get(
   '/',
   passport.authenticate('jwt', {session: false}),
   (req, res) => {
-    console.log(req.user.id);
     Task.find({user: req.user.id}, {user: 0, __v: 0})
       .sort({date: 1})
       .then(tasks => {
@@ -54,21 +53,22 @@ router.put(
 
     const {errors, isValid} = validateTaskInput(req.body);
     if (!isValid) {
-      return res.status(400).json(errors);
+      //return res.status(400).json(errors);
     }
 
-    const {userId, id, tech, target, targetDate, links} = req.body;
+    const {id, _id, tech, target, targetDate, status, links} = req.body;
 
-      Task.findById(id)
+      Task.findById(id || _id)
         .then(task => {
           task.updateOne({
             tech,
             target,
             targetDate,
+            status,
             links,
             updateDate: Date.now()
           }).then(result => {
-            Task.find({user: userId}, {user: 0, __v: 0})
+            Task.find({user: req.user.id}, {user: 0, __v: 0})
               .sort({updateDate: -1})
               .then(tasks => {
                 res.json(tasks)
