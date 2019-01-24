@@ -12,3 +12,4 @@ export const TASK_ERROR = 'TASK_ERROR';
 export const UPD_TASK = 'UPD_TASK';
 export const TASK_LIST_ERROR = 'TASK_LIST_ERROR';
 
+export const SORT_TYPES = 'SORT_TYPES';

@@ -7,6 +7,7 @@ import userReducer from './userReducer';
 import linksReducer from './linksReducer';
 import linkErrorReducer from './linkErrorReducer';
 import taskErrorReducer from './taskErrorReducer';
+import sortTypesReducer from './sortTypesReducer';
 
 export default combineReducers({
   errors: errorReducer,
@@ -16,5 +17,7 @@ export default combineReducers({
   user: userReducer,
   links: linksReducer,
   linkError: linkErrorReducer,
-  taskError: taskErrorReducer
+  taskError: taskErrorReducer,
+  sortTypes: sortTypesReducer,
+
 })

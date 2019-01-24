@@ -12,7 +12,7 @@ export const links = (url) => dispatch => {
     .catch(err => {
       dispatch({
         type: LINK_ERROR,
-        payload: err.response.data.error
+        payload: err.response.data
       });
     });
 };

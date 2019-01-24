@@ -3,6 +3,7 @@ import {registerUser, loginUser, logoutUser, setCurrentUser} from './authenticat
 import {forms} from './forms';
 import {user} from './user';
 import {links, clearLinkState} from './links';
+import {getSortTypes} from './sortTypes';
 
 export {
   addTask,
@@ -16,5 +17,6 @@ export {
   updateTask,
   clearLinkState,
   getTask,
+  getSortTypes,
 
 };
