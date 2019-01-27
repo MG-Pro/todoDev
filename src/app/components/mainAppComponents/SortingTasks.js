@@ -1,20 +1,27 @@
-import {connect} from 'react-redux';
-import {getSortTypes} from '../../redux/actions';
+import {sortTypes} from '../../config'
 
 const SortingTasks = (props) => {
+  const sortType = {
+
+  }
   return (
-      <div className='sorting'>
-        <select className='soting-elem'>
-          {props.types.map(item => {
-            <option key={item._id} value={item.name}>{item.name}</option>
-          })}
-        </select>
-      </div>
-    )
+    <div className='sorting'>
+      <ul className='soting__list'>
+        {sortTypes.map((item, i) => {
+          return <li
+            key={i}
+            className='soting__item'
+            onClick={props.sortChange}
+            data-val={item.value}>
+            {item.title}
+            {item.desc ?
+              <i className="fa fa-sort-desc"></i> :
+              <i className="fa fa-sort-asc"></i>
+            }
+          </li>
+        })}
+      </ul>
+    </div>
+  )
 };
-const mapStateToProps = state => ({
-  types: state.sortTypes,
-});
-
-export default connect(mapStateToProps, {getSortTypes})((SortingTasks));
-
+export default SortingTasks;
