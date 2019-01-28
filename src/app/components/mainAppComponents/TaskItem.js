@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import dateToString from '../../helpers/dateToString';
 import CheckBox from '../helperComponents/CheckBox';
 import {updateTask} from '../../redux/actions';
@@ -30,9 +30,10 @@ class TaskItem extends Component {
       <li className='task-item'>
         <div className="task-item__content">
           <p className="task-item__content-tech">{task.tech}</p>
+          <p className="task-item__content-date">Добавлена: {dateToString(task.date)}</p>
           <p className="task-item__content-target">{task.target}</p>
           <div className="task-item__content-footer">
-            <p className={`task-item__content-target-date ${alertClass}`}>{dateToString(task.targetDate)}</p>
+            <p className={`task-item__content-target-date ${alertClass}`}><span className='task-item__content-target-date-title'>Завершить до:</span> {dateToString(task.targetDate)}</p>
             {error && <span className='task-form__msg'>{errStr}</span>}
           </div>
 

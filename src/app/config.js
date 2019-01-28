@@ -1,7 +1,11 @@
 export const sortTypes = [
   {
+    value: 'createDate',
+    title: 'Дата добавления',
+  },
+  {
     value: 'targetDate',
-    title: 'Дата цели',
+    title: 'Дата завершения',
   },
   {
     value: 'updateDate',
