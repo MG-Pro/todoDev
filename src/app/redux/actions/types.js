@@ -11,5 +11,5 @@ export const ADD_TASK = 'ADD_TASK';
 export const TASK_ERROR = 'TASK_ERROR';
 export const UPD_TASK = 'UPD_TASK';
 export const TASK_LIST_ERROR = 'TASK_LIST_ERROR';
-
+export const SORTING_TYPE = 'SORTING_TYPE';
 

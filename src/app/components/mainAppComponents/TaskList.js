@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {Component} from 'react';
-import {getTask} from '../../redux/actions';
+import {getTask, sorting} from '../../redux/actions';
 import TaskItem from './TaskItem';
 import SortingTasks from './SortingTasks'
 
@@ -12,17 +12,34 @@ class TaskList extends Component {
     this.props.getTask();
   }
 
-  sortChange = (e) => {
-    const value = e.currentTarget.dataset.val;
-    console.log(value);
+  static sortList = (list, sortType) => {
+    function ifDate(item) {
+      sortType.value !== 'tech' ? (new Date(item[sortType.value])).getTime() : item;
+    }
+
+    let dir = sortType.dir === 'desc' ? 1 : -1;
+
+    const copyList = Array.from(list).sort((a , b) => {
+      if(ifDate(a) > ifDate(b)) {
+        return dir;
+      }
+      return dir;
+    });
+    return copyList;
+  };
+
+  sortChange = (sortType) => {
+    console.log(sortType);
+    this.props.sorting(sortType);
   };
 
   render() {
-    const {tasks} = this.props;
+    const {props} = this;
+    const tasks = TaskList.sortList(props.tasks, props.sortType);
     return (
       <div className='task-list'>
         <div className="task-list__sorting">
-          <SortingTasks sortChange={this.sortChange}/>
+          <SortingTasks sortChange={this.sortChange} sortType={props.sortType}/>
         </div>
         {!tasks.length && <p className='task-list__msg'>У вас пока нет задач</p>}
         <ul>
@@ -38,7 +55,8 @@ class TaskList extends Component {
 }
 
 const mapStateToProps = state => ({
-  tasks: state.tasks
+  tasks: state.tasks,
+  sortType: state.sortType,
 });
 
-export default connect(mapStateToProps, {getTask})(TaskList);
+export default connect(mapStateToProps, {getTask, sorting})(TaskList);

@@ -1,6 +1,6 @@
 export const sortTypes = [
   {
-    value: 'createDate',
+    value: 'date',
     title: 'Дата добавления',
   },
   {

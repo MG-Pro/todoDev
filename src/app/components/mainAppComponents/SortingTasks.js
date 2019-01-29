@@ -1,32 +1,53 @@
 import {sortTypes} from '../../config'
 
 const SortingTasks = ({sortType = {}, sortChange}) => {
-  sortType.dir = null;
-  sortType.value = 'createDate';
-
   let dirIcon;
-  if(sortType.dir === 'desc') {
-    dirIcon = <i className="fa fa-sort-desc"></i>
-  } else if(sortType.dir === 'asc') {
-    dirIcon = <i className="fa fa-sort-asc"></i>
-  } else {
-    dirIcon = <i className="fa fa-sort"></i>
-  }
+
+  const getSortIcon = (dir) => {
+    if (dir === 'desc') {
+      return <i className="fa fa-sort-desc"></i>
+    } else if (dir === 'asc') {
+      return <i className="fa fa-sort-asc"></i>
+    }
+    return <i className="fa fa-sort"></i>
+  };
 
 
+  const sortChangeView = (e) => {
+    const value = e.currentTarget.dataset.val;
+    let dir;
+    if (sortType.dir === null) {
+      dir = 'desc'
+    }
+    if (sortType.dir === 'desc') {
+      dir = 'asc'
+    }
+    if (sortType.dir === 'asc') {
+      dir = null;
+    }
+
+    sortChange({
+      value: value,
+      dir: dir
+    })
+  };
 
   return (
     <div className='sorting'>
       <ul className='sorting__list'>
         {sortTypes.map((item, i) => {
-          const activeClass = sortType.value === item.value ?
-            'sorting__item_active' : '';
+          let activeClass = '';
+          let dir = null;
+          if(sortType.value === item.value) {
+            dir = sortType.dir;
+            activeClass = 'sorting__item_active';
+          }
           return <li
             key={i}
             className={`sorting__item ${activeClass}`}
-            onClick={sortChange}
+            onClick={sortChangeView}
             data-val={item.value}>
-            {item.title}&nbsp;{dirIcon}
+            {item.title}&nbsp;{getSortIcon(dir)}
           </li>
         })}
       </ul>

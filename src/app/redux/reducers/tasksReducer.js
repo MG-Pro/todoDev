@@ -1,4 +1,4 @@
-import {ADD_TASK, UPD_TASK, TASK_LIST, TASK_LIST_ERROR} from '../actions/types';
+import {ADD_TASK, UPD_TASK, TASK_LIST} from '../actions/types';
 
 export default (state = [], action) => {
   switch (action.type) {
