@@ -1,7 +1,7 @@
 import {SORTING_TYPE} from '../actions/types';
 
 const initState = {
-  dir: null,
+  dir: 'desc',
   value: 'date'
 };
 

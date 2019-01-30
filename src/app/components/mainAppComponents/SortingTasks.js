@@ -16,14 +16,11 @@ const SortingTasks = ({sortType = {}, sortChange}) => {
   const sortChangeView = (e) => {
     const value = e.currentTarget.dataset.val;
     let dir;
-    if (sortType.dir === null) {
-      dir = 'desc'
-    }
     if (sortType.dir === 'desc') {
       dir = 'asc'
     }
     if (sortType.dir === 'asc') {
-      dir = null;
+      dir = 'desc';
     }
 
     sortChange({
