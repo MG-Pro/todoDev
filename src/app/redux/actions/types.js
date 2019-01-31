@@ -14,3 +14,4 @@ export const TASK_LIST_ERROR = 'TASK_LIST_ERROR';
 
 export const SORTING_TYPE = 'SORTING_TYPE';
 export const TECH_LIST = 'TECH_LIST';
+export const FILTER_TYPE = 'FILTER_TYPE';

@@ -1,5 +1,7 @@
 import {Component} from 'react';
 import {filters} from '../../config';
+import {connect} from 'react-redux';
+import {getTask, sorting} from '../../redux/actions';
 
 class MainSidebar extends Component {
   constructor(props) {
@@ -29,4 +31,8 @@ class MainSidebar extends Component {
   }
 }
 
-export default MainSidebar;
+const mapStateToProps = state => ({
+  filterType: state.filterType,
+});
+
+export default connect(mapStateToProps, {getTask, sorting})(MainSidebar);
