@@ -8,6 +8,7 @@ import linksReducer from './linksReducer';
 import linkErrorReducer from './linkErrorReducer';
 import taskErrorReducer from './taskErrorReducer';
 import sortingReducer from './sortingReducer';
+import techReducer from './techReducer';
 
 
 export default combineReducers({
@@ -20,5 +21,6 @@ export default combineReducers({
   linkError: linkErrorReducer,
   taskError: taskErrorReducer,
   sortType: sortingReducer,
+  tech: techReducer,
 
 })

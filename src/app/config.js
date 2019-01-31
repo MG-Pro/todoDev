@@ -16,3 +16,34 @@ export const sortTypes = [
     title: 'Технология',
   }
 ];
+
+export const filters = [
+  {
+    value: 'in_work',
+    title: 'Активны',
+    classNameFA: 'fa-hourglass-start'
+  },
+  {
+    value: 'expired',
+    title: 'Просрочены',
+    classNameFA: 'fa-hourglass-end'
+  },
+  {
+    value: 'complete',
+    title: 'Завершены',
+    classNameFA: 'fa-check-square'
+  },
+];
+
+
+
+
+
+
+
+
+
+
+
+
+

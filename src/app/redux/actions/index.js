@@ -4,6 +4,8 @@ import {forms} from './forms';
 import {user} from './user';
 import {links, clearLinkState} from './links';
 import {sorting} from './sorting';
+import {tech} from './tech';
+
 
 export {
   addTask,
@@ -18,6 +20,7 @@ export {
   clearLinkState,
   getTask,
   sorting,
+  tech,
 
 
 };
