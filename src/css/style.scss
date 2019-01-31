@@ -1046,6 +1046,39 @@ body {
     color: $tools-color-active;
     font-weight: 700;
   }
+  .sidebar {
+    padding-right: 15px;
+  }
+  .filters {
+    list-style: none;
+    padding-left: 5px;
+  }
+  .filters__item {
+    color: $tools-color;
+    font-size: 18px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    span {
+      margin-left: 5px;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .filters__item_active {
+    color: $tools-color-active;
+    font-weight: 700;
+  }
+  .sidebar__separ {
+    margin: 5px 0;
+    border-bottom: 1px solid $border-color;
+  }
+
+
+
+
+
+
   .footer__contacts {
     font-size: 20px;
     color: #ffffff;

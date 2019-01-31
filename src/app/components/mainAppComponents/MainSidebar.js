@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import {filters} from '../../config';
 
 class MainSidebar extends Component {
   constructor(props) {
@@ -6,10 +7,23 @@ class MainSidebar extends Component {
 
   }
 
+
+
   render() {
     return (
         <div className='sidebar'>
-          <h3 className='sidebar__head'>Технологии</h3>
+          <ul className="filters">
+            {filters.map((item, i) => {
+              const activeClass = 'filters__item_active';
+              return (
+                <li className={`filters__item ${activeClass}`} key={i} data-value={item.value}>
+                  <i className={`fa ${item.classNameFA}`}></i>
+                  <span>{item.title}</span>
+                </li>
+              )
+            })}
+          </ul>
+          <div className="sidebar__separ"></div>
         </div>
       )
   }
