@@ -17,7 +17,7 @@ class TaskList extends Component {
       sortType.value !== 'tech' ? (new Date(item[sortType.value])).getTime() : item;
     }
 
-    let dir = sortType.dir === 'desc' ? 1 : -1;
+    let dir = sortType.dir === 'desc' ? -1 : 1;
 
     const copyList = Array.from(list).sort((a , b) => {
       if(ifDate(a) > ifDate(b)) {

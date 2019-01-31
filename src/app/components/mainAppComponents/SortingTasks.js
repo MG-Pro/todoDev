@@ -1,8 +1,6 @@
 import {sortTypes} from '../../config'
 
 const SortingTasks = ({sortType = {}, sortChange}) => {
-  let dirIcon;
-
   const getSortIcon = (dir) => {
     if (dir === 'desc') {
       return <i className="fa fa-sort-desc"></i>
@@ -16,10 +14,12 @@ const SortingTasks = ({sortType = {}, sortChange}) => {
   const sortChangeView = (e) => {
     const value = e.currentTarget.dataset.val;
     let dir;
-    if (sortType.dir === 'desc') {
+
+    if(sortType.value !== value) {
+      dir = 'desc';
+    } else if (sortType.dir === 'desc') {
       dir = 'asc'
-    }
-    if (sortType.dir === 'asc') {
+    } else if (sortType.dir === 'asc') {
       dir = 'desc';
     }
 
