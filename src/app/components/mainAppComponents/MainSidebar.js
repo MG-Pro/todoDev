@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import {filters} from '../../config';
 import {connect} from 'react-redux';
-import {currentFilter} from '../../redux/actions';
+import {currentFilter, currentTechFilter} from '../../redux/actions';
 
 class MainSidebar extends Component {
   constructor(props) {
@@ -11,13 +11,19 @@ class MainSidebar extends Component {
 
   activeFilter = (e) => {
     const value = e.currentTarget.dataset.value;
-    console.log(value);
     this.props.currentFilter(value);
+    this.props.currentTechFilter(null);
   };
+
+  activeTechFilter = (e) => {
+    const value = e.currentTarget.dataset.value;
+    this.props.currentTechFilter(value);
+  };
+
 
   render() {
 
-    const {filterType} = this.props;
+    const {filterType, techList, techFilterType} = this.props;
     return (
         <div className='sidebar'>
           <ul className="filters">
@@ -33,6 +39,16 @@ class MainSidebar extends Component {
             })}
           </ul>
           <div className="sidebar__separ"></div>
+          <ul className="tech-filters">
+            {techList.map((tech, i) => {
+              const activeClass = tech.name === techFilterType ? 'tech-filters__item_active' : '';
+              return (
+                <li className={`tech-filters__item ${activeClass}`} key={i}  onClick={this.activeTechFilter} data-value={tech.name}>
+                  <span>{tech.name}</span>
+                </li>
+              )
+            })}
+          </ul>
         </div>
       )
   }
@@ -40,6 +56,8 @@ class MainSidebar extends Component {
 
 const mapStateToProps = state => ({
   filterType: state.filterType,
+  techList: state.tech,
+  techFilterType: state.techFilter
 });
 
-export default connect(mapStateToProps, {currentFilter})(MainSidebar);
+export default connect(mapStateToProps, {currentFilter, currentTechFilter})(MainSidebar);

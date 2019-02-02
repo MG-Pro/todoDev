@@ -5,7 +5,7 @@ import {user} from './user';
 import {links, clearLinkState} from './links';
 import {sorting} from './sorting';
 import {tech} from './tech';
-import {currentFilter} from './filters';
+import {currentFilter, currentTechFilter} from './filters';
 
 export {
   addTask,
@@ -22,5 +22,6 @@ export {
   sorting,
   tech,
   currentFilter,
+  currentTechFilter,
 
 };

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {tech} from './index'
 import {ADD_TASK, UPD_TASK, TASK_ERROR, TASK_LIST,TASK_LIST_ERROR} from './types';
 
 export const getTask = () => dispatch => {
@@ -8,6 +9,7 @@ export const getTask = () => dispatch => {
         type: TASK_LIST,
         payload: res.data
       });
+      dispatch(tech(res.data));
     })
     .catch(err => {
       dispatch({

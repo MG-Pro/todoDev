@@ -25,7 +25,7 @@ class TaskList extends Component {
     });
   };
 
-  static filterList = (list, filterType) => {
+  static filterList = (list, filterType, techFilterType) => {
     const date = new Date();
     const today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     function isExpired(date) {
@@ -34,11 +34,25 @@ class TaskList extends Component {
 
     return list.filter((item) => {
       if (filterType === 'in_work') {
-        return item.status;
+        if(techFilterType) {
+          return item.status && techFilterType === item.tech
+        } else {
+          return item.status;
+        }
       } else if(filterType === 'expired') {
-        return isExpired(item.targetDate) && item.status;
+        if(techFilterType) {
+          return isExpired(item.targetDate) && item.status && techFilterType === item.tech;
+        } else {
+          return isExpired(item.targetDate) && item.status;
+        }
+
       } else if(filterType === 'completed') {
-        return !item.status;
+        if(techFilterType) {
+          return !item.status && techFilterType === item.tech;
+        } else {
+          return !item.status;
+        }
+
       }
     });
   };
@@ -50,7 +64,7 @@ class TaskList extends Component {
   render() {
     const {props} = this;
 
-    const tasks = TaskList.filterList(props.tasks, props.filterType);
+    const tasks = TaskList.filterList(props.tasks, props.filterType, props.techFilterType);
     const filteredTask = TaskList.sortList(tasks, props.sortType);
     return (
       <div className='task-list'>
@@ -74,6 +88,7 @@ const mapStateToProps = state => ({
   tasks: state.tasks,
   sortType: state.sortType,
   filterType: state.filterType,
+  techFilterType: state.techFilter
 });
 
 export default connect(mapStateToProps, {getTask, sorting})(TaskList);
