@@ -29,7 +29,7 @@ export const filters = [
     classNameFA: 'fa-hourglass-end'
   },
   {
-    value: 'complete',
+    value: 'completed',
     title: 'Завершены',
     classNameFA: 'fa-check-square'
   },

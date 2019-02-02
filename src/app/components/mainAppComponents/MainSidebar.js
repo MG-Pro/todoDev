@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import {filters} from '../../config';
 import {connect} from 'react-redux';
-import {getTask, sorting} from '../../redux/actions';
+import {currentFilter} from '../../redux/actions';
 
 class MainSidebar extends Component {
   constructor(props) {
@@ -9,16 +9,23 @@ class MainSidebar extends Component {
 
   }
 
-
+  activeFilter = (e) => {
+    const value = e.currentTarget.dataset.value;
+    console.log(value);
+    this.props.currentFilter(value);
+  };
 
   render() {
+
+    const {filterType} = this.props;
     return (
         <div className='sidebar'>
           <ul className="filters">
             {filters.map((item, i) => {
-              const activeClass = 'filters__item_active';
+
+              const activeClass = item.value === filterType ? 'filters__item_active' : '';
               return (
-                <li className={`filters__item ${activeClass}`} key={i} data-value={item.value}>
+                <li className={`filters__item ${activeClass}`} key={i} data-value={item.value} onClick={this.activeFilter}>
                   <i className={`fa ${item.classNameFA}`}></i>
                   <span>{item.title}</span>
                 </li>
@@ -35,4 +42,4 @@ const mapStateToProps = state => ({
   filterType: state.filterType,
 });
 
-export default connect(mapStateToProps, {getTask, sorting})(MainSidebar);
+export default connect(mapStateToProps, {currentFilter})(MainSidebar);
