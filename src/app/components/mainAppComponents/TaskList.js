@@ -3,10 +3,17 @@ import {Component} from 'react';
 import {getTask, sorting} from '../../redux/actions';
 import TaskItem from './TaskItem';
 import SortingTasks from './SortingTasks'
+import ConfirmMsg from '../headerComponents/ComfirmMsg';
 
 
 class TaskList extends Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      confirmShow: false,
+    };
+    this.confirmMsg = 'Подтвердите удаление задачи!'
+  }
 
   componentDidMount() {
     this.props.getTask();
@@ -61,6 +68,24 @@ class TaskList extends Component {
     this.props.sorting(sortType);
   };
 
+  showMsg = (task) => {
+    this.setState({
+      confirmShow: true,
+      delTask: task,
+    })
+  };
+
+  successDel = () => {
+
+  };
+
+  cancelDel = () => {
+    this.setState({
+      confirmShow: false,
+      delTask: null,
+    })
+  };
+
   render() {
     const {props} = this;
 
@@ -74,9 +99,10 @@ class TaskList extends Component {
         {!filteredTask.length && <p className='task-list__msg'>У вас пока нет задач</p>}
         <ul>
           {filteredTask.map(task =>
-            <TaskItem key={task._id} task={task}/>
+            <TaskItem key={task._id} task={task} action={[this.showMsg]}/>
           )}
         </ul>
+        {this.state.confirmShow && <ConfirmMsg msg={this.confirmMsg} success={this.successDel} cancel={this.cancelDel}/>}
       </div>
     )
   }

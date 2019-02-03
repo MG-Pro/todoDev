@@ -585,7 +585,7 @@ body {
     cursor: pointer;
     transition: 0.25s;
     outline: none !important;
-
+    min-width: 75px;
     &:hover {
       background-color: #561990;
     }
@@ -1091,6 +1091,38 @@ body {
   .tech-filters__item_active {
     opacity: 1;
   }
+  // confirm msg
+  .conf-msg {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(208, 208, 208, 0.6);
+  }
+  .conf-msg__form {
+    margin: auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+  }
+  .conf-msg-wrap {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  .conf-msg__text {
+    margin: auto 0;
+    color: $head-color;
+  }
+  .conf-msg__btn-wrap {
+    display: flex;
+    justify-content: space-around;
+  }
+
+
 
 
 
