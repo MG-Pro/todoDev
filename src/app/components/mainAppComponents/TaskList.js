@@ -73,7 +73,8 @@ class TaskList extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.state.delProcess) {
       this.setState({
-        delProcess: false
+        delProcess: false,
+        delTask: null,
       })
     }
   }
@@ -88,8 +89,7 @@ class TaskList extends Component {
   successDel = () => {
     this.setState({
       confirmShow: false,
-      delTask: null,
-      delProcess: true
+      delProcess: true,
     });
     this.props.deleteTask(this.state.delTask);
   };
