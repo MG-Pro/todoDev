@@ -21,30 +21,30 @@ router.post(
   passport.authenticate('jwt', {session: false}),
   (req, res) => {
 
-  const {errors, isValid} = validateTaskInput(req.body);
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
+    const {errors, isValid} = validateTaskInput(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
 
-  const {userId, tech, target, targetDate, links} = req.body;
-  const newTask = new Task({
-    user: userId,
-    tech,
-    target,
-    targetDate,
-    links
-  });
+    const {userId, tech, target, targetDate, links} = req.body;
+    const newTask = new Task({
+      user: userId,
+      tech,
+      target,
+      targetDate,
+      links
+    });
 
-  newTask
-    .save().then(task => {
+    newTask
+      .save().then(task => {
       Task.find({user: userId}, {user: 0, __v: 0})
         .sort({date: 1})
         .then(tasks => {
-        res.json(tasks)
-      })
+          res.json(tasks)
+        })
     })
-    .catch(e => console.log(e));
-});
+      .catch(e => console.log(e));
+  });
 
 router.put(
   '/',
@@ -58,24 +58,37 @@ router.put(
 
     const {id, _id, tech, target, targetDate, status, links} = req.body;
 
-      Task.findById(id || _id)
-        .then(task => {
-          task.updateOne({
-            tech,
-            target,
-            targetDate,
-            status,
-            links,
-            updateDate: Date.now()
-          }).then(result => {
-            Task.find({user: req.user.id}, {user: 0, __v: 0})
-              .sort({updateDate: -1})
-              .then(tasks => {
-                res.json(tasks)
-              })
-          })
-        }).catch(e => console.log(e));
+    Task.findById(id || _id)
+      .then(task => {
+        task.updateOne({
+          tech,
+          target,
+          targetDate,
+          status,
+          links,
+          updateDate: Date.now()
+        }).then(result => {
+          Task.find({user: req.user.id}, {user: 0, __v: 0})
+            .sort({updateDate: -1})
+            .then(tasks => {
+              res.json(tasks)
+            })
+        })
+      }).catch(e => console.log(e));
 
   });
 
+router.delete(
+  '/',  passport.authenticate('jwt', {session: false}),
+  (req, res) => {
+    const {id} = req.body;
+    Task.findByIdAndDelete(id)
+      .then(result => {
+        Task.find({user: req.user.id}, {user: 0, __v: 0})
+          .then(tasks => {
+            res.json(tasks)
+          })
+      }).catch(e => console.log(e));
+
+  });
 module.exports = router;

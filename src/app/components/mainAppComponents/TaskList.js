@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {Component} from 'react';
-import {getTask, sorting} from '../../redux/actions';
+import {getTask, sorting, deleteTask} from '../../redux/actions';
 import TaskItem from './TaskItem';
 import SortingTasks from './SortingTasks'
 import ConfirmMsg from '../headerComponents/ComfirmMsg';
@@ -11,6 +11,8 @@ class TaskList extends Component {
     super(props);
     this.state = {
       confirmShow: false,
+      delTask: null,
+      delProcess: false
     };
     this.confirmMsg = 'Подтвердите удаление задачи!'
   }
@@ -68,6 +70,14 @@ class TaskList extends Component {
     this.props.sorting(sortType);
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (this.state.delProcess) {
+      this.setState({
+        delProcess: false
+      })
+    }
+  }
+
   showMsg = (task) => {
     this.setState({
       confirmShow: true,
@@ -76,7 +86,12 @@ class TaskList extends Component {
   };
 
   successDel = () => {
-
+    this.setState({
+      confirmShow: false,
+      delTask: null,
+      delProcess: true
+    });
+    this.props.deleteTask(this.state.delTask);
   };
 
   cancelDel = () => {
@@ -87,7 +102,7 @@ class TaskList extends Component {
   };
 
   render() {
-    const {props} = this;
+    const {props, state} = this;
 
     const tasks = TaskList.filterList(props.tasks, props.filterType, props.techFilterType);
     const filteredTask = TaskList.sortList(tasks, props.sortType);
@@ -99,10 +114,10 @@ class TaskList extends Component {
         {!filteredTask.length && <p className='task-list__msg'>У вас пока нет задач</p>}
         <ul>
           {filteredTask.map(task =>
-            <TaskItem key={task._id} task={task} action={[this.showMsg]}/>
+            <TaskItem key={task._id} task={task} action={[this.showMsg]} isActive={state.delProcess && state.delTask === task._id}/>
           )}
         </ul>
-        {this.state.confirmShow && <ConfirmMsg msg={this.confirmMsg} success={this.successDel} cancel={this.cancelDel}/>}
+        {state.confirmShow && <ConfirmMsg msg={this.confirmMsg} success={this.successDel} cancel={this.cancelDel}/>}
       </div>
     )
   }
@@ -117,4 +132,4 @@ const mapStateToProps = state => ({
   techFilterType: state.techFilter
 });
 
-export default connect(mapStateToProps, {getTask, sorting})(TaskList);
+export default connect(mapStateToProps, {getTask, sorting, deleteTask})(TaskList);

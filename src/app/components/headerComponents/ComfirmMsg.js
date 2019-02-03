@@ -1,8 +1,9 @@
 
 const ConfirmMsg = (props) => {
+
   return (
       <div className='conf-msg'>
-        <form className='conf-msg__form'>
+        <form className='conf-msg__form' onSubmit={e => e.preventDefault()}>
           <div className="conf-msg-wrap">
             <p className="conf-msg__text">{props.msg}</p>
           </div>

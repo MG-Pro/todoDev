@@ -1,4 +1,4 @@
-import {addTask, updateTask, getTask} from './task';
+import {addTask, updateTask, getTask, deleteTask} from './task';
 import {registerUser, loginUser, logoutUser, setCurrentUser} from './authentication';
 import {forms} from './forms';
 import {user} from './user';
@@ -17,6 +17,7 @@ export {
   user,
   links,
   updateTask,
+  deleteTask,
   clearLinkState,
   getTask,
   sorting,

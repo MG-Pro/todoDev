@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {tech} from './index'
-import {ADD_TASK, UPD_TASK, TASK_ERROR, TASK_LIST,TASK_LIST_ERROR} from './types';
+import {ADD_TASK, UPD_TASK, TASK_ERROR, TASK_LIST,TASK_LIST_ERROR, DEL_TASK} from './types';
 
 export const getTask = () => dispatch => {
   axios.get('/api/tasks/')
@@ -36,7 +36,6 @@ export const addTask = task => dispatch => {
 };
 
 export const updateTask = task => dispatch => {
-  //task.updateDate && delete task.updateDate;
   axios.put('/api/tasks/', task)
     .then(res => {
       dispatch({
@@ -49,5 +48,18 @@ export const updateTask = task => dispatch => {
         type: TASK_ERROR,
         payload: err.response.data
       });
+    });
+};
+
+export const deleteTask = taskId => dispatch => {
+  axios.delete('/api/tasks/', {data: {id: taskId}})
+    .then(res => {
+      dispatch({
+        type: DEL_TASK,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err.response);
     });
 };

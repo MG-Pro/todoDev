@@ -928,6 +928,24 @@ body {
     width: 100%;
     margin-bottom: 10px;
     border-bottom: 1px solid $border-color;
+    position: relative;
+  }
+  .task-item__overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    border-radius: 5px;
+    margin-left: -5px;
+    margin-top: -5px;
+    background-color: rgba(201, 201, 201, 0.61);
+    color: #ffffff;
+    font-size: 36px;
+    opacity: 0.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .task-item__content {
     width: 75%;

@@ -5,10 +5,6 @@ import {updateTask} from '../../redux/actions';
 import {connect} from 'react-redux';
 
 class TaskItem extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   changeStatus = () => {
     const task = Object.assign({}, this.props.task);
     task.status = !this.props.task.status;
@@ -17,7 +13,7 @@ class TaskItem extends Component {
   };
 
   render() {
-    const {task, error} = this.props;
+    const {task, error, isActive} = this.props;
     const targetDate = new Date(task.targetDate);
     const t = new Date();
     const today = new Date(t.getFullYear(), t.getMonth(), t.getDate());
@@ -50,9 +46,11 @@ class TaskItem extends Component {
           <p className="task-item__actions-upd-date">{`Обновлена ${dateToString(task.updateDate)}`}</p>
           <div className="task-item__actions-btns">
             <button className='task-btn'><i className='fa fa-pencil'></i></button>
-            <button onClick={() => this.props.action[0](task)} className='task-btn task-btn_del'><i className='fa fa-trash-o'></i></button>
+            <button onClick={() => this.props.action[0](task._id)} className='task-btn task-btn_del'><i className='fa fa-trash-o'></i></button>
           </div>
         </div>
+        {isActive && <div className="task-item__overlay"><span>Not active. Wait</span></div>}
+
       </li>
     )
   }
