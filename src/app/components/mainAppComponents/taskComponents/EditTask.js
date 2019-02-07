@@ -2,14 +2,14 @@ import {Component} from 'react';
 import DatePicker from '../../helperComponents/DatePicker';
 import LinksList from './LinksList';
 import {connect} from 'react-redux';
-import {addTask, updateTask} from '../../../redux/actions';
+import {addTask, updateTask, cleanEditTask} from '../../../redux/actions';
 import {withRouter} from 'react-router-dom';
 import dateToString from '../../../helpers/dateToString';
 
 class EditTask extends Component {
   constructor(props) {
     super(props);
-    const task = props.task || {};
+    const task = props.task;
     this.state = {
       id: task.id,
       tech: task.tech || '',
@@ -20,7 +20,6 @@ class EditTask extends Component {
       errors: {},
       success: ''
     }
-
   }
 
   showPicker = () => {
@@ -120,6 +119,10 @@ class EditTask extends Component {
     });
   }
 
+  componentWillUnmount() {
+    this.props.cleanEditTask();
+  }
+
   render() {
     const {state} = this;
     const {errors, success} = state;
@@ -211,7 +214,8 @@ class EditTask extends Component {
 const mapStateToProps = state => ({
   errors: state.errors,
   user: state.auth.user,
-  tasks: state.tasks
+  tasks: state.tasks,
+  task: state.currentEditTask
 });
 
-export default connect(mapStateToProps, {addTask, updateTask})(withRouter(EditTask));
+export default connect(mapStateToProps, {addTask, updateTask, cleanEditTask})(withRouter(EditTask));

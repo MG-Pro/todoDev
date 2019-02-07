@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {tech} from './index'
-import {ADD_TASK, UPD_TASK, TASK_ERROR, TASK_LIST,TASK_LIST_ERROR, DEL_TASK} from './types';
+import {ADD_TASK, UPD_TASK, TASK_ERROR, TASK_LIST,TASK_LIST_ERROR, DEL_TASK, CLEAN_EDIT_TASK, SET_EDIT_TASK} from './types';
 
 export const getTask = () => dispatch => {
   axios.get('/api/tasks/')
@@ -62,4 +62,18 @@ export const deleteTask = taskId => dispatch => {
     .catch(err => {
       console.log(err.response);
     });
+};
+
+export const setEditTask = task => dispatch => {
+  dispatch({
+    type: SET_EDIT_TASK,
+    payload: task
+  });
+};
+
+export const cleanEditTask = () => dispatch => {
+  dispatch({
+    type: CLEAN_EDIT_TASK,
+    payload: {}
+  });
 };

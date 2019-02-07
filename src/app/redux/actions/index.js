@@ -1,4 +1,4 @@
-import {addTask, updateTask, getTask, deleteTask} from './task';
+import {addTask, updateTask, getTask, deleteTask, setEditTask, cleanEditTask} from './task';
 import {registerUser, loginUser, logoutUser, setCurrentUser} from './authentication';
 import {forms} from './forms';
 import {user} from './user';
@@ -24,5 +24,7 @@ export {
   tech,
   currentFilter,
   currentTechFilter,
+  setEditTask,
+  cleanEditTask
 
 };

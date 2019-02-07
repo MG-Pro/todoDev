@@ -114,15 +114,19 @@ class TaskList extends Component {
         {!filteredTask.length && <p className='task-list__msg'>У вас пока нет задач</p>}
         <ul>
           {filteredTask.map(task =>
-            <TaskItem key={task._id} task={task} action={[this.showMsg]} isActive={state.delProcess && state.delTask === task._id}/>
+            <TaskItem
+              key={task._id}
+              task={task}
+              action={[this.showMsg]}
+              isActive={state.delProcess && state.delTask === task._id}
+
+            />
           )}
         </ul>
         {state.confirmShow && <ConfirmMsg msg={this.confirmMsg} success={this.successDel} cancel={this.cancelDel}/>}
       </div>
     )
   }
-
-
 }
 
 const mapStateToProps = state => ({

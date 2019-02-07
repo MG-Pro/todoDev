@@ -1,8 +1,9 @@
 import {Component} from 'react';
 import dateToString from '../../../helpers/dateToString';
 import CheckBox from '../../helperComponents/CheckBox';
-import {updateTask} from '../../../redux/actions';
+import {updateTask, setEditTask} from '../../../redux/actions';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 
 class TaskItem extends Component {
   changeStatus = () => {
@@ -10,6 +11,11 @@ class TaskItem extends Component {
     task.status = !this.props.task.status;
     console.log(task);
     this.props.updateTask(task);
+  };
+
+  editTask = (task) => {
+    this.props.history.push('/app/tasks/edit');
+    this.props.setEditTask(task);
   };
 
   render() {
@@ -45,8 +51,12 @@ class TaskItem extends Component {
           }
           <p className="task-item__actions-upd-date">{`Обновлена ${dateToString(task.updateDate)}`}</p>
           <div className="task-item__actions-btns">
-            <button className='task-btn'><i className='fa fa-pencil'></i></button>
-            <button onClick={() => this.props.action[0](task._id)} className='task-btn task-btn_del'><i className='fa fa-trash-o'></i></button>
+            <button onClick={() => this.editTask(task)} className='task-btn'>
+              <i className='fa fa-pencil'></i>
+            </button>
+            <button onClick={() => this.props.action[0](task._id)} className='task-btn task-btn_del'>
+              <i className='fa fa-trash-o'></i>
+            </button>
           </div>
         </div>
         {isActive && <div className="task-item__overlay"><span>Not active. Wait</span></div>}
@@ -57,7 +67,8 @@ class TaskItem extends Component {
 }
 const mapStateToProps = state => ({
   tasks: state.tasks,
-  error: state.taskError
+  error: state.taskError,
+
 });
 
-export default connect(mapStateToProps, {updateTask})(TaskItem);
+export default connect(mapStateToProps, {updateTask, setEditTask})(withRouter(TaskItem));
