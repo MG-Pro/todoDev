@@ -2,8 +2,9 @@ import {Component} from 'react';
 import {Switch} from "react-router-dom";
 import ToolBar from './ToolBar';
 import Content from './Content';
-import AddTask from './AddTask';
 import PrivateRoute from '../PrivateRoute';
+import ExerciseContent from './exerciseComponents/ExersciseContent';
+import EditTask from './taskComponents/EditTask';
 
 class Main extends Component {
 
@@ -13,7 +14,8 @@ class Main extends Component {
         <div className="layout">
           <ToolBar/>
           <Switch>
-            <PrivateRoute path='/app/tasks/new' component={AddTask}/>
+            <PrivateRoute path='/app/tasks/new' component={EditTask}/>
+            <PrivateRoute path='/app/exercises' component={ExerciseContent}/>
             <PrivateRoute path='/app' component={Content}/>
           </Switch>
         </div>

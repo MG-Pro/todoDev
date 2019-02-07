@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {links as addLink, clearLinkState} from '../../redux/actions';
+import {links as addLink, clearLinkState} from '../../../redux/actions';
 
 
 class LinksList extends Component {

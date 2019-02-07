@@ -1,9 +1,9 @@
 import {connect} from 'react-redux';
 import {Component} from 'react';
-import {getTask, sorting, deleteTask} from '../../redux/actions';
+import {getTask, sorting, deleteTask} from '../../../redux/actions';
 import TaskItem from './TaskItem';
 import SortingTasks from './SortingTasks'
-import ConfirmMsg from '../headerComponents/ComfirmMsg';
+import ConfirmMsg from '../../headerComponents/ComfirmMsg';
 
 
 class TaskList extends Component {

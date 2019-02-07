@@ -1,7 +1,7 @@
 import {Component} from 'react';
-import dateToString from '../../helpers/dateToString';
-import CheckBox from '../helperComponents/CheckBox';
-import {updateTask} from '../../redux/actions';
+import dateToString from '../../../helpers/dateToString';
+import CheckBox from '../../helperComponents/CheckBox';
+import {updateTask} from '../../../redux/actions';
 import {connect} from 'react-redux';
 
 class TaskItem extends Component {

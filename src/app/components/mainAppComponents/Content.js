@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import MainSidebar from './MainSidebar';
-import TaskList from './TaskList';
+import TaskList from './taskComponents/TaskList';
 
 class Content extends Component {
   render() {

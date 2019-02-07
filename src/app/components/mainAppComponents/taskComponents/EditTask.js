@@ -1,15 +1,15 @@
 import {Component} from 'react';
-import DatePicker from '../helperComponents/DatePicker';
+import DatePicker from '../../helperComponents/DatePicker';
 import LinksList from './LinksList';
 import {connect} from 'react-redux';
-import {addTask, updateTask} from '../../redux/actions';
+import {addTask, updateTask} from '../../../redux/actions';
 import {withRouter} from 'react-router-dom';
-import dateToString from '../../helpers/dateToString';
+import dateToString from '../../../helpers/dateToString';
 
 class EditTask extends Component {
   constructor(props) {
     super(props);
-    const {task} = props;
+    const task = props.task || {};
     this.state = {
       id: task.id,
       tech: task.tech || '',

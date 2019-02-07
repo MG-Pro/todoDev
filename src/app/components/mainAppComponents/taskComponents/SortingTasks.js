@@ -1,4 +1,4 @@
-import {sortTypes} from '../../config'
+import {sortTypes} from '../../../config'
 
 const SortingTasks = ({sortType = {}, sortChange}) => {
   const getSortIcon = (dir) => {
