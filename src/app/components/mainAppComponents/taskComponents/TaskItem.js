@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import dateToString from '../../../helpers/dateToString';
 import CheckBox from '../../helperComponents/CheckBox';
-import {updateTask, setEditTask} from '../../../redux/actions';
+import {updateTask} from '../../../redux/actions';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
@@ -14,8 +14,7 @@ class TaskItem extends Component {
   };
 
   editTask = (task) => {
-    this.props.history.push('/app/tasks/edit');
-    this.props.setEditTask(task);
+    this.props.history.push(`/app/tasks/edit/${task._id}`);
   };
 
   render() {
@@ -71,4 +70,4 @@ const mapStateToProps = state => ({
 
 });
 
-export default connect(mapStateToProps, {updateTask, setEditTask})(withRouter(TaskItem));
+export default connect(mapStateToProps, {updateTask})(withRouter(TaskItem));

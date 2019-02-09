@@ -2,24 +2,35 @@ import {Component} from 'react';
 import DatePicker from '../../helperComponents/DatePicker';
 import LinksList from './LinksList';
 import {connect} from 'react-redux';
-import {addTask, updateTask, cleanEditTask} from '../../../redux/actions';
+import {addTask, updateTask, getTask, cleanSuccessUpdTask} from '../../../redux/actions';
 import {withRouter} from 'react-router-dom';
 import dateToString from '../../../helpers/dateToString';
 
 class EditTask extends Component {
   constructor(props) {
     super(props);
-    const task = props.task;
+    const id = props.match.params.id;
+    const task = props.tasks.find((item) => item._id === id) || {};
     this.state = {
       id: task._id,
       tech: task.tech || '',
       target: task.target || '',
       targetDate: task.targetDate || new Date(),
       links: task.links || [],
+      status: task.status || false,
       showPicker: false,
       errors: {},
-      success: ''
     }
+  }
+
+  componentDidMount() {
+    if (!this.props.tasks.length) {
+      this.props.getTask();
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.cleanSuccessUpdTask();
   }
 
   showPicker = () => {
@@ -69,14 +80,14 @@ class EditTask extends Component {
       });
       return;
     }
-
     const task = {
       id: state.id,
       userId: this.props.user.id,
       tech: state.tech,
       target: state.target,
       targetDate: state.targetDate,
-      links: state.links
+      links: state.links,
+      status: state.status
     };
     if (state.id) {
       this.props.updateTask(task);
@@ -109,23 +120,19 @@ class EditTask extends Component {
       task = nextProps.tasks.find(item => item._id === this.state.id);
     }
     this.setState({
-      success: 'Задача обновлена',
       errors: {},
       id: task._id,
       tech: task.tech,
       target: task.target,
       targetDate: new Date(task.targetDate),
-      links: task.links
+      links: task.links,
+      status: task.status
     });
   }
 
-  componentWillUnmount() {
-    this.props.cleanEditTask();
-  }
-
   render() {
-    const {state} = this;
-    const {errors, success} = state;
+    const {state, props} = this;
+    const {errors} = state;
     return (
       <div className='edit-task'>
         <div className="edit-task-wrap">
@@ -135,7 +142,7 @@ class EditTask extends Component {
                 <div className='task-form__name-wrap'>
                   <span className="task-form__name">Технология</span>
                   {errors.tech && (<span className="task-form__msg ">{errors.tech}</span>)}
-                  {success && (<span className="task-form__msg task-form__msg_success">{success}</span>)}
+                  {props.successUpdTask && (<span className="task-form__msg task-form__msg_success">Задача обновлена</span>)}
                 </div>
                 <div className="user-form__input-wrap">
               <span className="user-form__icon">
@@ -215,7 +222,7 @@ const mapStateToProps = state => ({
   errors: state.errors,
   user: state.auth.user,
   tasks: state.tasks,
-  task: state.currentEditTask
+  successUpdTask: state.successUpdTask
 });
 
-export default connect(mapStateToProps, {addTask, updateTask, cleanEditTask})(withRouter(EditTask));
+export default connect(mapStateToProps, {addTask, updateTask, getTask, cleanSuccessUpdTask})(withRouter(EditTask));

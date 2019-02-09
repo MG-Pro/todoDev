@@ -11,7 +11,7 @@ import sortingReducer from './sortingReducer';
 import techReducer from './techReducer';
 import filterReducer from './filterReducer';
 import techFilterReducer from './techFilterReducer';
-import currentEditTaskReducer from './currentEditTaskReducer';
+import successUpdTaskReducer from './successUpdTaskReducer'
 
 export default combineReducers({
   errors: errorReducer,
@@ -26,6 +26,6 @@ export default combineReducers({
   tech: techReducer,
   filterType: filterReducer,
   techFilter: techFilterReducer,
-  currentEditTask: currentEditTaskReducer,
+  successUpdTask: successUpdTaskReducer
 
 })

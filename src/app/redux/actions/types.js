@@ -15,8 +15,8 @@ export const UPD_TASK = 'UPD_TASK';
 export const DEL_TASK = 'DEL_TASK';
 export const TASK_LIST_ERROR = 'TASK_LIST_ERROR';
 
-export const SET_EDIT_TASK = 'SET_CUR_EDIT_TASK';
-export const CLEAN_EDIT_TASK = 'CLEAN_EDIT_TASK';
+export const SET_SUCCESS_UPD_TASK = 'SUCCESS_UPD_TASK';
+export const CLEAN_SUCCESS_UPD_TASK = 'CLEAN_SUCCESS_UPD_TASK';
 
 export const SORTING_TYPE = 'SORTING_TYPE';
 export const TECH_LIST = 'TECH_LIST';

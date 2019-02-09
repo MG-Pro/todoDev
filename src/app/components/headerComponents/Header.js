@@ -70,7 +70,7 @@ class Header extends Component {
               <img className="header__logo-img" src={logo} alt="logo"/>
             </div>
             <div className="header__brand">
-              <Link to={'/app'} className="header__brand-link">
+              <Link to={'/app/tasks'} className="header__brand-link">
                 <p className="header__brand-title">TODO:</p>
                 <p className="header__brand-subtitle">App for development training</p>
               </Link>

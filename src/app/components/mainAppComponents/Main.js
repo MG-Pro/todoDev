@@ -15,9 +15,9 @@ class Main extends Component {
           <ToolBar/>
           <Switch>
             <PrivateRoute path='/app/tasks/new' component={EditTask}/>
-            <PrivateRoute path='/app/tasks/edit' component={EditTask}/>
+            <PrivateRoute path='/app/tasks/edit/:id' component={EditTask}/>
             <PrivateRoute path='/app/exercises' component={ExerciseContent}/>
-            <PrivateRoute path='/app' component={Content}/>
+            <PrivateRoute path='/app/tasks' component={Content}/>
           </Switch>
         </div>
       </div>

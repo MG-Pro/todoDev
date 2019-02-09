@@ -21,8 +21,7 @@ class App extends Component {
             <Route exact path='/app/login' component={Login}/>
             <Switch>
               <PrivateRoute path='/app/account' component={Account}/>
-
-              <PrivateRoute path='/app' component={Main}/>
+              <PrivateRoute path='/app'  component={Main}/>
             </Switch>
           </main>
           <Footer/>

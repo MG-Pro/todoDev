@@ -1,6 +1,15 @@
 import axios from 'axios';
 import {tech} from './index'
-import {ADD_TASK, UPD_TASK, TASK_ERROR, TASK_LIST,TASK_LIST_ERROR, DEL_TASK, CLEAN_EDIT_TASK, SET_EDIT_TASK} from './types';
+import {
+  ADD_TASK,
+  UPD_TASK,
+  TASK_ERROR,
+  TASK_LIST,
+  TASK_LIST_ERROR,
+  DEL_TASK,
+  SET_SUCCESS_UPD_TASK,
+  CLEAN_SUCCESS_UPD_TASK
+} from './types';
 
 export const getTask = () => dispatch => {
   axios.get('/api/tasks/')
@@ -42,6 +51,7 @@ export const updateTask = task => dispatch => {
         type: UPD_TASK,
         payload: res.data
       });
+      dispatch(setSuccessUpdTask());
     })
     .catch(err => {
       dispatch({
@@ -64,16 +74,16 @@ export const deleteTask = taskId => dispatch => {
     });
 };
 
-export const setEditTask = task => dispatch => {
+export const setSuccessUpdTask = () => dispatch => {
   dispatch({
-    type: SET_EDIT_TASK,
-    payload: task
+    type: SET_SUCCESS_UPD_TASK,
+    payload: true
   });
 };
 
-export const cleanEditTask = () => dispatch => {
+export const cleanSuccessUpdTask = () => dispatch => {
   dispatch({
-    type: CLEAN_EDIT_TASK,
-    payload: {}
+    type: CLEAN_SUCCESS_UPD_TASK,
+    payload: false
   });
 };
