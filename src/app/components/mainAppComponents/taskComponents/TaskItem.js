@@ -51,10 +51,10 @@ class TaskItem extends Component {
           <p className="task-item__actions-upd-date">{`Обновлена ${dateToString(task.updateDate)}`}</p>
           <div className="task-item__actions-btns">
             <button onClick={() => this.editTask(task)} className='task-btn'>
-              <i className='fa fa-pencil'></i>
+              <i className='fa fa-pencil'/>
             </button>
             <button onClick={() => this.props.action[0](task._id)} className='task-btn task-btn_del'>
-              <i className='fa fa-trash-o'></i>
+              <i className='fa fa-trash-o'/>
             </button>
           </div>
         </div>

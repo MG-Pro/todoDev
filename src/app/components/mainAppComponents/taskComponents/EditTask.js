@@ -22,8 +22,12 @@ class EditTask extends Component {
       errors: {},
     }
   }
+  // TODO fix task status
 
   componentDidMount() {
+    if(this.props.match.params.id) {
+      return;
+    }
     if (!this.props.tasks.length) {
       this.props.getTask();
     }
@@ -93,7 +97,7 @@ class EditTask extends Component {
       this.props.updateTask(task);
       return;
     }
-    this.props.addTask(task);
+    this.props.addTask(task, this.props.history);
   };
 
   cleanForm = (e) => {
@@ -112,13 +116,11 @@ class EditTask extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    const len = nextProps.tasks.length;
-    let task;
-    if (!this.state.id && len > this.props.tasks.length) {
-      task = nextProps.tasks[len - 1];
-    } else if (this.state.id) {
-      task = nextProps.tasks.find(item => item._id === this.state.id);
+    const id = nextProps.match.params.id;
+    if (!id) {
+      return;
     }
+    const task = nextProps.tasks.find((item) => item._id === id) || {};
     this.setState({
       errors: {},
       id: task._id,
@@ -146,7 +148,7 @@ class EditTask extends Component {
                 </div>
                 <div className="user-form__input-wrap">
               <span className="user-form__icon">
-                <i className="fa fa-cog"></i>
+                <i className="fa fa-cog"/>
               </span>
                   <input
                     className="user-form__input"
@@ -165,7 +167,7 @@ class EditTask extends Component {
                 </div>
                 <div className="user-form__input-wrap">
               <span className="user-form__icon">
-                <i className="fa fa-dot-circle-o"></i>
+                <i className="fa fa-dot-circle-o"/>
               </span>
                   <textarea
                     name="target"
@@ -174,7 +176,6 @@ class EditTask extends Component {
                     className="user-form__input user-form__input_ta"
                     onChange={this.inputChange}
                   >
-
                   </textarea>
                 </div>
               </div>
@@ -185,7 +186,7 @@ class EditTask extends Component {
                 </div>
                 <div className="user-form__input-wrap">
               <span className="user-form__icon">
-                <i className="fa fa-calendar"></i>
+                <i className="fa fa-calendar"/>
               </span>
                   <input
                     className="user-form__input"

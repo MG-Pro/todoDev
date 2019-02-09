@@ -84,8 +84,8 @@ class Header extends Component {
               <div className="header__user-name" onClick={this.menuToggle}>{user.name}
                 <span className="header__user-name-angle">
                   {!this.state.showMenu
-                    ? <i className="fa fa-angle-down" aria-hidden="true"></i>
-                    : <i className="fa fa-angle-right" aria-hidden="true"></i>
+                    ? <i className="fa fa-angle-down"/>
+                    : <i className="fa fa-angle-right"/>
                   }
               </span>
               </div>

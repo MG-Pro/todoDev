@@ -28,13 +28,15 @@ export const getTask = () => dispatch => {
     });
 };
 
-export const addTask = task => dispatch => {
+export const addTask = (task, history) => dispatch => {
   axios.post('/api/tasks/', task)
     .then(res => {
       dispatch({
         type: ADD_TASK,
         payload: res.data
       });
+      history.push(`/app/tasks/edit/${res.data[0]._id}`);
+      dispatch(setSuccessUpdTask());
     })
     .catch(err => {
       dispatch({
@@ -45,6 +47,7 @@ export const addTask = task => dispatch => {
 };
 
 export const updateTask = task => dispatch => {
+  dispatch(cleanSuccessUpdTask());
   axios.put('/api/tasks/', task)
     .then(res => {
       dispatch({
