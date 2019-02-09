@@ -11,7 +11,7 @@ class EditTask extends Component {
     super(props);
     const task = props.task;
     this.state = {
-      id: task.id,
+      id: task._id,
       tech: task.tech || '',
       target: task.target || '',
       targetDate: task.targetDate || new Date(),
@@ -59,7 +59,7 @@ class EditTask extends Component {
     if (state.target.length < 5) {
       errors.target = 'Описание цели не должно быть короче 5 символов';
     }
-    if (state.targetDate.getTime() < Date.now()) {
+    if ((new Date(state.targetDate)).getTime() < Date.now()) {
       errors.targetDate = 'Дата завершения должна быть позже сегодняшней';
     }
 
