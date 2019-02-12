@@ -53,21 +53,21 @@ router.put(
 
     const {errors, isValid} = validateTaskInput(req.body);
     if (!isValid) {
-      //return res.status(400).json(errors);
+      return res.status(400).json(errors);
     }
 
-    const {id, _id, tech, target, targetDate, status, links} = req.body;
+    const {_id, tech, target, targetDate, completed, links} = req.body;
 
-    Task.findById(id || _id)
+    Task.findById(_id)
       .then(task => {
         task.updateOne({
           tech,
           target,
           targetDate,
-          status,
+          completed: completed,
           links,
           updateDate: Date.now()
-        }).then(result => {
+        }).then(() => {
           Task.find({user: req.user.id}, {user: 0, __v: 0})
             .sort({updateDate: -1})
             .then(tasks => {

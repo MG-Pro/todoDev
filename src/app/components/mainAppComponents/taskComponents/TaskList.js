@@ -44,22 +44,22 @@ class TaskList extends Component {
     return list.filter((item) => {
       if (filterType === 'in_work') {
         if(techFilterType) {
-          return item.status && techFilterType === item.tech
+          return !item.completed && techFilterType === item.tech
         } else {
-          return item.status;
+          return !item.completed;
         }
       } else if(filterType === 'expired') {
         if(techFilterType) {
-          return isExpired(item.targetDate) && item.status && techFilterType === item.tech;
+          return isExpired(item.targetDate) && !item.completed && techFilterType === item.tech;
         } else {
-          return isExpired(item.targetDate) && item.status;
+          return isExpired(item.targetDate) && !item.completed;
         }
 
       } else if(filterType === 'completed') {
         if(techFilterType) {
-          return !item.status && techFilterType === item.tech;
+          return item.completed && techFilterType === item.tech;
         } else {
-          return !item.status;
+          return item.completed;
         }
 
       }
@@ -119,7 +119,6 @@ class TaskList extends Component {
               task={task}
               action={[this.showMsg]}
               isActive={state.delProcess && state.delTask === task._id}
-
             />
           )}
         </ul>

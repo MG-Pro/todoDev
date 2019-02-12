@@ -17,12 +17,12 @@ class EditTask extends Component {
       target: task.target || '',
       targetDate: task.targetDate || new Date(),
       links: task.links || [],
-      status: task.status || false,
+      completed: task.completed || false,
       showPicker: false,
       errors: {},
     }
   }
-  // TODO fix task status
+  // TODO fix task completed
 
   componentDidMount() {
     if(this.props.match.params.id) {
@@ -91,7 +91,7 @@ class EditTask extends Component {
       target: state.target,
       targetDate: state.targetDate,
       links: state.links,
-      status: state.status
+      completed: state.completed
     };
     if (state.id) {
       this.props.updateTask(task);
@@ -128,7 +128,7 @@ class EditTask extends Component {
       target: task.target,
       targetDate: new Date(task.targetDate),
       links: task.links,
-      status: task.status
+      completed: task.completed
     });
   }
 

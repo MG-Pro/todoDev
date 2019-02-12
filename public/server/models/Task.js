@@ -17,9 +17,10 @@ const TaskSchema = new Schema({
   links: {
     type: Array
   },
-  status: {
+  completed: {
     type: Boolean,
-    default: false
+    default: false,
+    required:true
   },
   date: {
     type: Date,

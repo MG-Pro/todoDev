@@ -8,7 +8,7 @@ import {withRouter} from 'react-router-dom';
 class TaskItem extends Component {
   changeStatus = () => {
     const task = Object.assign({}, this.props.task);
-    task.status = !this.props.task.status;
+    task.completed = !this.props.task.completed;
     console.log(task);
     this.props.updateTask(task);
   };
@@ -41,8 +41,8 @@ class TaskItem extends Component {
         </div>
         <div className="task-item__actions">
           <div className="task-item__actions-status">
-            <span className='task-item__actions-status-name'>Статус</span>
-            <CheckBox checked={task.status} change={this.changeStatus}/>
+            <span className='task-item__actions-status-name'>{task.completed ? 'Возобновить' : 'Завершить'}</span>
+            <CheckBox checked={task.completed} change={this.changeStatus}/>
           </div>
           {!task.links.length ?
             <p className="task-item__actions-links">{`Вы не прикрепили ссылки к задаче`}</p> :
@@ -59,7 +59,6 @@ class TaskItem extends Component {
           </div>
         </div>
         {isActive && <div className="task-item__overlay"><span>Not active. Wait</span></div>}
-
       </li>
     )
   }
@@ -67,7 +66,6 @@ class TaskItem extends Component {
 const mapStateToProps = state => ({
   tasks: state.tasks,
   error: state.taskError,
-
 });
 
 export default connect(mapStateToProps, {updateTask})(withRouter(TaskItem));
