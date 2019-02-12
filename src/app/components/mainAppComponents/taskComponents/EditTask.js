@@ -22,7 +22,6 @@ class EditTask extends Component {
       errors: {},
     }
   }
-  // TODO fix task completed
 
   componentDidMount() {
     if(this.props.match.params.id) {

@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {Switch} from "react-router-dom";
+import {Switch, Redirect} from "react-router-dom";
 import ToolBar from './ToolBar';
 import Content from './Content';
 import PrivateRoute from '../PrivateRoute';
@@ -20,9 +20,10 @@ class Main extends Component {
             <PrivateRoute path='/app/tasks' component={Content}/>
           </Switch>
         </div>
+        <Redirect exact from='/app' to='/app/tasks'/>
       </div>
     )
   }
 }
-
+// todo routing fix
 export default Main;
