@@ -18,12 +18,12 @@ class Main extends Component {
             <PrivateRoute path='/app/tasks/edit/:id' component={EditTask}/>
             <PrivateRoute path='/app/exercises' component={ExerciseContent}/>
             <PrivateRoute path='/app/tasks' component={Content}/>
+            <PrivateRoute component={Content}/>
           </Switch>
         </div>
-        <Redirect exact from='/app' to='/app/tasks'/>
       </div>
     )
   }
 }
-// todo routing fix
+
 export default Main;
