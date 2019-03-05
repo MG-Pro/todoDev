@@ -43,17 +43,15 @@ class EditTask extends Component {
   };
 
   closePicker = () => {
-    setTimeout(() => {
-      this.setState({
-        showPicker: false
-      })
-    }, 300)
-
+    this.setState({
+      showPicker: false
+    })
   };
 
   getDate = (date) => {
     this.setState({
-      targetDate: date
+      targetDate: date,
+      showPicker: false
     })
   };
 
@@ -194,12 +192,12 @@ class EditTask extends Component {
                     value={dateToString(state.targetDate)}
                     onChange={this.inputChange}
                     onFocus={this.showPicker}
-                    onBlur={this.closePicker}
                   />
                   {this.state.showPicker &&
                   <div className="date-picker-wrap">
                     <DatePicker
                       onDayClick={this.getDate}
+                      close={this.closePicker}
                     />
                   </div>
                   }

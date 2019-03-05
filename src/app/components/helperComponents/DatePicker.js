@@ -200,6 +200,9 @@ export default class DatePicker extends Component {
 
     return (
       <div className="react-daypicker-root">
+        <div className="close-holder">
+          <span onClick={this.props.close}>X</span>
+        </div>
         <div className="header">
           <div className="previous-month" onClick={this.previousMonth}>
             ◀
