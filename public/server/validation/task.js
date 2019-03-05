@@ -1,7 +1,7 @@
 const Validator = require('validator');
 const isEmpty = require('./isEmpty');
 
-module.exports = (task) => {
+module.exports = (task, isUpdate) => {
   const errors = {};
 
   if(!Validator.isLength(task.tech, {min: 2, max: 30})) {
@@ -11,10 +11,11 @@ module.exports = (task) => {
   if(!Validator.isLength(task.target, {min: 2})) {
     errors.target = 'Target desc is invalid';
   }
-
-  const targetDate = (new Date(task.targetDate)).getTime();
-  if(targetDate < Date.now()) {
-    errors.targetDate = 'Target date is invalid';
+  if (isUpdate) {
+    const targetDate = (new Date(task.targetDate)).getTime();
+    if(targetDate < Date.now()) {
+      errors.targetDate = 'Target date is invalid';
+    }
   }
 
   return {

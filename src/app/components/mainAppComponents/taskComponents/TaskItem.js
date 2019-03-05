@@ -9,7 +9,6 @@ class TaskItem extends Component {
   changeStatus = () => {
     const task = Object.assign({}, this.props.task);
     task.completed = !this.props.task.completed;
-    console.log(task);
     this.props.updateTask(task);
   };
 
@@ -46,7 +45,7 @@ class TaskItem extends Component {
           </div>
           {!task.links.length ?
             <p className="task-item__actions-links">{`Вы не прикрепили ссылки к задаче`}</p> :
-            <p className="task-item__actions-links">{`Вы прикрепили ${task.links.length} ссылок к задаче`}</p>
+            <p className="task-item__actions-links">{`Количество ссылок: ${task.links.length}`}</p>
           }
           <p className="task-item__actions-upd-date">{`Обновлена ${dateToString(task.updateDate)}`}</p>
           <div className="task-item__actions-btns">

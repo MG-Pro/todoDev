@@ -21,7 +21,7 @@ router.post(
   passport.authenticate('jwt', {session: false}),
   (req, res) => {
 
-    const {errors, isValid} = validateTaskInput(req.body);
+    const {errors, isValid} = validateTaskInput(req.body, true);
     if (!isValid) {
       return res.status(400).json(errors);
     }
