@@ -898,7 +898,7 @@ body {
       left: 10px;
     }
     &::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
       border-radius: 10px;
     }
     &::-webkit-scrollbar-thumb {
@@ -1141,9 +1141,6 @@ body {
   }
 
 
-
-
-
   .footer__contacts {
     font-size: 20px;
     color: #ffffff;
@@ -1162,6 +1159,56 @@ body {
     font-size: 16px;
   }
 
-
 }
 
+@media screen and (max-width: 640px) {
+  .app {
+    .header__logo-img {
+      width: 35px;
+    }
+    .header__brand {
+      text-align: left;
+    }
+    .header__brand-title {
+      font-size: 34px;
+    }
+    .header__brand-subtitle {
+      display: none;
+    }
+    .header__menu {
+      padding-right: 0;
+      padding-left: 5px;
+    }
+    .header__menu {
+      font-size: 16px;
+    }
+    .header {
+      min-height: auto;
+      padding: 5px 0;
+    }
+    .footer {
+      padding: 10px 0;
+    }
+    .footer__contacts {
+      font-size: 16px;
+      br {
+        display: none;
+      }
+    }
+    .footer__contacts-link {
+      margin-right: 10px;
+    }
+    .user-form__form {
+      padding: 10px;
+    }
+    .user-form__head {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+    .user-form__group {
+      margin-bottom: 15px;
+    }
+
+
+  }
+}
