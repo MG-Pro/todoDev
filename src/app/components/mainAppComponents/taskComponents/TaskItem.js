@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import dateToString from '../../../helpers/dateToString';
-import CheckBox from '../../helperComponents/CheckBox';
+import CheckBox from '../../commonComponents/CheckBox';
 import {updateTask} from '../../../redux/actions';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';

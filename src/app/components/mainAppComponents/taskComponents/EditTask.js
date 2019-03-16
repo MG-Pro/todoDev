@@ -1,8 +1,8 @@
 import {Component} from 'react';
-import DatePicker from '../../helperComponents/DatePicker';
+import DatePicker from '../../commonComponents/DatePicker';
 import LinksList from './LinksList';
 import {connect} from 'react-redux';
-import {addTask, updateTask, getTask, cleanSuccessUpdTask} from '../../../redux/actions';
+import {addTask, updateTask, cleanSuccessUpdTask} from '../../../redux/actions';
 import {withRouter} from 'react-router-dom';
 import dateToString from '../../../helpers/dateToString';
 
@@ -20,15 +20,6 @@ class EditTask extends Component {
       completed: task.completed || false,
       showPicker: false,
       errors: {},
-    }
-  }
-
-  componentDidMount() {
-    if(this.props.match.params.id) {
-      return;
-    }
-    if (!this.props.tasks.length) {
-      this.props.getTask();
     }
   }
 
@@ -223,4 +214,4 @@ const mapStateToProps = state => ({
   successUpdTask: state.successUpdTask
 });
 
-export default connect(mapStateToProps, {addTask, updateTask, getTask, cleanSuccessUpdTask})(withRouter(EditTask));
+export default connect(mapStateToProps, {addTask, updateTask, cleanSuccessUpdTask})(withRouter(EditTask));

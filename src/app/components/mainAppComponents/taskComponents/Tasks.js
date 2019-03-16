@@ -1,8 +1,8 @@
 import {Component} from 'react';
-import MainSidebar from './MainSidebar';
-import TaskList from './taskComponents/TaskList';
+import MainSidebar from './TasksSidebar';
+import TaskList from './TaskList';
 
-class Content extends Component {
+class Tasks extends Component {
   render() {
     return (
       <div className="main-wrap">
@@ -13,4 +13,4 @@ class Content extends Component {
   }
 }
 
-export default Content;
+export default Tasks;

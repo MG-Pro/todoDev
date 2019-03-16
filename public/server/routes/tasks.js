@@ -56,9 +56,9 @@ router.put(
       return res.status(400).json(errors);
     }
 
-    const {_id, tech, target, targetDate, completed, links} = req.body;
+    const {_id, id, tech, target, targetDate, completed, links} = req.body;
 
-    Task.findById(_id)
+    Task.findById(_id || id)
       .then(task => {
         task.updateOne({
           tech,
