@@ -34,7 +34,7 @@ class Login extends Component {
     if(nextProps.auth.isAuthenticated) {
       this.props.history.push('/app/tasks');
     }
-    if (nextProps.errors) {
+    if (Object.keys(nextProps.errors).length) {
       this.setState({
         errors: nextProps.errors
       });
@@ -56,7 +56,9 @@ class Login extends Component {
             <h1 className="user-form__head">Вход</h1>
             <div className="user-form__group">
               <div className="user-form__input-wrap">
-                <span className="user-form__icon"><i className="fa fa-envelope"></i></span>
+                <span className="user-form__icon">
+                  <i className="fa fa-envelope"/>
+                </span>
                 <input
                   className="user-form__input"
                   name="email"
@@ -70,7 +72,9 @@ class Login extends Component {
             </div>
             <div className="user-form__group">
               <div className="user-form__input-wrap">
-                <span className="user-form__icon"><i className="fa fa-key"></i></span>
+                <span className="user-form__icon">
+                  <i className="fa fa-key"/>
+                </span>
                 <input
                   className="user-form__input"
                   name="pass"

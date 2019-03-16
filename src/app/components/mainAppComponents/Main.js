@@ -24,7 +24,7 @@ class Main extends Component {
             <PrivateRoute path='/app/tasks/edit/:id' component={EditTask}/>
             <PrivateRoute path='/app/exercises' component={ExerciseContent}/>
             <PrivateRoute path='/app/tasks' component={Tasks}/>
-            <PrivateRoute exict path='/app' component={Tasks}/>
+            <PrivateRoute exact path='/app' component={Tasks}/>
           </Switch>
         </div>
       </div>
