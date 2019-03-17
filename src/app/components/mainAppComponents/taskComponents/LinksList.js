@@ -75,10 +75,20 @@ class LinksList extends Component {
               {links.map((link, i) => {
                 return (
                   <li className='edit-task__links-item' key={i}>
-                    {link.fav && <img src={link.fav} className='edit-task__links-fav'/>}
+                    {link.fav &&
+                    <img src={link.fav} className='edit-task__links-fav'/>}
                     <a href={link.url} target='_blank' className='edit-task__links-link'>
                       {link.title}
                     </a>
+                    <div className="edit-task__links-btns">
+                      <button className='edit-task__links-edit'>
+                        <i className="fa fa-pencil"/>
+                      </button>
+                      <button className='edit-task__links-del'>
+                        <i className="fa fa-trash-o"/>
+                      </button>
+                    </div>
+
                   </li>
                 )
               })}

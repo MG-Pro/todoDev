@@ -884,6 +884,8 @@ body {
     border-bottom: 1px solid $border-color;
     padding-bottom: 5px;
     margin-bottom: 5px;
+    position: relative;
+    padding-right: 50px;
   }
   .edit-task__links-link {
     font-size: 14px;
@@ -898,6 +900,25 @@ body {
     display: inline-block;
     margin-right: 5px;
     vertical-align: middle;
+  }
+  .edit-task__links-btns {
+    position: absolute;
+    right: 0;
+    top: 0px;
+    button {
+      background: none;
+      border: none;
+      font-size: 20px;
+      outline: none;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  }
+  .edit-task__links-del {
+    color: $alert-color;
+  }
+  .edit-task__links-edit {
+    color: $success-color;
   }
   .user-form__input-wrap_links {
     max-height: 190px;
