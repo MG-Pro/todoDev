@@ -1,9 +1,9 @@
 import {Component} from 'react';
-import {filters} from '../../config';
+import {filters} from '../../../config';
 import {connect} from 'react-redux';
-import {currentFilter, currentTechFilter} from '../../redux/actions';
+import {currentFilter, currentTechFilter} from '../../../redux/actions';
 
-class MainSidebar extends Component {
+class TasksSidebar extends Component {
   constructor(props) {
     super(props);
 
@@ -60,4 +60,4 @@ const mapStateToProps = state => ({
   techFilterType: state.techFilter
 });
 
-export default connect(mapStateToProps, {currentFilter, currentTechFilter})(MainSidebar);
+export default connect(mapStateToProps, {currentFilter, currentTechFilter})(TasksSidebar);

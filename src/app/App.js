@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import Main from './components/mainAppComponents/Main';
 import Register from './components/authComponents/Register';
 import Login from './components/authComponents/Login';
-import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from './components/commonComponents/PrivateRoute';
 import Account from './components/accountComponents/Account';
 
 

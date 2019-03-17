@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {Component} from 'react';
-import {getTask, sorting, deleteTask} from '../../../redux/actions';
+import {sorting, deleteTask} from '../../../redux/actions';
 import TaskItem from './TaskItem';
 import SortingTasks from './SortingTasks'
 import ConfirmMsg from '../../headerComponents/ComfirmMsg';
@@ -15,10 +15,6 @@ class TaskList extends Component {
       delProcess: false
     };
     this.confirmMsg = 'Подтвердите удаление задачи!'
-  }
-
-  componentDidMount() {
-    this.props.getTask();
   }
 
   static sortList = (list, sortType) => {
@@ -135,4 +131,4 @@ const mapStateToProps = state => ({
   techFilterType: state.techFilter
 });
 
-export default connect(mapStateToProps, {getTask, sorting, deleteTask})(TaskList);
+export default connect(mapStateToProps, {sorting, deleteTask})(TaskList);
