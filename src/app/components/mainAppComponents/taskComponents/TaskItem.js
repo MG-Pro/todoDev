@@ -33,28 +33,30 @@ class TaskItem extends Component {
           <p className="task-item__content-date">Добавлена: {dateToString(task.date)}</p>
           <p className="task-item__content-target">{task.target}</p>
           <div className="task-item__content-footer">
-            <p className={`task-item__content-target-date ${alertClass}`}><span className='task-item__content-target-date-title'>Завершить до:</span> {dateToString(task.targetDate)}</p>
+            <p className={`task-item__content-target-date ${alertClass}`}><span
+              className='task-item__content-target-date-title'>Завершить до:</span> {dateToString(task.targetDate)}</p>
             {error && <span className='task-form__msg'>{errStr}</span>}
           </div>
-
         </div>
         <div className="task-item__actions">
           <div className="task-item__actions-status">
             <span className='task-item__actions-status-name'>{task.completed ? 'Возобновить' : 'Завершить'}</span>
             <CheckBox checked={task.completed} change={this.changeStatus}/>
           </div>
-          {!task.links.length ?
-            <p className="task-item__actions-links">{`Вы не прикрепили ссылки к задаче`}</p> :
-            <p className="task-item__actions-links">{`Количество ссылок: ${task.links.length}`}</p>
-          }
-          <p className="task-item__actions-upd-date">{`Обновлена ${dateToString(task.updateDate)}`}</p>
-          <div className="task-item__actions-btns">
-            <button onClick={() => this.editTask(task)} className='task-btn'>
-              <i className='fa fa-pencil'/>
-            </button>
-            <button onClick={() => this.props.action[0](task._id)} className='task-btn task-btn_del'>
-              <i className='fa fa-trash-o'/>
-            </button>
+          <div className="task-item__actions-wrap">
+            {!task.links.length ?
+              <p className="task-item__actions-links">{`Вы не прикрепили ссылки к задаче`}</p> :
+              <p className="task-item__actions-links">{`Количество ссылок: ${task.links.length}`}</p>
+            }
+            <p className="task-item__actions-upd-date">{`Обновлена ${dateToString(task.updateDate)}`}</p>
+            <div className="task-item__actions-btns">
+              <button onClick={() => this.editTask(task)} className='task-btn'>
+                <i className='fa fa-pencil'/>
+              </button>
+              <button onClick={() => this.props.action[0](task._id)} className='task-btn task-btn_del'>
+                <i className='fa fa-trash-o'/>
+              </button>
+            </div>
           </div>
         </div>
         {isActive && <div className="task-item__overlay"><span>Not active. Wait</span></div>}
@@ -62,9 +64,10 @@ class TaskItem extends Component {
     )
   }
 }
+
 const mapStateToProps = state => ({
   tasks: state.tasks,
-  error: state.taskError,
+  error: state.taskError
 });
 
 export default connect(mapStateToProps, {updateTask})(withRouter(TaskItem));
