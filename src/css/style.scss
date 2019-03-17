@@ -1210,9 +1210,37 @@ body {
 
 @media screen and (max-width: 720px) {
   .app {
+    .edit-task__main {
+
+      width: 100%;
+      padding-right: 0;
+    }
     .edit-task-wrap {
       display: block;
+      position: relative;
+      padding-bottom: 50px;
     }
+    .edit-task__links {
+      width: 100%;
+      padding-left: 0;
+    }
+
+    .task-form {
+
+    }
+    .user-form__input_ta {
+      min-height: 70px;
+    }
+    .user-form__btn-wrap {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      width: 100%;
+      max-width: 100%;
+    }
+
+
 
 
 
@@ -1524,6 +1552,14 @@ body {
       width: 43%;
       justify-content: flex-start;
       margin-right: 10px;
+    }
+
+  }
+}
+@media screen and (max-width: 360px) {
+  .app {
+    .user-form__input_links {
+      max-width: 155px;
     }
   }
 }

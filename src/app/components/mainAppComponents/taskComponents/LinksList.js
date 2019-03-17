@@ -66,7 +66,7 @@ class LinksList extends Component {
           </div>
           <div className="user-form__input-wrap user-form__input-wrap_links">
                   <span className="user-form__icon">
-                    <i className="fa fa-external-link"></i>
+                    <i className="fa fa-external-link"/>
                   </span>
             <ul className="edit-task__links-list">
               {!links.length &&
@@ -88,7 +88,7 @@ class LinksList extends Component {
         <form className="edit-task__links-form" onSubmit={this.linkSubmit}>
           <div className="user-form__input-wrap">
               <span className="user-form__icon">
-                <i className="fa fa-link"></i>
+                <i className="fa fa-link"/>
               </span>
             <input
               className="user-form__input user-form__input_links"
