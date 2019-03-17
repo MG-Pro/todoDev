@@ -17,9 +17,9 @@ class App extends Component {
         <div className="wrapper">
           <main className="main">
             <Header/>
-            <Route exact path='/app/register' component={Register}/>
-            <Route exact path='/app/login' component={Login}/>
             <Switch>
+              <Route path='/app/register' component={Register}/>
+              <Route path='/app/login' component={Login}/>
               <PrivateRoute path='/app/account' component={Account}/>
               <PrivateRoute path='/app' component={Main}/>
             </Switch>
