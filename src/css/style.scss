@@ -1208,6 +1208,17 @@ body {
   }
 }
 
+@media screen and (max-width: 720px) {
+  .app {
+    .edit-task-wrap {
+      display: block;
+    }
+
+
+
+  }
+}
+
 @media screen and (max-width: 640px) {
   .footer {
     padding: 10px 0;
@@ -1514,7 +1525,5 @@ body {
       justify-content: flex-start;
       margin-right: 10px;
     }
-
-
   }
 }
