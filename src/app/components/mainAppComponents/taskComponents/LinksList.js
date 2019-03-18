@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
 import {links as addLink, clearLinkState} from '../../../redux/actions';
+import EditLink from './EditLink';
 
 
 class LinksList extends Component {
@@ -9,6 +10,7 @@ class LinksList extends Component {
     this.state = {
       error: false,
       value: '',
+      editLink: null,
     }
   }
 
@@ -30,10 +32,17 @@ class LinksList extends Component {
     this.props.addLink(value);
   };
 
+  deleteLink = (link) => {
+    console.log(link);
+    const idx = this.props.links.findIndex(it => it.url === link.url)
+    this.props.links.splice(idx, 1);
+    this.props.changeLinks();
+  };
+
   componentWillReceiveProps(nextProps) {
     if(nextProps.linkData) {
       this.props.links.push(nextProps.linkData);
-      this.props.changeLinks(this.props.links);
+      this.props.changeLinks();
       this.setState({
         value: '',
         error: false
@@ -48,6 +57,22 @@ class LinksList extends Component {
     }
   }
 
+  editLink = (link) => {
+    this.setState({
+      editLink: link
+    })
+  };
+
+  editedLink = (link) => {
+    console.log(link);
+  };
+
+  closeEditLink = () => {
+    this.setState({
+      editLink: null
+    })
+  };
+
   inputChange = (e) => {
     this.setState({
       value: e.currentTarget.value
@@ -55,7 +80,7 @@ class LinksList extends Component {
   };
 
   render() {
-    const {error} = this.state;
+    const {error, editLink} = this.state;
     const {links} = this.props;
     return (
       <div className="edit-task__links">
@@ -81,14 +106,19 @@ class LinksList extends Component {
                       {link.title}
                     </a>
                     <div className="edit-task__links-btns">
-                      <button className='edit-task__links-edit'>
+                      <button onClick={() => this.editLink(link)} className='edit-task__links-edit'>
                         <i className="fa fa-pencil"/>
                       </button>
-                      <button className='edit-task__links-del'>
+                      <button onClick={() => this.deleteLink(link)} className='edit-task__links-del'>
                         <i className="fa fa-trash-o"/>
                       </button>
                     </div>
-
+                    {(editLink && editLink.url === link.url) &&
+                    <EditLink
+                      link={link}
+                      save={this.editedLink}
+                      close={this.closeEditLink}
+                    />}
                   </li>
                 )
               })}

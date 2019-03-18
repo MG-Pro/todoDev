@@ -550,7 +550,7 @@ body {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     padding: 5px;
-    color: #8a2be2;
+    color: $btn-bg;
     display: flex;
     align-items: center;
   }
@@ -575,7 +575,7 @@ body {
   .user-form__btn {
     padding: 8px 10px;
     border-radius: 10px;
-    background-color: #8a2be2;
+    background-color: $btn-bg;
     color: #ffffff;
     text-transform: uppercase;
     text-align: center;
@@ -589,11 +589,11 @@ body {
     outline: none !important;
     min-width: 75px;
     &:hover {
-      background-color: #561990;
+      background-color: $btn-bg-hover;
     }
 
     &:active {
-      background-color: #3b1163;
+      background-color: $btn-bg-active;
       box-shadow: inset 0px 0 2px 2px rgba(0, 0, 0, 0.5);
       color: #b1b1b1;
     }
@@ -1176,7 +1176,51 @@ body {
     display: flex;
     justify-content: space-around;
   }
-
+  .edit-link {
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  .edit-link__group {
+    font-size: 0;
+    margin-bottom: 5px;
+  }
+  .edit-link__label {
+    font-size: 14px;
+    color: $head-color;
+    margin-bottom: 3px;
+  }
+  .edit-link__input {
+    border: 0.5px solid $border-color;
+    border-radius: 3px;
+    width: 100%;
+    font-size: 14px;
+    padding: 3px;
+    color: $head-color;
+  }
+  .edit-link__btns {
+    display: flex;
+    justify-content: space-around;
+  }
+  .edit-link__btn {
+    padding: 4px 8px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: $btn-bg;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 105px;
+    &:hover {
+      background-color: $btn-bg-hover;
+    }
+    &:active {
+      background-color: $btn-bg-active;
+      box-shadow: inset 0px 0 2px 2px rgba(0, 0, 0, 0.5);
+      color: #b1b1b1;
+    }
+  }
 
   .footer__contacts {
     font-size: 20px;
@@ -1581,6 +1625,13 @@ body {
   .app {
     .user-form__input_links {
       max-width: 155px;
+    }
+    .edit-task__links-item {
+      padding-right: 30px;
+    }
+    .edit-link__btn {
+      min-width: 95px;
+      font-size: 14px;
     }
   }
 }

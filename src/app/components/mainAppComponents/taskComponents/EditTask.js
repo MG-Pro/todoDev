@@ -54,6 +54,10 @@ class EditTask extends Component {
 
   submit = (e) => {
     e.preventDefault();
+    this.taskUpdate();
+  };
+
+  taskUpdate = () => {
     const {state} = this;
     const errors = {};
     if (state.tech.length < 2) {
@@ -97,10 +101,8 @@ class EditTask extends Component {
     });
   };
 
-  changeLinks = (links) => {
-    this.setState({
-      links: links
-    })
+  changeLinks = () => {
+    this.taskUpdate();
   };
 
   componentWillReceiveProps(nextProps) {
