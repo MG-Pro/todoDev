@@ -7,9 +7,10 @@ const EditLink = (props) => {
 
   const save = (e) => {
     e.preventDefault();
-    const url = e.currentTarget[0].value;
-    const title = e.currentTarget[1].value;
-    console.log(e.currentTarget);
+    props.save({
+      url: e.currentTarget[0].value,
+      title: e.currentTarget[1].value,
+    });
   };
 
   return (

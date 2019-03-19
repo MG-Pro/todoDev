@@ -34,7 +34,7 @@ class LinksList extends Component {
 
   deleteLink = (link) => {
     console.log(link);
-    const idx = this.props.links.findIndex(it => it.url === link.url)
+    const idx = this.props.links.findIndex(it => it.url === link.url);
     this.props.links.splice(idx, 1);
     this.props.changeLinks();
   };
@@ -64,12 +64,34 @@ class LinksList extends Component {
   };
 
   editedLink = (link) => {
-    console.log(link);
+    let error = '';
+    for (let key in link) {
+      if(link[key].length < 3) {
+        error += `${key.toUpperCase()} не может быть пустым! `
+      }
+    }
+    if(!error) {
+      this.props.links.forEach(item => {
+        console.log(this.state.editLink);
+        if(item.url === this.state.editLink.url) {
+          item.url = link.url;
+          item.title = link.title
+        }
+      });
+
+      this.props.changeLinks();
+      link = null;
+    }
+    this.setState({
+      error,
+      editLink: link
+    });
   };
 
   closeEditLink = () => {
     this.setState({
-      editLink: null
+      editLink: null,
+      error: null,
     })
   };
 
