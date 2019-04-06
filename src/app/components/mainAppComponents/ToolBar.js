@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 class ToolBar extends Component {
   constructor(props) {
@@ -28,16 +28,16 @@ class ToolBar extends Component {
               </Link>
             </li>
             <li className={`tool-bar__item ${showMenu ? '': 'mob-hide'}`}>
-              <Link to='/app/tasks' className="tool-bar__link">
+              <NavLink to='/app/tasks' className="tool-bar__link" activeClassName='tool-bar__link_active'>
                 <i className="fa fa-tasks"/>
                Мои задачи
-              </Link>
+              </NavLink>
             </li>
             <li className={`tool-bar__item ${showMenu ? '': 'mob-hide'}`}>
-              <Link to='/app/exercises' className="tool-bar__link">
+              <NavLink to='/app/exercises' className="tool-bar__link" activeClassName='tool-bar__link_active'>
                 <i className="fa fa-code"/>
                 Мои упражнения
-              </Link>
+              </NavLink>
             </li>
             <li className="tool-bar__item tool-bar__mob-menu">
               <button className='tool-bar__mob-menu-btn' onClick={this.showMenu}>

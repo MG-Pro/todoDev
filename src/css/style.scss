@@ -747,6 +747,11 @@ body {
       color: #7b7596;
     }
   }
+  .tool-bar__link_active {
+    color: $tools-color-active;
+    font-weight: 700;
+    transition: none;
+  }
   .tool-bar__mob-menu {
     display: none;
   }
