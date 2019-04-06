@@ -545,7 +545,7 @@ body {
   }
 
   .user-form__icon {
-    border: 0.5px solid #cecece;
+    border: 0.5px solid $border-color;
     border-right: none;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -557,7 +557,7 @@ body {
 
   .user-form__input {
     flex-grow: 1;
-    border: 0.5px solid #cecece;
+    border: 0.5px solid $border-color;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     outline: none !important;
@@ -744,7 +744,7 @@ body {
       margin-right: 5px;
     }
     &:hover {
-      color: #7b7596;
+      color: $tools-color-active;
     }
   }
   .tool-bar__link_active {

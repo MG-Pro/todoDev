@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run devserver | npm run start",
-    "prod": "pm2 start /home/admin/nodeApps/todoDev/build/server/server.js --watch –disable-logs",
+    "prod": "git pull & npm run build & pm2 start /home/admin/nodeApps/todoDev/build/server/server.js --watch –disable-logs",
     "devserver": "nodemon public/server/server.js",
     "build": "webpack --mode production --colors --progress",
     "start": "webpack-dev-server --mode development --hot --colors "
