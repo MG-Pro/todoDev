@@ -104,7 +104,10 @@ module.exports = {
     ]
   },
   plugins: [
-    isProduction ? new CleanWebpackPlugin('build') : () => {},
+    new webpack.ProgressPlugin(),
+    isProduction ? new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['build'],
+    }) : () => {},
     new HtmlWebpackPlugin({
       filename: 'app.html',
       template: 'public/app.html',
