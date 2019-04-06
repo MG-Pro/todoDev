@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
 import {links as addLink, clearLinkState} from '../../../redux/actions';
+import EditLink from './EditLink';
 
 
 class LinksList extends Component {
@@ -9,6 +10,7 @@ class LinksList extends Component {
     this.state = {
       error: false,
       value: '',
+      editLink: null,
     }
   }
 
@@ -30,10 +32,17 @@ class LinksList extends Component {
     this.props.addLink(value);
   };
 
+  deleteLink = (link) => {
+    console.log(link);
+    const idx = this.props.links.findIndex(it => it.url === link.url);
+    this.props.links.splice(idx, 1);
+    this.props.changeLinks();
+  };
+
   componentWillReceiveProps(nextProps) {
     if(nextProps.linkData) {
       this.props.links.push(nextProps.linkData);
-      this.props.changeLinks(this.props.links);
+      this.props.changeLinks();
       this.setState({
         value: '',
         error: false
@@ -48,6 +57,44 @@ class LinksList extends Component {
     }
   }
 
+  editLink = (link) => {
+    this.setState({
+      editLink: link
+    })
+  };
+
+  editedLink = (link) => {
+    let error = '';
+    for (let key in link) {
+      if(link[key].length < 3) {
+        error += `${key.toUpperCase()} не может быть пустым! `
+      }
+    }
+    if(!error) {
+      this.props.links.forEach(item => {
+        console.log(this.state.editLink);
+        if(item.url === this.state.editLink.url) {
+          item.url = link.url;
+          item.title = link.title
+        }
+      });
+
+      this.props.changeLinks();
+      link = null;
+    }
+    this.setState({
+      error,
+      editLink: link
+    });
+  };
+
+  closeEditLink = () => {
+    this.setState({
+      editLink: null,
+      error: null,
+    })
+  };
+
   inputChange = (e) => {
     this.setState({
       value: e.currentTarget.value
@@ -55,7 +102,7 @@ class LinksList extends Component {
   };
 
   render() {
-    const {error} = this.state;
+    const {error, editLink} = this.state;
     const {links} = this.props;
     return (
       <div className="edit-task__links">
@@ -66,7 +113,7 @@ class LinksList extends Component {
           </div>
           <div className="user-form__input-wrap user-form__input-wrap_links">
                   <span className="user-form__icon">
-                    <i className="fa fa-external-link"></i>
+                    <i className="fa fa-external-link"/>
                   </span>
             <ul className="edit-task__links-list">
               {!links.length &&
@@ -75,10 +122,25 @@ class LinksList extends Component {
               {links.map((link, i) => {
                 return (
                   <li className='edit-task__links-item' key={i}>
-                    {link.fav && <img src={link.fav} className='edit-task__links-fav'/>}
+                    {link.fav &&
+                    <img src={link.fav} className='edit-task__links-fav'/>}
                     <a href={link.url} target='_blank' className='edit-task__links-link'>
                       {link.title}
                     </a>
+                    <div className="edit-task__links-btns">
+                      <button onClick={() => this.editLink(link)} className='edit-task__links-edit'>
+                        <i className="fa fa-pencil"/>
+                      </button>
+                      <button onClick={() => this.deleteLink(link)} className='edit-task__links-del'>
+                        <i className="fa fa-trash-o"/>
+                      </button>
+                    </div>
+                    {(editLink && editLink.url === link.url) &&
+                    <EditLink
+                      link={link}
+                      save={this.editedLink}
+                      close={this.closeEditLink}
+                    />}
                   </li>
                 )
               })}
@@ -88,7 +150,7 @@ class LinksList extends Component {
         <form className="edit-task__links-form" onSubmit={this.linkSubmit}>
           <div className="user-form__input-wrap">
               <span className="user-form__icon">
-                <i className="fa fa-link"></i>
+                <i className="fa fa-link"/>
               </span>
             <input
               className="user-form__input user-form__input_links"
