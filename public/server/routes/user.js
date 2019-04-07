@@ -9,6 +9,7 @@ const validateLoginInput = require('../validation/login');
 const validateNewPasswordInput = require('../validation/newPassword');
 const validateForgotPasswordInput = require('../validation/forgot');
 const User = require('../models/User');
+const sendEmail = require('../common/sendEmail');
 
 router.post('/register', (req, res) => {
 
@@ -181,20 +182,27 @@ router.get('/forgot-pass', (req, res) => {
   }
   User.findOne({email})
     .then(user => {
-      if(!user) {
+      if (!user) {
         return res.json({
           success: false,
           errors: {email: `User not found`}
         });
       }
-
-      return res.json({
-        success: true,
-        message: `Email sent to your address. Check it and follow instruction!`
+      sendEmail({
+        email: user.email,
+        subject: 'test',
+        body: 'test'
+      }).then(result => {
+        return res.json({
+          success: true,
+          message: `Email sent to your address. Check it and follow instruction!`
+        });
+      }).catch(err => {
+        return console.log(err);
       });
     })
     .catch(err => {
-        console.log(err);
+      console.log(err);
     });
 
 
