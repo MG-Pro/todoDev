@@ -7,9 +7,10 @@ const passport = require('passport');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 const validateNewPasswordInput = require('../validation/newPassword');
+const validateForgotPasswordInput = require('../validation/forgot');
 const User = require('../models/User');
 
-router.post('/register', function (req, res) {
+router.post('/register', (req, res) => {
 
   const {errors, isValid} = validateRegisterInput(req.body);
 
@@ -110,7 +111,7 @@ router.get('/me',
 
 router.put('/:id',
   passport.authenticate('jwt', {session: false}),
-  function (req, res) {
+  (req, res) => {
     const id = req.params.id;
 
     const {errors, isValid} = validateNewPasswordInput(req.body);
@@ -170,5 +171,33 @@ router.put('/:id',
         }
       });
   });
+
+router.get('/forgot-pass', (req, res) => {
+  const email = req.query.email;
+  const {errors, isValid} = validateForgotPasswordInput({email: email});
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  User.findOne({email})
+    .then(user => {
+      if(!user) {
+        return res.json({
+          success: false,
+          errors: {email: `User not found`}
+        });
+      }
+
+      return res.json({
+        success: true,
+        message: `Email sent to your address. Check it and follow instruction!`
+      });
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+
+});
 
 module.exports = router;

@@ -621,7 +621,9 @@ body {
     bottom: -18px;
     font-size: 14px;
   }
-
+  .user-form__msg_scs {
+    color: $success-color;
+  }
   // Accaunt
 
   .layout {

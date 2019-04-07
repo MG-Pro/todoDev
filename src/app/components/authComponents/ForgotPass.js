@@ -30,12 +30,16 @@ class ForgotPass extends Component {
         }
       })
     }
-    console.log(isEmail);
   };
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      errors: nextProps.errors || '',
+    })
+  }
 
   render() {
-    const {errors} = this.state;
+    const {errors, email} = this.state;
     return (
       <div className="user-form">
         <div className="container container_user-form">
@@ -52,10 +56,11 @@ class ForgotPass extends Component {
                   type="email"
                   placeholder="Email"
                   onChange={this.inputChange}
-                  value={this.state.email}
+                  value={email}
                 />
               </div>
               {errors.email && (<span className="user-form__msg">{errors.email}</span>)}
+              {this.props.message && (<span className="user-form__msg user-form__msg_scs">{this.props.message}</span>)}
             </div>
             <button className="user-form__btn">Отправить</button>
           </form>
@@ -66,8 +71,8 @@ class ForgotPass extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  errors: state.forgotPass,
-  message: state.forgotPass,
+  errors: state.forgotPass.errors,
+  message: state.forgotPass.message,
 });
 
 export default connect(mapStateToProps, {forgotPass})(ForgotPass);
