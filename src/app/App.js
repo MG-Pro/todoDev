@@ -8,6 +8,7 @@ import Register from './components/authComponents/Register';
 import Login from './components/authComponents/Login';
 import PrivateRoute from './components/commonComponents/PrivateRoute';
 import Account from './components/accountComponents/Account';
+import ForgotPass from './components/authComponents/ForgotPass';
 
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
             <Switch>
               <Route path='/app/register' component={Register}/>
               <Route path='/app/login' component={Login}/>
+              <Route path='/app/forgot/' component={ForgotPass}/>
               <PrivateRoute path='/app/account' component={Account}/>
               <PrivateRoute path='/app' component={Main}/>
             </Switch>

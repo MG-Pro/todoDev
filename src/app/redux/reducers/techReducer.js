@@ -1,4 +1,4 @@
-import {TECH_LIST} from '../actions/types';
+import {TECH_LIST} from '../types';
 
 const initState = [];
 

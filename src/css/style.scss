@@ -572,6 +572,19 @@ body {
     min-height: 31px;
     max-height: 200px;
   }
+  .user-form_forgot-pass {
+    margin-bottom: 10px;
+    margin-top: -20px;
+  }
+  .user-form_forgot-pass-link {
+    text-decoration: none;
+    font-size: 14px;
+    color: $tools-color;
+    transition: 0.5s;
+    &:hover {
+      color: $alert-color;
+    }
+  }
   .user-form__btn {
     padding: 8px 10px;
     border-radius: 10px;

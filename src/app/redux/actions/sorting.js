@@ -1,4 +1,4 @@
-import {SORTING_TYPE} from './types';
+import {SORTING_TYPE} from '../types';
 
 export const sorting = (sortType) => dispatch => {
   dispatch({

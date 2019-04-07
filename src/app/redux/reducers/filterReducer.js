@@ -1,4 +1,4 @@
-import {FILTER_TYPE} from '../actions/types';
+import {FILTER_TYPE} from '../types';
 
 const initState = 'in_work';
 

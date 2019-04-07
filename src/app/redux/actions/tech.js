@@ -1,4 +1,4 @@
-import {TECH_LIST} from './types';
+import {TECH_LIST} from '../types';
 
 export const tech = (tasks) => dispatch => {
   const techList = [];

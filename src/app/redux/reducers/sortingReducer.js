@@ -1,4 +1,4 @@
-import {SORTING_TYPE} from '../actions/types';
+import {SORTING_TYPE} from '../types';
 
 const initState = {
   dir: 'desc',

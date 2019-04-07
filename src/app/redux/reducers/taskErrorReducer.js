@@ -1,4 +1,4 @@
-import {TASK_ERROR} from '../actions/types';
+import {TASK_ERROR} from '../types';
 
 export default (state = [], action) => {
   switch (action.type) {

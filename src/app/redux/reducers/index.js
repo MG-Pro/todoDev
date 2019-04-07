@@ -12,6 +12,7 @@ import techReducer from './techReducer';
 import filterReducer from './filterReducer';
 import techFilterReducer from './techFilterReducer';
 import successUpdTaskReducer from './successUpdTaskReducer'
+import forgotPassReducer from './forgotPassReducer';
 
 export default combineReducers({
   errors: errorReducer,
@@ -26,6 +27,6 @@ export default combineReducers({
   tech: techReducer,
   filterType: filterReducer,
   techFilter: techFilterReducer,
-  successUpdTask: successUpdTaskReducer
-
+  successUpdTask: successUpdTaskReducer,
+  forgotPass: forgotPassReducer
 })

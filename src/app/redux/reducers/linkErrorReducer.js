@@ -1,4 +1,4 @@
-import {LINK_ERROR} from '../actions/types';
+import {LINK_ERROR} from '../types';
 
 export default function (state = null, action) {
   switch (action.type) {

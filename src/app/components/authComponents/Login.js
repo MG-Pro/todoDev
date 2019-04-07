@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
 import {loginUser} from '../../redux/actions';
+import {Link} from 'react-router-dom';
 
 class Login extends Component {
   constructor(props) {
@@ -85,6 +86,9 @@ class Login extends Component {
                 />
               </div>
               {errors.password && (<span className="user-form__msg">{errors.password}</span>)}
+            </div>
+            <div className="user-form_forgot-pass">
+              <Link to='/app/forgot/' className='user-form_forgot-pass-link'>Восстановить пароль</Link>
             </div>
             <button className="user-form__btn">Отправить</button>
           </form>

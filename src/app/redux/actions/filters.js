@@ -1,4 +1,4 @@
-import {FILTER_TYPE, TECH_FILTER_TYPE} from './types';
+import {FILTER_TYPE, TECH_FILTER_TYPE} from '../types';
 
 export const currentFilter = (filterType) => dispatch => {
   dispatch({

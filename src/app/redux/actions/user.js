@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_ERRORS, SET_NEW_PASSWORD} from './types';
+import {GET_ERRORS, SET_NEW_PASSWORD} from '../types';
 import setAuthToken from '../../helpers/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import {setCurrentUser} from './authentication';

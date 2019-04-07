@@ -9,7 +9,7 @@ import {
   DEL_TASK,
   SET_SUCCESS_UPD_TASK,
   CLEAN_SUCCESS_UPD_TASK
-} from './types';
+} from '../types';
 
 export const getTask = () => dispatch => {
   axios.get('/api/tasks/')

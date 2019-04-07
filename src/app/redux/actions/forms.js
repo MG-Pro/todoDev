@@ -1,4 +1,4 @@
-import {FORM_TYPE} from './types';
+import {FORM_TYPE} from '../types';
 
 export const forms = (formType) => dispatch => {
   dispatch({

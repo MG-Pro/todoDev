@@ -1,4 +1,4 @@
-import {ADD_LINK, CLEAR_LINK} from '../actions/types';
+import {ADD_LINK, CLEAR_LINK} from '../types';
 
 export default function (state = null, action) {
   switch (action.type) {

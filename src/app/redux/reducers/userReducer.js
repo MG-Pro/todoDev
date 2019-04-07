@@ -1,4 +1,4 @@
-import {SET_NEW_PASSWORD} from '../actions/types';
+import {SET_NEW_PASSWORD} from '../types';
 
 const initialState = {
   isSetNewPassword: false,

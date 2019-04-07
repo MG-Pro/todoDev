@@ -1,5 +1,5 @@
 const initialState = 'login';
-import {FORM_TYPE} from '../actions/types';
+import {FORM_TYPE} from '../types';
 
 export default function (state = initialState, action) {
   switch (action.type) {
