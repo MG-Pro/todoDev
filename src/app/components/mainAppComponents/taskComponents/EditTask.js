@@ -2,7 +2,7 @@ import {Component} from 'react';
 import DatePicker from '../../commonComponents/DatePicker';
 import LinksList from './LinksList';
 import {connect} from 'react-redux';
-import {addTask, updateTask, cleanSuccessUpdTask} from '../../../redux/actions';
+import {addTask, updateTask, successUpdTask as cleanSuccessUpdTask} from '../../../redux/actions';
 import {withRouter} from 'react-router-dom';
 import dateToString from '../../../helpers/dateToString';
 

@@ -7,8 +7,7 @@ import {
   TASK_LIST,
   TASK_LIST_ERROR,
   DEL_TASK,
-  SET_SUCCESS_UPD_TASK,
-  CLEAN_SUCCESS_UPD_TASK,
+  SUCCESS_UPD_TASK,
   UPD_PROCESS_TASK
 } from '../types';
 
@@ -38,8 +37,9 @@ export const addTask = (task, history) => dispatch => {
         type: ADD_TASK,
         payload: data
       });
+      dispatch(tech(data));
       history.push(`/app/tasks/edit/${data[data.length - 1]._id}`);
-      dispatch(setSuccessUpdTask());
+      dispatch(successUpdTask(true));
       dispatch(updProcessTask());
     })
     .catch(err => {
@@ -52,17 +52,16 @@ export const addTask = (task, history) => dispatch => {
 
 export const updateTask = task => dispatch => {
   dispatch(updProcessTask(true));
-  dispatch(cleanSuccessUpdTask());
-  console.log(1);
+  dispatch(successUpdTask());
   axios.put('/api/tasks/', task)
     .then(res => {
       dispatch({
         type: UPD_TASK,
         payload: res.data
       });
-      dispatch(setSuccessUpdTask());
+      dispatch(successUpdTask(true));
       dispatch(updProcessTask());
-      console.log(2);
+      dispatch(tech(res.data));
     })
     .catch(err => {
       dispatch({
@@ -79,23 +78,17 @@ export const deleteTask = taskId => dispatch => {
         type: DEL_TASK,
         payload: res.data
       });
+      dispatch(tech(res.data));
     })
     .catch(err => {
       console.log(err.response);
     });
 };
 
-export const setSuccessUpdTask = () => dispatch => {
+export const successUpdTask = (success = false) => dispatch => {
   dispatch({
-    type: SET_SUCCESS_UPD_TASK,
-    payload: true
-  });
-};
-
-export const cleanSuccessUpdTask = () => dispatch => {
-  dispatch({
-    type: CLEAN_SUCCESS_UPD_TASK,
-    payload: false
+    type: SUCCESS_UPD_TASK,
+    payload: success
   });
 };
 
