@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const emailParams = require('../../../params').email;
 
 const sendEmail = (data) => {
   const output = `
@@ -9,12 +10,12 @@ const sendEmail = (data) => {
   let smtpTransport;
   try {
     smtpTransport = nodemailer.createTransport({
-      host: 'smtp.yandex.ru',
+      host: emailParams.host,
       port: 465,
       secure: true,
       auth: {
-        user: 'sale1@sushi-woki.ru',
-        pass: 'rxtnmgvvmpkkfheg'
+        user: emailParams.user,
+        pass: emailParams.pass
       }
     });
   } catch (e) {
