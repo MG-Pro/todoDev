@@ -30,12 +30,13 @@ export const getTask = () => dispatch => {
 
 export const addTask = (task, history) => dispatch => {
   axios.post('/api/tasks/', task)
-    .then(res => {
+    .then(({data}) => {
+      console.log(data);
       dispatch({
         type: ADD_TASK,
-        payload: res.data
+        payload: data
       });
-      history.push(`/app/tasks/edit/${res.data[0]._id}`);
+      history.push(`/app/tasks/edit/${data[data.length - 1]._id}`);
       dispatch(setSuccessUpdTask());
     })
     .catch(err => {

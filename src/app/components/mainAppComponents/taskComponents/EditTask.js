@@ -19,7 +19,7 @@ class EditTask extends Component {
       links: task.links || [],
       completed: task.completed || false,
       showPicker: false,
-      errors: {},
+      errors: {}
     }
   }
 
@@ -67,7 +67,7 @@ class EditTask extends Component {
       errors.target = 'Описание цели не должно быть короче 5 символов';
     }
     if ((new Date(state.targetDate)).getTime() < Date.now()) {
-      errors.targetDate = 'Дата завершения должна быть позже сегодняшней';
+      errors.targetDate = 'Дата завершения должна быть позднее сегодняшней';
     }
 
     if (Object.keys(errors).length) {
@@ -108,6 +108,15 @@ class EditTask extends Component {
   componentWillReceiveProps(nextProps) {
     const id = nextProps.match.params.id;
     if (!id) {
+      this.setState({
+        errors: {},
+        id: null,
+        tech: '',
+        target: '',
+        targetDate: new Date(),
+        links: [],
+        completed: false
+      });
       return;
     }
     const task = nextProps.tasks.find((item) => item._id === id) || {};
@@ -134,7 +143,8 @@ class EditTask extends Component {
                 <div className='task-form__name-wrap'>
                   <span className="task-form__name">Технология</span>
                   {errors.tech && (<span className="task-form__msg ">{errors.tech}</span>)}
-                  {props.successUpdTask && (<span className="task-form__msg task-form__msg_success">Задача обновлена</span>)}
+                  {props.successUpdTask && (
+                    <span className="task-form__msg task-form__msg_success">Задача обновлена</span>)}
                 </div>
                 <div className="user-form__input-wrap">
               <span className="user-form__icon">
@@ -204,6 +214,11 @@ class EditTask extends Component {
           </div>
           <LinksList links={this.state.links} changeLinks={this.changeLinks} isTask={this.state.id}/>
         </div>
+        {this.props.successUpdTask &&
+        <div className="edit-task__overlay">
+          <span>Not active. Wait.</span>
+        </div>
+        }
       </div>
     )
   }
