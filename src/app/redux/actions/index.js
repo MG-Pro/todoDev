@@ -6,7 +6,7 @@ import {links, clearLinkState} from './links';
 import {sorting} from './sorting';
 import {tech} from './tech';
 import {currentFilter, currentTechFilter} from './filters';
-import {forgotPass} from './forgotPass';
+import {forgotPass, newForgotPass} from './forgotPass';
 
 export {
   addTask,
@@ -27,6 +27,7 @@ export {
   currentTechFilter,
   successUpdTask,
   forgotPass,
+  newForgotPass,
   updProcessTask,
 
 };

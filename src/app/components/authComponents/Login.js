@@ -55,6 +55,9 @@ class Login extends Component {
         <div className="container container_user-form">
           <form onSubmit={this.submit} className="user-form__form">
             <h1 className="user-form__head">Вход</h1>
+            {this.props.location.state &&
+              <p className="user-form__msg task-form__msg_success">{this.props.location.state}</p>
+            }
             <div className="user-form__group">
               <div className="user-form__input-wrap">
                 <span className="user-form__icon">

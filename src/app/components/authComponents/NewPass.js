@@ -1,16 +1,16 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {registerUser} from '../../redux/actions';
+import {newForgotPass} from '../../redux/actions';
 
-class Register extends Component {
+class NewPass extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
       pass: '',
       pass2: '',
-      errors: {}
+      token: null,
+      errors: {},
     };
 
     this.inputChange = this.inputChange.bind(this);
@@ -20,11 +20,11 @@ class Register extends Component {
   submit(e) {
     e.preventDefault();
     const user = {
-      email: this.state.email,
       password: this.state.pass,
-      password_confirm: this.state.pass2
+      password_confirm: this.state.pass2,
+      token: this.state.token
     };
-    this.props.registerUser(user, this.props.history);
+    this.props.newForgotPass(user, this.props.history);
   };
 
   inputChange(e) {
@@ -48,6 +48,19 @@ class Register extends Component {
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push('/app/tasks');
+    } else {
+      import('query-string').then((qs) => {
+        const token = qs.parse(this.props.location.search).token;
+        if(!token) {
+          this.props.history.push('/app/login');
+          return;
+        }
+        this.setState({
+          token: token
+        })
+      });
+
+
     }
   }
 
@@ -57,20 +70,7 @@ class Register extends Component {
       <div className="user-form">
         <div className="container container_user-form">
           <form onSubmit={this.submit} className="user-form__form">
-            <h1 className="user-form__head">Регистрация</h1>
-            <div className="user-form__group">
-              <div className="user-form__input-wrap">
-                <span className="user-form__icon"><i className="fa fa-envelope"/></span>
-                <input
-                  className="user-form__input"
-                  name="email"
-                  type="email"
-                  placeholder="Email"
-                  onChange={this.inputChange}
-                />
-              </div>
-              {errors.email && (<span className="user-form__msg">{errors.email}</span>)}
-            </div>
+            <h1 className="user-form__head">Новый пароль</h1>
             <div className="user-form__group">
               <div className="user-form__input-wrap">
                 <span className="user-form__icon"><i className="fa fa-key"/></span>
@@ -78,7 +78,7 @@ class Register extends Component {
                   className="user-form__input"
                   name="pass"
                   type="password"
-                  placeholder="Пароль"
+                  placeholder="Новый пароль"
                   onChange={this.inputChange}
                 />
               </div>
@@ -107,10 +107,10 @@ class Register extends Component {
 
 const mapStateToProps = state => ({
   errors: state.errors,
-  auth: state.auth
+  auth: state.auth,
+  successNewPass: state.user.isSetNewPassword
 });
 
 export default connect(
-  mapStateToProps,
-  {registerUser})(withRouter(Register)
+  mapStateToProps,  {newForgotPass})(withRouter(NewPass)
 );

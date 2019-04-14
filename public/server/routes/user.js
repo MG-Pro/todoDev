@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 const validateNewPasswordInput = require('../validation/newPassword');
 const validateForgotPasswordInput = require('../validation/forgot');
+const validateNewForgotPassword = require('../validation/newForgotPassword');
 const User = require('../models/User');
 const sendEmail = require('../common/sendEmail');
 
@@ -188,24 +190,72 @@ router.get('/forgot-pass', (req, res) => {
           errors: {email: `User not found`}
         });
       }
-      sendEmail({
-        email: user.email,
-        subject: 'test',
-        body: 'test'
-      }).then(result => {
-        return res.json({
-          success: true,
-          message: `Email sent to your address. Check it and follow instruction!`
+
+      const buf = crypto.randomBytes(20);
+      const token = buf.toString('hex');
+      user.resetPasswordToken = token;
+      user.resetPasswordExpires = Date.now() + 3600000;
+
+      user.save().then(() => {
+        sendEmail({
+          email: user.email,
+          subject: 'TodoDev - Forgot password',
+          body: `
+<p>
+You are receiving this because you (or someone else) have requested the reset of the password for your account. <br> Please complete the process: <a href="http://${req.headers.host}/app/new-pass?token=${token}"><b>HERE</b></a>. <br><br>If you did not request this, please ignore this email and your password will remain unchanged.
+</p>`
+        }).then(result => {
+          return res.json({
+            success: true,
+            message: `Email sent to your address. Check it and follow instruction!`
+          });
+        }).catch(err => {
+          return console.log(err);
         });
-      }).catch(err => {
-        return console.log(err);
       });
+
     })
     .catch(err => {
       console.log(err);
     });
+});
 
+router.post('/forgot-pass', (req, res) => {
+  const {errors, isValid} = validateNewForgotPassword(req.body);
 
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  User.findOne({resetPasswordToken: req.body.token, resetPasswordExpires: {$gt: Date.now()}})
+    .then(user => {
+      if(!user) {
+        return res.status(400).json({
+          password_confirm: 'Password reset token is invalid or has expired.'
+        });
+      }
+
+      bcrypt.genSalt(10, (err, salt) => {
+        if (err) console.error('There was an error', err);
+        else {
+          bcrypt.hash(req.body.password, salt, (err, hash) => {
+            if (err) console.error('There was an error', err);
+            else {
+              user.password = hash;
+              user.resetPasswordToken = null;
+              user.resetPasswordExpires = null;
+
+              user
+                .save()
+                .then(user => {
+                  res.json(user)
+                })
+                .catch(e => console.log(e));
+            }
+          });
+        }
+      });
+    })
 });
 
 module.exports = router;
