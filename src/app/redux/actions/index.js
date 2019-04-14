@@ -1,4 +1,4 @@
-import {addTask, updateTask, getTask, deleteTask, setSuccessUpdTask, cleanSuccessUpdTask} from './task';
+import {addTask, updateTask, getTask, deleteTask, setSuccessUpdTask, cleanSuccessUpdTask, updProcessTask} from './task';
 import {registerUser, loginUser, logoutUser, setCurrentUser} from './authentication';
 import {forms} from './forms';
 import {user} from './user';
@@ -27,6 +27,7 @@ export {
   currentTechFilter,
   setSuccessUpdTask,
   cleanSuccessUpdTask,
-  forgotPass
+  forgotPass,
+  updProcessTask,
 
 };

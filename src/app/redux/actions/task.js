@@ -8,7 +8,8 @@ import {
   TASK_LIST_ERROR,
   DEL_TASK,
   SET_SUCCESS_UPD_TASK,
-  CLEAN_SUCCESS_UPD_TASK
+  CLEAN_SUCCESS_UPD_TASK,
+  UPD_PROCESS_TASK
 } from '../types';
 
 export const getTask = () => dispatch => {
@@ -29,6 +30,7 @@ export const getTask = () => dispatch => {
 };
 
 export const addTask = (task, history) => dispatch => {
+  dispatch(updProcessTask(true));
   axios.post('/api/tasks/', task)
     .then(({data}) => {
       console.log(data);
@@ -38,6 +40,7 @@ export const addTask = (task, history) => dispatch => {
       });
       history.push(`/app/tasks/edit/${data[data.length - 1]._id}`);
       dispatch(setSuccessUpdTask());
+      dispatch(updProcessTask());
     })
     .catch(err => {
       dispatch({
@@ -48,7 +51,9 @@ export const addTask = (task, history) => dispatch => {
 };
 
 export const updateTask = task => dispatch => {
+  dispatch(updProcessTask(true));
   dispatch(cleanSuccessUpdTask());
+  console.log(1);
   axios.put('/api/tasks/', task)
     .then(res => {
       dispatch({
@@ -56,6 +61,8 @@ export const updateTask = task => dispatch => {
         payload: res.data
       });
       dispatch(setSuccessUpdTask());
+      dispatch(updProcessTask());
+      console.log(2);
     })
     .catch(err => {
       dispatch({
@@ -89,5 +96,12 @@ export const cleanSuccessUpdTask = () => dispatch => {
   dispatch({
     type: CLEAN_SUCCESS_UPD_TASK,
     payload: false
+  });
+};
+
+export const updProcessTask = (process = false) => dispatch => {
+  dispatch({
+    type: UPD_PROCESS_TASK,
+    payload: process
   });
 };

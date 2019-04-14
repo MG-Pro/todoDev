@@ -214,7 +214,7 @@ class EditTask extends Component {
           </div>
           <LinksList links={this.state.links} changeLinks={this.changeLinks} isTask={this.state.id}/>
         </div>
-        {this.props.successUpdTask &&
+        {this.props.isUpdating &&
         <div className="edit-task__overlay">
           <span>Not active. Wait.</span>
         </div>
@@ -228,7 +228,8 @@ const mapStateToProps = state => ({
   errors: state.errors,
   user: state.auth.user,
   tasks: state.tasks,
-  successUpdTask: state.successUpdTask
+  successUpdTask: state.successUpdTask,
+  isUpdating: state.updProcessTask
 });
 
 export default connect(mapStateToProps, {addTask, updateTask, cleanSuccessUpdTask})(withRouter(EditTask));

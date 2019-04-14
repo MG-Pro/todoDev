@@ -32,13 +32,13 @@ class TasksSidebar extends Component {
               const activeClass = item.value === filterType ? 'filters__item_active' : '';
               return (
                 <li className={`filters__item ${activeClass}`} key={i} data-value={item.value} onClick={this.activeFilter}>
-                  <i className={`fa ${item.classNameFA}`}></i>
+                  <i className={`fa ${item.classNameFA}`}/>
                   <span>{item.title}</span>
                 </li>
               )
             })}
           </ul>
-          <div className="sidebar__separ"></div>
+          <div className="sidebar__separ"/>
           <ul className="tech-filters">
             {techList.map((tech, i) => {
               const activeClass = tech.name === techFilterType ? 'tech-filters__item_active' : '';
