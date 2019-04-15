@@ -55,9 +55,6 @@ class Login extends Component {
         <div className="container container_user-form">
           <form onSubmit={this.submit} className="user-form__form">
             <h1 className="user-form__head">Вход</h1>
-            {this.props.location.state &&
-              <p className="user-form__msg task-form__msg_success">{this.props.location.state}</p>
-            }
             <div className="user-form__group">
               <div className="user-form__input-wrap">
                 <span className="user-form__icon">
@@ -89,6 +86,12 @@ class Login extends Component {
                 />
               </div>
               {errors.password && (<span className="user-form__msg">{errors.password}</span>)}
+              {this.props.location.state &&
+              <p
+                className="user-form__msg task-form__msg_success"
+                style={{left: 'auto', right: '0'}}
+              >{this.props.location.state}</p>
+              }
             </div>
             <div className="user-form_forgot-pass">
               <Link to='/app/forgot/' className='user-form_forgot-pass-link'>Восстановить пароль</Link>

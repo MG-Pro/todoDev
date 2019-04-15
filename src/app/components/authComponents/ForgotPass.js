@@ -40,6 +40,7 @@ class ForgotPass extends Component {
 
   render() {
     const {errors, email} = this.state;
+    const {message} = this.props;
     return (
       <div className="user-form">
         <div className="container container_user-form">
@@ -57,12 +58,13 @@ class ForgotPass extends Component {
                   placeholder="Email"
                   onChange={this.inputChange}
                   value={email}
+                  disabled={message}
                 />
               </div>
               {errors.email && (<span className="user-form__msg">{errors.email}</span>)}
-              {this.props.message && (<span className="user-form__msg user-form__msg_scs">{this.props.message}</span>)}
+              {message && (<span className="user-form__msg user-form__msg_scs">{message}</span>)}
             </div>
-            <button className="user-form__btn">Отправить</button>
+            <button className="user-form__btn" disabled={message}>Отправить</button>
           </form>
         </div>
       </div>

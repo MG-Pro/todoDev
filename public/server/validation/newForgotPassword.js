@@ -2,7 +2,6 @@ const Validator = require('validator');
 const isEmpty = require('./isEmpty');
 
 module.exports = function (data) {
-  console.log(data);
   const errors = {};
   data.password = !isEmpty(data.password) ? data.password : '';
   data.password_confirm = !isEmpty(data.password_confirm) ? data.password_confirm : '';
