@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import {addTask, updateTask, successUpdTask as cleanSuccessUpdTask} from '../../../redux/actions';
 import {withRouter} from 'react-router-dom';
 import dateToString from '../../../helpers/dateToString';
+import autocomplete from '../../../helpers/autocomplete';
+import TechTips from './TechTips';
 
 class EditTask extends Component {
   constructor(props) {
@@ -19,6 +21,7 @@ class EditTask extends Component {
       links: task.links || [],
       completed: task.completed || false,
       showPicker: false,
+      techList: [],
       errors: {}
     }
   }
@@ -47,8 +50,16 @@ class EditTask extends Component {
   };
 
   inputChange = (e) => {
+    let value = e.currentTarget.value;
+    let techList = [];
+
+    if(e.currentTarget.name === 'tech') {
+      techList = autocomplete(value, this.props.techList);
+    }
+
     this.setState({
-      [e.currentTarget.name]: e.currentTarget.value
+      [e.currentTarget.name]: value,
+      techList
     })
   };
 
@@ -105,6 +116,19 @@ class EditTask extends Component {
     this.taskUpdate();
   };
 
+  closeTechTips = () => {
+    setTimeout(() => {
+      this.setState({});
+    }, 200);
+
+  };
+
+  setTechFromTips = (tech) => {
+    this.setState({
+      tech
+    })
+  };
+
   componentWillReceiveProps(nextProps) {
     const id = nextProps.match.params.id;
     if (!id) {
@@ -156,8 +180,11 @@ class EditTask extends Component {
                     type="text"
                     value={state.tech}
                     placeholder="Начните ввод"
+                    autoComplete='off'
                     onChange={this.inputChange}
+                    onBlur={this.closeTechTips}
                   />
+                  <TechTips techList={state.techList} setTech={this.setTechFromTips}/>
                 </div>
               </div>
               <div className="task-form__group">
@@ -229,7 +256,8 @@ const mapStateToProps = state => ({
   user: state.auth.user,
   tasks: state.tasks,
   successUpdTask: state.successUpdTask,
-  isUpdating: state.updProcessTask
+  isUpdating: state.updProcessTask,
+  techList: state.tech
 });
 
 export default connect(mapStateToProps, {addTask, updateTask, cleanSuccessUpdTask})(withRouter(EditTask));
