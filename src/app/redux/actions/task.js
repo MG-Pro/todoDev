@@ -47,6 +47,7 @@ export const addTask = (task, history) => dispatch => {
         type: TASK_ERROR,
         payload: err.response.data
       });
+      dispatch(updProcessTask());
     });
 };
 
@@ -68,6 +69,7 @@ export const updateTask = task => dispatch => {
         type: TASK_ERROR,
         payload: err.response.data
       });
+      dispatch(updProcessTask());
     });
 };
 

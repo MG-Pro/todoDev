@@ -1,7 +1,9 @@
 import axios from 'axios';
 import {ADD_LINK, LINK_ERROR, CLEAR_LINK} from '../types';
+import {updProcessTask} from './index';
 
 export const links = (url) => dispatch => {
+  dispatch(updProcessTask(true));
   axios.get('/api/helpers/link-info?url=' + url)
     .then(res => {
       dispatch({
@@ -14,6 +16,7 @@ export const links = (url) => dispatch => {
         type: LINK_ERROR,
         payload: err.response.data
       });
+      dispatch(updProcessTask());
     });
 };
 

@@ -44,6 +44,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "get-website-favicon": "0.0.7",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.4.0",
     "jwt-decode": "^2.2.0",
@@ -58,8 +59,6 @@
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "request": "^2.88.0",
-    "unfluff": "^3.2.0",
     "url-parse-lax": "^3.0.0",
     "validator": "^10.10.0"
   }

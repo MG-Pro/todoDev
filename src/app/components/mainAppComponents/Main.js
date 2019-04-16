@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {Switch} from "react-router-dom";
+import {Switch, Redirect} from "react-router-dom";
 import ToolBar from './ToolBar';
 import Tasks from './taskComponents/Tasks';
 import PrivateRoute from '../commonComponents/PrivateRoute';
@@ -24,7 +24,7 @@ class Main extends Component {
             <PrivateRoute path='/app/tasks/edit/:id' component={EditTask}/>
             <PrivateRoute path='/app/exercises' component={ExerciseContent}/>
             <PrivateRoute path='/app/tasks' component={Tasks}/>
-            <PrivateRoute exact path='/app' component={Tasks}/>
+            <Redirect exact from='/app' to='/app/tasks'/>
           </Switch>
         </div>
       </div>
