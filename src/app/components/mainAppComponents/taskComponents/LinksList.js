@@ -29,6 +29,17 @@ class LinksList extends Component {
       });
       return;
     }
+
+    const isRepeat = this.props.links
+      .findIndex(it => it.url === value);
+
+    if(isRepeat !== -1) {
+      this.setState({
+        error: 'Вы уже добавили этот ресурс'
+      });
+      return;
+    }
+
     this.props.addLink(value);
   };
 
@@ -59,7 +70,7 @@ class LinksList extends Component {
 
   editLink = (link) => {
     this.setState({
-      editLink: link
+      editLink: this.state.editLink ? null : link
     })
   };
 
