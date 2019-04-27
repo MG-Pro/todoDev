@@ -10,9 +10,9 @@ const users = require('./routes/user');
 const tasks = require('./routes/tasks');
 const jwtStrategy = require('./validation/jwtStrategy');
 const path = require('path');
+const dBparams = require('../../params').db.todo_app;
 
-const dbUrl = 'mongodb+srv://droneadmin:8APndnqKYshne9A0@cluster0-dmatc.gcp.mongodb.net/todo_app?retryWrites=false';
-
+const dbUrl = `mongodb://${dBparams.user}:${dBparams.pass}@176.119.157.43:27017/todo_app?retryWrites=false`;
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
