@@ -1,5 +1,5 @@
 # todoDev
-http://todo.chinamakes.ru/app
+
 
 Планировщик задач по обучению
 
